@@ -1,5 +1,5 @@
 # Site Info
-title: Codinfox Lanyon
+title: 'Lunallena TIL Blog'
 tagline: 'A Jekyll theme based on Lanyon'
 description: 'A Jekyll theme adapted from <a href="http://lanyon.getpoole.com/" target="_blank">Lanyon</a>. Made by <a href="http://codinfox.github.io" target="_blank">@codinfox</a>.'
 baseurl: ''
@@ -24,17 +24,15 @@ permalink: pretty
 version: 1.0.0
 
 # About/contact
-author:
-  name: Codinfox
-  description: A passionate <strong>developer and researcher</strong>, learning to be a giant.
-  gravatar: 3c2986ad7ac1f2230ea3596f44563328 # md5 hash of your email address
+author: Luna
+  name: YooYoung Ko
+  description: A passionate <strong>developer</strong>
+  gravatar: 7e5150e6f53a595f8619f20371ddd613 # md5 hash of your email address
   contact:
-    linkedin:  https://www.linkedin.com/in/lizhihao
-    github:    https://github.com/codinfox
+    linkedin:  https://www.linkedin.com/in/lunayyko
+    github:    https://github.com/lunayyko
     # facebook:  <hide>
-    twitter:   https://twitter.com/Li_Zhihao
-    weibo:     http://weibo.com/41173780
-    email:     http://www.google.com/recaptcha/mailhide/d?k=01I3lZFiZYng9N3QxYEtsDaQ==&c=31wAnZkuKqcG0ATAqJN8Z3ln5kkYLA9TwkGc-IbygpM=
+    twitter:   #
 
 # Navigation (2nd level links supported)
 nav:
@@ -54,8 +52,8 @@ tag_page: '/blog/tags/'
 category_page: '/blog/categories/'
 
 hero:
-  image: /public/img/we_will_be_giants_by_yalestewart.jpg
-  caption: Original Artwork &copy; <a href="http://yalestewart.deviantart.com/art/We-Will-Be-Giants-370176475">Yale Stewart</a>
+  image: /public/img/luna.jpg
+  caption: photo taken at ny
 
 # Puglins
 mathjax: true # whether support mathjax
