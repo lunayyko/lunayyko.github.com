@@ -19,7 +19,6 @@ sass:
 pagination: enabled:true
 paginate: 5
 paginate_path: '/blog/page:num'
-permalink: pretty
 
 version: 1.0.0
 
