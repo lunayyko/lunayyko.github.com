@@ -19,6 +19,7 @@ sass:
 pagination: enabled:true
 paginate: 5
 paginate_path: '/blog/page:num'
+permalink: pretty
 
 version: 1.0.0
 
@@ -30,8 +31,6 @@ author: 'Luna'
   contact:
     linkedin:  https://www.linkedin.com/in/lunayyko
     github:    https://github.com/lunayyko
-    # facebook:  <hide>
-    twitter:   #
 
 # Navigation (2nd level links supported)
 nav:
@@ -58,4 +57,3 @@ hero:
 mathjax: true # whether support mathjax
 google_analytics_token: 'UA-00000000-1' # leave blank if you don't want google analytics
 disqus_short_name: 'your_short_name' # leave blank if you don't want disqus
-
