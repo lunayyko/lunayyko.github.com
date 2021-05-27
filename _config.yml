@@ -23,14 +23,15 @@ permalink: pretty
 
 version: 1.0.0
 
-# About/contact
-author: 'Luna'
-  name: 'Ko'
+# About/contact 
+author: 
+  name: YooYoung
   description: A passionate <strong>developer</strong>
-  gravatar: 7e5150e6f53a595f8619f20371ddd613 # md5 hash of your email address
-  contact:
-    linkedin:  https://www.linkedin.com/in/lunayyko
-    github:    https://github.com/lunayyko
+gravatar: 7e5150e6f53a595f8619f20371ddd613 # md5 hash of your email address
+contact:
+  linkedin:  https://www.linkedin.com/in/lunayyko
+  github:    https://github.com/lunayyko
+  # facebook:  <hide>
 
 # Navigation (2nd level links supported)
 nav:
@@ -57,3 +58,4 @@ hero:
 mathjax: true # whether support mathjax
 google_analytics_token: 'UA-00000000-1' # leave blank if you don't want google analytics
 disqus_short_name: 'your_short_name' # leave blank if you don't want disqus
+
