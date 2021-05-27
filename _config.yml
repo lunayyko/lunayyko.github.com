@@ -51,8 +51,8 @@ tag_page: '/blog/tags/'
 category_page: '/blog/categories/'
 
 hero:
-  image: /public/img/luna.jpg
-  caption: ''
+  image: /public/img/linus.jpeg
+  caption: '리누스 토발즈님'
 
 # Puglins
 mathjax: true # whether support mathjax
