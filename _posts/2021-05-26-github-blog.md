@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 깃헙 블로그 만들기 05.27 TIL
+title: 깃헙 블로그 만들기 05.26 TIL
 ---
 
 <div class="message">
