@@ -19,11 +19,11 @@ class Orange:
         #init 은 initialize(초기화하다, 시작하다)를 뜻한다
         print("Orange Created!")
 ```
+이렇게 두 개의 __ 언더스코어로 둘러쌓인 매쏘드는 매직매쏘드라고 불리고 객체를 생성하는 것같은 특별한 목적을 위해서 파이썬에서 사용된다.
 
 ## Class
 
-> The object-oriented programming paradigm also addresses the problems that arise in procedural programming by eliminating global state, but instead of storing state in functions, it is stored in objects. In object-oriented programming, classes define a set of objects that can interact with each other.
-- the self-taught programmer by cory althoff
+> The object-oriented programming paradigm also addresses the problems that arise in procedural programming by eliminating global state, but instead of storing state in functions, it is stored in objects. In object-oriented programming, classes define a set of objects that can interact with each other. - 'the self-taught programmer' by cory althoff
 
 <div class="message">
 쉽게 말하면, 클래스는 다른 것들과 상호작용할 수 있는 객체들의 모음이다. 클래스는 데이터타입의 템플릿이다. 클래스라는 것을 나타내기 위해서 첫 글자는 대문자를 사용하는 것이 관례이고 instantiated(클래스를 객체로 만드는 과정) 되어야한다. 
@@ -35,12 +35,10 @@ class Orange:
 ```python
 class Orange:
     def __init__(self, w, c):
-        #init이라는 특별 매쏘드는 두 개의 인스탄스변수 weight와 color를 만든다. 이렇게 두 개의 __ 언더스코어로 둘러쌓인 매쏘드는 매직매쏘드라고 불리고 객체를 생성하는 것같은 특별한 목적을 위해서 파이썬에서 사용된다.
+        #init이라는 특별 매쏘드는 두 개의 인스탄스변수 weight와 color를 만든다.
         self.weight = w
         self.color = c
         print("Created!")
 ```
 
 이렇게 새 객체를 만드는 것을 클래스를 instantiate 한다고 한다.
-
-
