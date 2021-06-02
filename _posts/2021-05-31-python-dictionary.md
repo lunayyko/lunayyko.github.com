@@ -42,7 +42,10 @@ for pair in zip(numbers, letters):
 {2: ["apple", "orange"]} -> O
 ```
 
-* 응용 : old_dict의 키 a의 value를 new_dict의 키b의 value로 집어넣을 때
+
+
+* 응용 : old_dict의 키 a의 value를 new_dict의 키b의 value로 집어넣자
+
 ```python
 new_dict["new key"] = old_dict.pop("old key")
 ```
@@ -64,7 +67,7 @@ Women make up 37 percentage of Lawyers
 
 스크래블은 영어 알파벳 블럭을 이용해서 단어를 만들어서 알파벳 블럭마다 주어진 점수를 얻는 게임이다.
 
-<img src="scrabble.jpeg">
+<img src="../public/img/scrabble.jpeg">
 
 ```python
 letters=["A","B","C"..."y","Z"]
