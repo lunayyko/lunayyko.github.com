@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 코데카데미 파이썬 기초과정 요약 - 딕셔너리 06.04 TIL
+title: 코데카데미 파이썬 기초과정 요약 - 딕셔너리 05.31 TIL
 ---
 
 # Dictionaries

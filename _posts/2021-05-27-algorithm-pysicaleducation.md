@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 프로그래머스 체육복 풀이 05.29 TIL
+title: 프로그래머스 체육복 풀이 05.27 TIL
 ---
 
 <a href="https://programmers.co.kr/learn/challenges">프로그래머스</a> 챌린지 중 Level 1 맨처음에 해당하는 체육복 챌린지.  
