@@ -27,13 +27,12 @@ class Orange:
 > The object-oriented programming paradigm also addresses the problems that arise in procedural programming by eliminating global state, but instead of storing state in functions, it is stored in objects. In object-oriented programming, classes define a set of objects that can interact with each other. - 'the self-taught programmer' by cory althoff    
 <div class="message">
 클래스는 다른 것들과 상호작용할 수 있는 객체들의 모음이다.<br>
-클래스라는 것을 나타내기 위해서 첫 글자는 대문자를 사용하는 것이 관례이고 instantiated(클래스를 객체로 만드는 과정) 되어야한다. 
+클래스라는 것을 나타내기 위해서 첫 글자는 대문자를 사용하는 것이 관례이고 인스턴스화(클래스를 객체로 만드는 과정) 되어야한다. 
 </div>  
 
 <br>
 <img src = "../public/img/instantiate1.jpeg">    
 <br>
-이런 개념이고 예를 들어서 오렌지를 만드는 클래스가 있다면 작고 밝은 오렌지 객체, 크고 어두운 오렌지 객체 등을 만들 수 있다. 
 
 * 다른 색과 무게의 오렌지들을 만들어내는 클래스 오렌지를 만들어보자.    
 
@@ -46,7 +45,7 @@ class Orange:
         print("Created!")
 ```    
 
-이렇게 새 객체를 만드는 것을 클래스를 instantiate 한다고 한다.
+이렇게 새 객체를 만드는 것을 인스턴스화한다고 한다.
 <br>
 * 지름 파라미터를 받아서 문자열을 출력하는 클래스 써클을 만들어보자
 
@@ -54,7 +53,7 @@ class Orange:
 class Circle:
   pi = 3.14
   def __init__(self, diameter):
-    print("New circle with diameter: {diameter}".format(diameter=diameter))
+    print("New circle with diameter: {d}".format(d=diameter))
     #"출력하고싶은내용{변수}".format(변수=파라미터)
 teaching_table = Circle(36)
 #결과 : New circle with diameter: 36
@@ -81,8 +80,6 @@ isabelles_ices.store_name = "Isabelle's Ices"
 ```
 <br>
 
-
-
 ## 궁금한 부분
 
 코데카데미에서 아래 설명을 읽고 있었는데 맨 마지막 줄이 이해가 잘 가지 않았다.
@@ -90,7 +87,8 @@ isabelles_ices.store_name = "Isabelle's Ices"
 >The first dunder method we’re going to use is the __init__() method (note the two underscores before and after the word “init”). This method is used to initialize a newly created object. <u>It is called every time the class is instantiated.</u> 
 
 
-init 매쏘드는 클래스가 인스턴스화 될때마다 호출된다?
+init 매쏘드는 클래스가 인스턴스화 될때마다 호출된다?  
+-> 06.03 붕어빵틀을 쓸 때 붕어빵틀을 구성하는 매쏘드를 사용하기때문에 붕어빵을 찍어낼 때(인스턴스화) 매쏘드가 호출된다고 생각한다.
 
 initialize(초기화)와 instantiate(인스턴스화)의 정확한 뜻을 알아보자.
 
@@ -123,6 +121,4 @@ new_orange = Orange()
 파이썬의 init함수에 대해서도 찾아보니 뭔가 복잡한 내용들이 있었는데 실제 코드를 작성하면서 더 공부해보고 나중에 다뤄봐야겠다.
 
 > 어디로 가고 있는가?
-그 곳에 도달하기 위해 오늘 무엇을 했는가?
-
--토머스 헨리 헉슬리
+그 곳에 도달하기 위해 오늘 무엇을 했는가?   -토머스 헨리 헉슬리

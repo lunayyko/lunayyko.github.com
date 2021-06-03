@@ -48,7 +48,7 @@ bundle exec jekyll serve
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/pYgfXPoNhUg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-예전에 찍어놓은 영상이라 퀄리티가 좋지 않지만 초보분들에게 도움이 되기를 바란다.
+예전에 찍어놓은 영상이라 퀄리티가 좋지 않지만 도움이 되기를 바란다.
 
 ### 오늘의 단축키
 
