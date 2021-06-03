@@ -42,6 +42,7 @@ class Orange:
         #init이라는 특별 매쏘드는 두 개의 인스탄스변수 weight와 color를 만든다.
         self.weight = w
         self.color = c
+        #평소에 선언할 때와는 다르게 정의하는 값이 등호의 뒤에 와있다
         print("Created!")
 ```    
 

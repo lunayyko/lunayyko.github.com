@@ -22,3 +22,33 @@ print(Circle.circumference(medium_pizza))
 print(Circle.circumference(teaching_table))
 print(Circle.circumference(round_room))
 ```
+
+* 학생의 이름, 학년, 점수를 속성으로 가지는 클래스 만들기
+
+7.
+Add an .add_grade() method to Student that takes a parameter, grade.  
+
+.add_grade() should verify that <u>grade is of type Grade</u> and if so, add it to the Student‘s .grades.  
+
+이게 무슨 뜻일까?!
+
+```python
+class Student:
+  def __init__(self, name, year):
+    self.name = name
+    self.year = year
+    self.grades = []
+
+  def add_grade(self, grade):
+    if type(grade) is Grade:
+      self.grades.append(grade)
+
+class Grade:
+  minimum_passing = 65
+  def __init__(self,score):
+    self.score = score
+
+roger = Student("Roger van der Weyden", 10)
+sandro = Student("Sandro Botticelli", 12)
+pieter = Student("Pieter Bruegel the Elder",8)
+```
