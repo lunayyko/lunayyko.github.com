@@ -82,6 +82,7 @@ isabelles_ices.store_name = "Isabelle's Ices"
 <br>
 
 
+
 ## 궁금한 부분
 
 코데카데미에서 아래 설명을 읽고 있었는데 맨 마지막 줄이 이해가 잘 가지 않았다.
@@ -105,12 +106,15 @@ initialize(초기화)와 instantiate(인스턴스화)의 정확한 뜻을 알아
 
 <div class="message">
 인스턴스화는 클래스 내의 객체에 대해 특정한 변형을 정의하고, 이름을 붙인 다음, 그것을 물리적인 어떤 장소에 위치시키는 등의 작업을 통해, 인스턴스를 만드는 것을 의미한다. - http://www.terms.co.kr/instance.htm
-</div>
+</div>  
 
+<img src = "../public/img/instantiate2.png">  
 
-<img src = "../public/img/instantiate2.png">
-
-
+```python
+#인스턴스 생성하기
+new_orange = Orange()
+#새 인스턴스 변수 이름 = 클래스()
+```
 
 그림을 보니 무슨 개념인지 조금 알 것 같지만 아직은 잘 모르겠다.
 
