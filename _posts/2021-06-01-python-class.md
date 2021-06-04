@@ -1,5 +1,6 @@
 ---
 layout: post
+category: python
 title: 코데카데미 파이썬 기초과정 요약 - 클래스 06.01 TIL
 ---
 

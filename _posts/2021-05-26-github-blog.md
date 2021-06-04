@@ -1,5 +1,7 @@
 ---
 layout: post
+category: 셋업
+tag: Jekyll
 title: 깃헙 블로그 만들기 05.26 TIL
 ---
 

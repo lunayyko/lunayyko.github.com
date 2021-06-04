@@ -1,5 +1,6 @@
 ---
 layout: post
+category: 알고리즘
 title: 프로그래머스 체육복 풀이 05.27 TIL
 ---
 

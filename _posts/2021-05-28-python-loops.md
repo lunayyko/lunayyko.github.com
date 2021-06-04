@@ -1,5 +1,7 @@
 ---
 layout: post
+category: python
+tag: 기초
 title: 코데카데미 파이썬 기초과정 요약 - 반복문 05.28 TIL
 ---
 
