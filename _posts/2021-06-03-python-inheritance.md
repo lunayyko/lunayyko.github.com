@@ -1,7 +1,7 @@
 ---
 layout: post
 category: python
-tag: [기초, 내용 추가하기]
+tag: [기초, 내용 추가하기, 질문]
 title: 코데카데미 파이썬 기초과정 요약 - 상속과 다형성 06.03 TIL
 ---
 
@@ -101,6 +101,9 @@ class SpecialPotatoSalad(PotatoSalad):
 <br>
 When two classes have the same method names and attributes, we say they implement the same interface. An interface in Python usually refers to the names of the methods and the arguments they take. Other programming languages have more rigid definitions of what an interface is, but it usually hinges on the fact that different objects from different classes can perform the same operation (even if it is implemented differently for each class).
 <br>
+<div class="message">
+다른 클래스에서 온 다른 객체가 같은 동작을 수행하면 같은 인터페이스를 implement했다고 본다. 
+</div>
 
 ```python
 class InsurancePolicy:
@@ -119,6 +122,10 @@ class HomeInsurance(InsurancePolicy):
 
 ## 다형성 (Polymorphism)
 
+<div class="message">
+다형성이란 같은 신택스(여기서는 +를 예로 들었지만 매쏘드이름 일수도 있음)가 데이터 타입에 따라 다른 행동을 하는 것을 말한다.
+</div>
+
 우리가 흔히 더하기라고 알고있는 + 는 파이썬에서 자료형별로 다른 역할을 한다. 예를 들어 int + int 를 하면 int가 나오고 list + list를 하면 해당 list들을 합친 리스트가 나온다.
 
 ```python
@@ -135,11 +142,4 @@ class HomeInsurance(InsurancePolicy):
 [1, 2] + [3, 4] == [1, 2, 3, 4]
 ```
 
-<div class="message">
-다형성이란 같은 신택스(여기서는 +를 예로 들었지만 매쏘드이름 일수도 있음)가 데이터 타입에 따라 다른 행동을 하는 것을 말한다.
-</div>
-
 Polymorphism is an abstract concept that covers a lot of ground, but defining class hierarchies that all implement the same interface is a way of introducing polymorphism to our code.?
-
-
-
