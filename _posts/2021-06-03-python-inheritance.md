@@ -30,7 +30,8 @@ class Admin(User): #자식(부모)
 * 재고 없음 Exception을 만들어서 적용해보자
 
 ```python
-class OutOfStock(Exception): #Exception을 상속받아 재고없음 클래스를 만든다
+class OutOfStock(Exception): 
+#Exception을 상속받아 재고없음 클래스를 만든다
   pass #그냥 들여쓰기 에러를 피하기 위해서 적어놓은 것
 
 class CandleShop: #양초가게
@@ -41,9 +42,10 @@ class CandleShop: #양초가게
   def buy(self, color): #색깔 속성을 가진 구매 매쏘드를 만든다
     if self.stock[color] < 1: #해당 색상의 재고가 1개 미만이면
       raise OutOfStock #재고없음 클래스호출
-    self.stock[color] = self.stock[color] - 1 #아니면 해당 색상의 재고 1개 빼기
+    self.stock[color] = self.stock[color] - 1 
+    #아니면 해당 색상의 재고 1개 빼기
 
-candle_shop = CandleShop({'blue': 6, 'red': 2, 'green': 0})
+candle_shop = CandleShop({'blue':6,'red':2,'green':0})
 candle_shop.buy('blue')
 
 # This should raise OutOfStock:
@@ -67,8 +69,10 @@ class User:
     self.username = username
     
   def edit_message(self, message, new_text):
-    if message.sender == self.username: #메세지 전송하는 사람이 해당 유저와 유저네임이 같다면
-      message.text = new_text #메세지의 텍스트를 new_text에 넣는다
+    if message.sender == self.username: 
+    #메세지 전송하는 사람이 해당 유저와 유저네임이 같다면
+      message.text = new_text
+      #메세지의 텍스트를 new_text에 넣는다
       
 class Admin(User):
   def edit_message(self, message, new_text):
@@ -92,9 +96,11 @@ class PotatoSalad:
 
 class SpecialPotatoSalad(PotatoSalad):
   def __init__(self,potatoes, celery, onions):
-    super().__init__(potatoes, celery, onions) #부모님 모시고와라는 뜻
+    super().__init__(potatoes, celery, onions) 
+    #부모클래스 모시고와 라는 뜻??
     self.raisins = 40
-    # 그래서 수퍼를 쓰면 부모인 감자샐러드 클래스에서 뭐가 바뀌나..?? 아직 용도 및 쓰임을 잘 모르겠음
+    # 그래서 수퍼를 쓰면 부모인 감자샐러드 클래스에서 뭐가 바뀌나..?? 
+    # 아직 용도 및 쓰임을 잘 모르겠음
 ```
 
 ### 인터페이스 (Interface)
