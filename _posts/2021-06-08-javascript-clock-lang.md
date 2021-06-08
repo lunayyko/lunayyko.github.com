@@ -5,62 +5,31 @@ tag: [입문]
 title: 자바스크립트 - 시계, 언어 변경 06.08 TIL
 ---
 
-포트폴리오페이지에 간단한 자바스크립트 기능을 추가하기로 했다.
+포트폴리오페이지에 간단한 자바스크립트 기능을 추가하기로 했다.  
 시계는 한국과 독일의 시간을 넣고 시간에 따라 사진이 낮/밤으로 바뀌도록 했고 언어는 한국어,영어,독일어 세 가지가 바뀔 수 있도록 했다.
 
-- 시계
+## 시계
+
+<img src="../public/img/clock.png">
+
+* html 
 
 ```html
-<div class="bg-intro" id="home">
-  <div class="layer-intro" id="pic-kr">
-    <div class="container">
-      <div class="row">
-        <div class="col-sm-12">
-          <h2 id="seoul" data-lang="seoul" class="d-inline-block m-r-1em">
-            [seoul]
-          </h2>
-          <h2 class="clock-kr d-inline-block"></h2>
-        </div>
-      </div>
-    </div>
-  </div>
+<!-- 한국 시계-->
+<div class="layer-intro" id="pic-kr">
+    <h2 class="clock-kr"></h2>
 </div>
-<div class="bg-intro2" id="home">
-  <div class="layer-intro" id="pic-de">
-    <div class="container">
-      <div class="row">
-        <div class="col-sm-12">
-          <h2 id="berlin" data-lang="berlin" class="d-inline-block m-r-1em">
-            [berlin]
-          </h2>
-          <h2 class="clock-de d-inline-block"></h2>
-        </div>
-      </div>
-    </div>
-  </div>
+<!-- 독일 시계-->
+<div class="layer-intro" id="pic-de">
+    <h2 class="clock-de"></h2>
 </div>
 ```
+상관없는 부분은 생략했다.  
+
+* css
 
 ```css
-/*인트로 도시 사진*/
-.bg-intro {
-  color: #fff;
-  background-image: url(../images/seoul_day.jpeg);
-  background-repeat: no-repeat;
-  background-position: center;
-  /*background-size*/
-  -moz-background-size: cover;
-  background-size: cover;
-}
-.bg-intro2 {
-  color: #fff;
-  background-image: url(../images/berlin_night.jpeg);
-  background-repeat: no-repeat;
-  background-position: center;
-  /*background-size*/
-  -moz-background-size: cover;
-  background-size: cover;
-}
+/* 도시 사진을 클래스마다 넣는다 */
 .seoul-day {
   background-image: url(../images/seoul_day.jpeg);
   background-size: cover;
@@ -80,30 +49,25 @@ title: 자바스크립트 - 시계, 언어 변경 06.08 TIL
   background-image: url(../images/berlin_night.jpeg);
   background-size: cover;
 }
-.bg-intro .row {
-  padding-top: 180px;
-  padding-bottom: 140px;
-}
-.bg-intro2 .row {
-  padding-top: 100px;
-  padding-bottom: 140px;
-}
 ```
+* javascript
 
 ```javascript
+// clock-kr 클래스를 clock-kr 변수에 저장
 var clock_kr = document.querySelector(".clock-kr");
 var clock_de = document.querySelector(".clock-de");
 
 function getTime() {
+  // 자바스크립트에서 현재 시간 받아서 상수 curr에 저장 
   const curr = new Date();
-  // UTC 구하기
+  // 표준시간 UTC 구하기
   const utc = curr.getTime() + curr.getTimezoneOffset() * 60 * 1000;
 
-  // UTC to KST (UTC + 9시간)
+  // UTC to KST 한국 (UTC + 9시간)
   const KR_TIME_DIFF = 9 * 60 * 60 * 1000;
   const kr_curr = new Date(utc + KR_TIME_DIFF);
 
-  // UTC to CET (UTC + 1시간)
+  // UTC to CET 독일 (UTC + 1시간)
   const DE_TIME_DIFF = 1 * 60 * 60 * 1000;
   const de_curr = new Date(utc + DE_TIME_DIFF);
 
@@ -127,55 +91,65 @@ function getTime() {
     " " +
     de_ampm;
 
-  //시간별로 사진 바꾸기
-
+  // 시간별로 사진 바꾸기
+  // pic-kr 아이디를 obj_kr 변수에 저장
   var obj_kr = document.getElementById("pic-kr");
   var obj_de = document.getElementById("pic-de");
-
+  // 7시 초과 18시 미만일 때 obj_kr 변수의 클래스를 seoul-day로 바꿈
   if (kr_hr > 7 && kr_hr < 18) {
     obj_kr.setAttribute("class", "seoul-day");
   } else {
     obj_kr.setAttribute("class", "seoul-night");
   }
-
   if (de_hr > 7 && de_hr < 18) {
     obj_de.setAttribute("class", "berlin-day");
   } else {
     obj_de.setAttribute("class", "berlin-night");
   }
 }
-
+// 1초마다 함수를 업데이트
 setInterval(getTime, 1000);
 ```
 
-- 언어 변경
+## 언어 변경
+
+<img src="../public/img/lang-1.png">
+<img src="../public/img/lang-2.png">
+
+
+* html
 
 ```html
 <li>
   <a>
+    <!-- 이 부분이 왜인지 꼭 필요하던데 숨길 수가 없어서 css로 숨겼다 -->
     <p id="language">
       <span data-lang="now_sys_lang"></span>
       <span id="locale"></span>
     </p>
+    <!-- 각 언어별 버튼 -->
     <span id="btn-ko" class="nav-lang">KR</span>
     <span id="btn-en" class="nav-lang">EN</span>
     <span id="btn-de" class="nav-lang">DE</span>
   </a>
 </li>
 ```
+* css
 
 ```css
+/* 비활성화 일때 버튼 클래스 */
 .nav-lang {
   border: grey 2px solid;
   border-radius: 4px;
   padding: 5px 10px;
   color: grey
 }
+/* 활성화 일때 버튼 클래스 */
 .active {
   border: #1ecba7 2px solid;
   color:#1ecba7
 }
-
+/* 마우스 올렸을 때 버튼 색 변화 */
 #btn-en:hover{
   border: #1ecba7 2px solid;
   color:#1ecba7
@@ -192,6 +166,10 @@ setInterval(getTime, 1000);
   display:none;
 } 
 ```
+* javascript
+
+다국어지원 자바스크립트는 아래 블로그 글에서 복사해왔다.  
+http://yoonbumtae.com/?p=2469
 
 ```javascript
 // 언어별 JSON 파일
@@ -256,6 +234,7 @@ const lang = {
   },
 };
 
+// 아래부분 4가지는 복사해다 붙여넣기 했는데 무슨 뜻인지 아직 잘 모르겠다.
 // 현재 브라우저의 언어 가져오기
 function getLanguage() {
   return navigator.language || navigator.userLanguage;
@@ -291,9 +270,12 @@ document.getElementById("btn-de").addEventListener("click", (e) => {
   render("de");
 });
 
-// 버튼 활성화
+// 버튼 활성화 - 비활성화일 때 클릭하면 활성화
 $(".nav-lang").on("click", function () {
+// nav-lang 클래스가 클릭되면 함수실행
   $(".nav-lang").removeClass("active");
+  // nav-lang 클래스 모두(버튼3개)에서 active 클래스 삭제 
   $(this).addClass("active");
+  // 클릭된 버튼 클래스에 active클래스 추가
 });
 ```
