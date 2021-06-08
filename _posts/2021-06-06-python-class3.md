@@ -2,14 +2,14 @@
 layout: post
 category: python
 tag: [입문, 나중에 살펴보기, 주석 추가하기]
-title: 코데카데미 파이썬 기초과정 요약 - 프랜차이즈 음식점 06.04 TIL
+title: 코데카데미 파이썬 기초과정 요약 - 클래스3 프랜차이즈 음식점 06.06 TIL
 ---
 
 클래스 과정의 마지막 리뷰이다.
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/Dk-ePlxdmBU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-영어이지만 이 비디오를 보면 문제와 코드를 쓰는 과정을 알 수 있다. 
+영어이지만 이 비디오를 보면 문제와 코드를 쓰는 과정을 알 수 있다.
 
 ```python
 class Menu: #메뉴셋트의 이름, 메뉴 아이템들, 가능시작시간, 제공종료시간
@@ -19,8 +19,8 @@ class Menu: #메뉴셋트의 이름, 메뉴 아이템들, 가능시작시간, �
     self.start_time = start_time
     self.end_time = end_time
 
-  def __repr__(self): #클래스의 대표가되는 스트링을 반환하는 매직 매쏘드  
-    return self.name + ' menu availble from ' + str(self.start_time) + '-' + str(self.end_time)  
+  def __repr__(self): #클래스의 대표가되는 스트링을 반환하는 매직 매쏘드
+    return self.name + ' menu availble from ' + str(self.start_time) + '-' + str(self.end_time)
     # 예를 들어 brunch_menu 는 11시부터 16시까지 가능합니다 문자열 반환
 
   def calculate_bill(self, purchased_items): #음식값 계산
@@ -39,7 +39,7 @@ brunch_menu = Menu('Brunch', brunch_items, 1100,1600)
 print(brunch_menu.calculate_bill(['pancakes', 'home fries', 'coffee']))
 #13.5
 #브런치_메뉴에서 calculate_bill매쏘드를 써서 (['주문한 메뉴'])의 값을 출력한다.
-#왜떔시 변수 이름들을 헷갈리게 만들어놓고는 두 뎁쓰로 나눠서 표현해야했을까? 
+#왜떔시 변수 이름들을 헷갈리게 만들어놓고는 두 뎁쓰로 나눠서 표현해야했을까?
 
 early_bird_items = {
   'salumeria plate': 8.00, 'salad and breadsticks (serves 2, no refills)': 14.00, 'pizza with quattro formaggi': 9.00, 'duck ragu': 17.50, 'mushroom ravioli (vegan)': 13.50, 'coffee': 1.50, 'espresso': 3.00,
@@ -64,11 +64,11 @@ class Franchise:
     self.menus = menus
   def __repr__(self): #프랜차이즈 클래스는 대표 문자열로 주소를 반환한다
     return self.address
-  
+
   def available_menus(self, time):
     available_menus = []
-    for menu in self.menus: 
-      if time >= menu.start_time and time <= menu.end_time #입력받은 시간이 메뉴의 시작시간의 이후이거나 종료시간 이전일 떄 
+    for menu in self.menus:
+      if time >= menu.start_time and time <= menu.end_time #입력받은 시간이 메뉴의 시작시간의 이후이거나 종료시간 이전일 떄
         #TMI : 이 부분 오류가 났는데 선생님 코드하고 비교해보니까 똑같이 생겼다
         available_menus.append(menu) #메뉴를 가능한 메뉴들 리스트에 넣는다
     return available_menus
