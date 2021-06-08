@@ -5,7 +5,7 @@ tag: [입문]
 title: 자바스크립트 - 시계, 언어 변경 06.08 TIL
 ---
 
-포트폴리오페이지에 간단한 자바스크립트 기능을 추가하기로 했다.  
+포트폴리오페이지에 간단한 자바스크립트 기능(시계, 언어변경)을 추가하기로 했다.  
 시계는 한국과 독일의 시간을 넣고 시간에 따라 사진이 낮/밤으로 바뀌도록 했고 언어는 한국어,영어,독일어 세 가지가 바뀔 수 있도록 했다.  
 [포트폴리오](https://lunaplease.com)
 
@@ -54,7 +54,7 @@ title: 자바스크립트 - 시계, 언어 변경 06.08 TIL
 * javascript
 
 ```javascript
-// clock-kr 클래스를 clock-kr 변수에 저장
+// clock-kr 클래스를 clock_kr 변수에 저장
 var clock_kr = document.querySelector(".clock-kr");
 var clock_de = document.querySelector(".clock-de");
 
