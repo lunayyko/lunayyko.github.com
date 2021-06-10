@@ -2,7 +2,7 @@
 layout: post
 category: javascript
 tag: [기초, 나중에 살펴보기, 질문]
-title: 코데카데미 자바스크립트 기초과정 요약 - 변수 06.04 TIL
+title: 자바스크립트 기초 - 변수 06.04 TIL
 ---
 
 # var, let, const
