@@ -1,7 +1,7 @@
 ---
 layout: post
 category: python
-tag: [기초, 내용 추가하기, 질문]
+tag: [기초, 내용 추가하기, 나중에 살펴보기, 질문]
 title: 코데카데미 파이썬 기초과정 요약 - 함수와 인자 06.07 TIL
 ---
 
@@ -15,63 +15,61 @@ title: 코데카데미 파이썬 기초과정 요약 - 함수와 인자 06.07 TI
 
 <img src="../public/img/param-arg.png">  
 
-입으로 들어가는건 매개변수 나오는(?)건 인수... 인.. 인변 인수..  
+쉽게 외우자면 들어가는건 매개변수 나오는(?)건 인수... 인.. 인변... 인수..    
 
-함수의 인수는 파이썬에서 꼭 필요로된다. 그래서 표준 함수 정의는 두 개의 매개변수를 정의하고 함수에 두 개의 인수를 패스한다.  
-
+함수의 인수는 파이썬에서 꼭 필요로된다. 그래서 두 개의 매개변수를 정의하고 함수에 두 개의 인수를 패스하는게 표준함수의 정의이다. 
+<br>
 ## 키워드 인수 (Keyword Arguments)
 
-파이썬에서 함수를 호출할 때, 우리는 매개변수를 함수 정의할 때 썼던 순서 그대로 나열해야되는데 키워드 인수를 사용하면 그렇지 않아도 괜찮다. 
+<div class="message">
+키워드 인수는 말 그대로 인수에 이름(키워드)을 붙이는 기능인데 <strong>키워드</strong>=값 형식으로 사용한다. 
+</div>
 
-매개변수의 이름을 사용하는 특별한 신택스가 있는 함수에서 키워드 인수를 사용한다. 함수가 선택적인(optional, 안써도 되는?) 디폴트 인수를 많이 갖고 있을 때나 매개변수의 순서를 알기 어려울 때 유용한다.
-다음 함수가 선택적인 디폴트 인수를 많이 가지고 있다.  
+파이썬에서 함수를 호출할 때, 우리는 매개변수를 함수 정의할 때 썼던 순서 그대로 나열해야되는데 키워드 인수를 사용하면 그렇지 않아도 된다. 
+
+함수가 선택적인 디폴트 인수를 많이 갖고 있을 때나 매개변수의 순서를 알기 어려울 때 키워드 인수를 사용하는 것이 유용한다.  
+다음과 같은 함수가 선택적인 디폴트 인수를 많이 가지고 있는 함수이다.  
 
 ```python
-# Define a function with a bunch of default arguments
+# 디폴트 인수들을 많이 가진 함수를 정의해보자
 def log_message(logging_style="shout", message="", font="Times", date=None):
+  #로그_메세지() 함수를 정의했고 이 함수는 0에서 4개까지의 인수를 가질 수 있다
   if logging_style == 'shout':
-    # capitalize the message
+    # 메세지를 대문자로 바꾸자
     message = message.upper()
   print(message, date)
  
-# Now call the function with keyword arguments
+# 키워드 인수 2개로 함수를 호출해보자
 log_message(message="Hello from the past", date="November 20, 1693")
+# 4개의 인수가 어떤 순서로 정의될 지 확실하지 않기 때문에 우리는 함수를 호출하기 위해서 매개변수 이름을 쓸 수 있다
 ```
-이 코드에서 우리는 로그_메세지() 함수를 정의했고 이는 0에서 4개까지의 인수를 가질 수 있다.
-4개의 인수가 어떤 순서로 정의될 지 확실하지 않기 때문에 우리는 함수를 호출하기 위해서 매개변수 이름을 쓸 수 있다. 우리가 함수를 호출하면서 이 신택스 message="Hello from the past" 를 사용한 점에 주의하자. 여기서 이 키워드 message는 우리가 인수를 패스하고자하는 매개변수의 이름이어야한다.    
 
-한글로 써봐도 무슨 뜻인지 잘 알 수가 없다 ㅋㅋㅋㅋ  
-
-```python
-import shapes
-
-def draw_shape(shape_name="box", character="x", line_breaks=True):
-  shape = shapes.draw_shape(shape_name, character)
-  if not line_breaks:
-    print(shape[1:-1])
-  else:
-    print(shape)
-
-# call draw_shape() with keyword arguments here:
-draw_shape(character='m', line_breaks=False)
-```
+우리가 함수를 호출하면서 신택스 <em>message</em>="Hello from the past" 를 사용한 점에 주의하자. 
+여기서 이 키워드 message는 우리가 인수를 패스하고자하는 매개변수의 이름이어야한다.  
+<br>
 
 ## 변형 가능한 객체를 디폴트 인수로 사용하지 않는다
 
 디폴트 인수를 갖고 함수를 만들 때, 빈 리스트를 쓰고싶겠지만 그렇게하면 안 된다.  
-파이썬에서 어떤 객체들은 변형가능하지 않다는 것을 알아두면 좋다. (그래서 기본 인수로 사용하기 좋다) int, float를 비롯한 숫자들은 변형될 수 없다. (산술 연산은 새 숫자를 반환한다) will return a new number). 튜플도 변형 불가능한 리스트에 속한다. 문자열도 변형 불가하다 - 문자열을 업데이트하는 작업들은 완전 새 문자열을 반환하고 있는 것이다.   
+파이썬에서 어떤 객체들은 변형가능하지 않아서 기본 인수로 사용하기 좋다.      
+
+int, float를 비롯한 숫자들은 변형될 수 없다. 산술 연산은 새 숫자를 반환하는 것이다.  
+튜플도 변형 불가능한 리스트에 속한다.  
+문자열도 변형 불가하다 - 문자열을 업데이트하는 작업들도 새 문자열을 반환하고 있는 것이다.   
 
 * 빈 리스트 대신 None 을 보초로 사용하자
 
 ```python
-def update_order(new_item, current_order=None): #current_order=[]대신 =None을 넣고
+def update_order(new_item, current_order=None): 
+  #current_order=[]대신 =None을 넣고
   if current_order is None: #None이라면
     current_order=[] #빈 리스트를 만들어주는 방법을 사용하자
   current_order.append(new_item)
   return current_order
 ```
+<br>
 
-# None
+## None
 
 None은 파이썬에서 특별한 값이다. 유일무이하고 (두 개의 다른 None이란 없다!) 변형불가하다 (None을 업데이트하거나 새 속성을 부여할 수 없다) 
 
