@@ -56,10 +56,10 @@ def draw_shape(shape_name="box", character="x", line_breaks=True):
 draw_shape(character='m', line_breaks=False)
 ```
 
-## Don't Use Mutable Default Arguments
+## 변형 가능한 객체를 디폴트 인수로 사용하지 않는다
 
-디폴트 인수를 갖고 함수를 만들 때, 빈 리스트를 쓰고싶겠지만 그렇게하면 안 된다.
-It might be helpful to note some of the objects in Python that are not mutable (and therefore OK to use as default arguments). int, float, and other numbers can’t be mutated (arithmetic operations will return a new number). tuples are a kind of immutable list. Strings are also immutable — operations that update a string will all return a completely new string.
+디폴트 인수를 갖고 함수를 만들 때, 빈 리스트를 쓰고싶겠지만 그렇게하면 안 된다.  
+파이썬에서 어떤 객체들은 변형가능하지 않다는 것을 알아두면 좋다. (그래서 기본 인수로 사용하기 좋다) int, float를 비롯한 숫자들은 변형될 수 없다. (산술 연산은 새 숫자를 반환한다) will return a new number). 튜플도 변형 불가능한 리스트에 속한다. 문자열도 변형 불가하다 - 문자열을 업데이트하는 작업들은 완전 새 문자열을 반환하고 있는 것이다.   
 
 * 빈 리스트 대신 None 을 보초로 사용하자
 
@@ -73,46 +73,43 @@ def update_order(new_item, current_order=None): #current_order=[]대신 =None을
 
 # None
 
-None is a special value in Python. It is unique (there can’t be two different Nones) and immutable (you can’t update None or assign new attributes to it).
+None은 파이썬에서 특별한 값이다. 유일무이하고 (두 개의 다른 None이란 없다!) 변형불가하다 (None을 업데이트하거나 새 속성을 부여할 수 없다) 
 
-None is falsy, meaning that it evaluates to False in an if statement, which is why the above code prints “Goodbye”. None is also unique, which means that you can test if something is None using the 'is' keyword.
+None 은 거짓으로 취급되서 if문에 넣으면 거짓을 반환한다. None은 유일무이하기 때문에 어떤 것이 None인지 테스트하고 싶을 때는 is 키워드를 사용한다. 
 
 ```python
-# first we define session_id as None
+# session_id을 none으로 정의한다
 session_id = None
  
 if session_id is None:
   print("session ID is None!")
-  # this prints out "session ID is None!"
+  # 이걸 실행하면 "session ID is None!" 가 출력된다
  
-# we can assign something to session_id
+# session_id에다가 뭔가를 할당할 수 있다
 if active_session:
   session_id = active_session.id
  
-# but if there's no active_session, we don't send sensitive data
+# 하지만 active_session이 없다면, 우리는 개인정보를 보내지 않는다
 if session_id is not None:
   send_sensitive_data(session_id)
 ```
 
-What does a function return when it doesn’t return anything? This sounds like a riddle, but there is a correct answer. A Python function that does not have any explicit return statement will return None after completing. 
+함수가 아무것도 반환하지 않을때는 무엇을 반환할까? 수수께끼같은 질문이지만 정답은 있다.   
+반환을 하지 않는 함수는 완료 후 None을 반환한다.  
 
 ```python
-# store the result of this print() statement in the variable prints_return
-prints_return = print("What does this print function return?")
+prints_return = print("이 함수는 무엇을 반환할까요?")
 
-# print out the value of prints_return
 print(prints_return)
 #결과 : None
 
-# call sort_this_list.sort() and save that in list_sort_return
+# sort_this_list.sort()를 호출하고 list_sort_return에 저장한다
 sort_this_list = [14, 631, 4, 51358, 50000000]
 list_sort_return = sort_this_list.sort()
 
-# print out the value of list_sort_return
 print(list_sort_return)
 #결과 : None
 ```
-default return 값이 none이라고 하는데 나는 여기서 무엇을 배워야하는건지 잘 모르겠다. 
 
 **보완할 점**  
 
