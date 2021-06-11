@@ -1,7 +1,7 @@
 ---
 layout: post
 category: 알고리즘
-title: 백준 더하기 사이클 06.10 TIL
+title: 백준 더하기 사이클 06.09 TIL
 ---
 
 [백준 더하기 사이클 문제](https://www.acmicpc.net/problem/1110) 
@@ -15,8 +15,7 @@ title: 백준 더하기 사이클 06.10 TIL
 n = int(input())
 
 while true
-    counter = i
-    i++
+    counter += i
     n = n[1]+(n[0]+n[1])[1]  
     if n == n:
         break
@@ -43,6 +42,8 @@ while True:
         break
 print(count)
 ```
+
+* 주요 포인트 및 생각해볼 점  
 10분정도 고민하고 바로 답을 찾아보고 있는데 답을 너무 빨리 보는건가 싶다가도  
 쉬운 문제지만 힌트 없이 풀려면 너무 진척이 없을 것 같다.     
-앞의 쉬운 문제들은 조금 시간이 지난 뒤에 다시 풀어보면 좋지않을까싶다.    
+앞의 쉬운 문제들은 조금 시간이 지난 뒤에 다시 풀어보면 좋지않을까싶다.   
