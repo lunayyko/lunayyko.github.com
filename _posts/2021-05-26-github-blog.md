@@ -61,5 +61,5 @@ Command + shift + F   vs code 내의 열린 폴더 전부에서 찾기
 ### 더 공부할 부분
 
 https://honbabzone.com/jekyll/start-gitHubBlog/
-- Admin 페이지 세팅하기
-- disqus 추가하기
+- <del>Admin 페이지 세팅하기</del> 
+- <del>disqus 추가하기</del>
