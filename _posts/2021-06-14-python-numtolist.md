@@ -24,8 +24,8 @@ int_arr = map(int, arr)
 # str은 더하기가 안 되서 해당 숫자를 모두 더하려면 모든 숫자를 다시 인트로 만들어줘야한다.
 print(int_arr)
 #<map object at 0x1039d7df0>
-#map은 찢기만 하는거라서 리스트에 다시 넣어줘야 한다.
 int_arr = list(map(int, arr))
+#map은 찢기만 하는거라서 리스트에 다시 넣어줘야 한다.
 print(int_arr)
 # 출력 : ['1', '9', '8', '8'] (int형 : 연산이 가능하다)
 answer = sum(int_arr)
