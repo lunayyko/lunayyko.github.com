@@ -12,7 +12,11 @@ var는 변수, let은 변수, const(상수)는 재선언할 수 없는 변수이
 let과 const는 블록{} 범위이며 var는 함수 범위이다.  
 </div>
 
-어떤 상황에서 어떤 것을 사용하는게 좋을지는 아직 잘 모르겠다.   
+어떤 상황에서 어떤 것을 사용하는게 좋을지는 아직 잘 모르겠다.    
+-> 06.15 let, const, var의 쓰임과 스코프에 관련해서 간결하고 좋은 강의를 발견했다.
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/WrjlQstaCwo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
 설명을 읽던 중 호이스팅과 초기화 관련해서 궁금한 점이 생겨서 자세히 알아보았다.   
 
 **변수의 3단계 생성과정**
