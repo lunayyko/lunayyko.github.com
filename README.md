@@ -1,4 +1,4 @@
-# Codinfox-Lanyon
+# 루나의 Today I learned 기술 블로그
 
 This is a jekyll template based on [Lanyon](https://github.com/poole/lanyon). See a live demo [here](http://codinfox.github.io).
 
