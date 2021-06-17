@@ -59,28 +59,28 @@ candle_shop.buy('green')
 
 * 유저 클래스에서 쓰이는 edit_message매쏘드를 새 하위클래스 어드민에서 오버라이드해보자.
 
-```python
-class Message:
-  def __init__(self, sender, recipient, text):
-    self.sender = sender
-    self.recipient = recipient
-    self.text = text
+  ```python
+  class Message:
+    def __init__(self, sender, recipient, text):
+      self.sender = sender
+      self.recipient = recipient
+      self.text = text
 
-class User:
-  def __init__(self, username):
-    self.username = username
-    
-  def edit_message(self, message, new_text):
-    if message.sender == self.username: 
-    #메세지 전송하는 사람이 해당 유저와 유저네임이 같다면
-      message.text = new_text
-      #메세지의 텍스트를 new_text에 넣는다
+  class User:
+    def __init__(self, username):
+      self.username = username
       
-class Admin(User):
-  def edit_message(self, message, new_text):
-    message.text = new_text
-    # 유저권한 확인 없이 메세지의 텍스트를 new_text에 넣는다
-```
+    def edit_message(self, message, new_text):
+      if message.sender == self.username: 
+      #메세지 전송하는 사람이 해당 유저와 유저네임이 같다면
+        message.text = new_text
+        #메세지의 텍스트를 new_text에 넣는다
+        
+  class Admin(User):
+    def edit_message(self, message, new_text):
+      message.text = new_text
+      # 유저권한 확인 없이 메세지의 텍스트를 new_text에 넣는다
+  ```
 ### Super()
 
 오버라이딩도 좋지만 존재하는 매쏘드에 로직을 추가하고 싶을 때, <strong>부모 클래스를 통해서 매쏘드를 호출</strong> 해야하는데 그럴 때 super()가 쓰인다.
@@ -89,21 +89,21 @@ class Admin(User):
 
 * 감자샐러드 클래스를 상속받아서 건포도를 추가한 스페셜감자샐러드를 만들어보자
 
-```python
-class PotatoSalad:
-  def __init__(self, potatoes, celery, onions):
-    self.potatoes = potatoes
-    self.celery = celery
-    self.onions = onions
+  ```python
+  class PotatoSalad:
+    def __init__(self, potatoes, celery, onions):
+      self.potatoes = potatoes
+      self.celery = celery
+      self.onions = onions
 
-class SpecialPotatoSalad(PotatoSalad):
-  def __init__(self,potatoes, celery, onions):
-    super().__init__(potatoes, celery, onions) 
-    #부모클래스 모시고와 라는 뜻??
-    self.raisins = 40
-    # 그래서 수퍼를 쓰면 부모인 감자샐러드 클래스에서 뭐가 바뀌나..?? 
-    # 아직 용도 및 쓰임을 잘 모르겠음
-```
+  class SpecialPotatoSalad(PotatoSalad):
+    def __init__(self,potatoes, celery, onions):
+      super().__init__(potatoes, celery, onions) 
+      #부모클래스 모시고와 라는 뜻??
+      self.raisins = 40
+      # 그래서 수퍼를 쓰면 부모인 감자샐러드 클래스에서 뭐가 바뀌나..?? 
+      # 아직 용도 및 쓰임을 잘 모르겠음
+  ```
 
 ### 인터페이스 (Interface)
 <br>
@@ -133,7 +133,6 @@ class HomeInsurance(InsurancePolicy):
 <div class="message">
 다형성이란 같은 신택스(여기서는 +를 예로 들었지만 매쏘드이름 일수도 있음)가 데이터 타입에 따라 다른 행동을 하는 것을 말한다.
 </div>
-
 우리가 흔히 더하기라고 알고있는 + 는 파이썬에서 자료형별로 다른 역할을 한다. 예를 들어 int + int 를 하면 int가 나오고 list + list를 하면 해당 list들을 합친 리스트가 나온다.
 
 ```python
@@ -150,4 +149,6 @@ class HomeInsurance(InsurancePolicy):
 [1, 2] + [3, 4] == [1, 2, 3, 4]
 ```
 
-Polymorphism is an abstract concept that covers a lot of ground, but defining class hierarchies that all implement the same interface is a way of introducing polymorphism to our code.?
+* 주요 포인트 및 생각해볼 점 
+  Polymorphism is an abstract concept that covers a lot of ground, but defining class hierarchies that all implement the same interface is a way of introducing polymorphism to our code.?
+  이 부분이 무슨 뜻일까?

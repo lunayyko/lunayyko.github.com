@@ -42,12 +42,12 @@ let 키워드로 선언된 변수는 hoisting 되어 선언단계가 이뤄지�
 
 * 연습문제 : 칼빈 293도일 때 섭씨와 화씨를 구해보자
 
-```javascript
-const kelvin = 293; //변하지 않는 상수
-let celsius = kelvin - 273;
-let fahrenheit = celsius * (9/5) + 32;
-t = Math.floor(fahrenheit);
-console.log('The temperature is '+t+' degrees fahrenheit.');
-```
+    ```javascript
+    const kelvin = 293; //변하지 않는 상수
+    let celsius = kelvin - 273;
+    let fahrenheit = celsius * (9/5) + 32;
+    t = Math.floor(fahrenheit);
+    console.log('The temperature is '+t+' degrees fahrenheit.');
+    ```
 
 

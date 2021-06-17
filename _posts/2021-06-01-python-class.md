@@ -21,8 +21,9 @@ class Orange:
         print("Orange Created!")
 ```    
 
-이렇게 두 개의 __ 언더스코어로 둘러쌓인 매쏘드는 매직매쏘드라고 불리고 객체를 생성하는 것같은 특별한 목적을 위해서 사용된다. __new__, __init__ 등이 있다.      
+이렇게 두 개의 __ 언더스코어로 둘러쌓인 매쏘드는 매직매쏘드라고 불리고 객체를 생성하는 것같은 특별한 목적을 위해서 사용된다. \__new__, \__init__ 등이 있다.      
 <br>
+
 # Class
 <br>
 > The object-oriented programming paradigm also addresses the problems that arise in procedural programming by eliminating global state, but instead of storing state in functions, it is stored in objects. In object-oriented programming, classes define a set of objects that can interact with each other. - 'the self-taught programmer' by cory althoff    
@@ -37,49 +38,49 @@ class Orange:
 
 * 다른 색과 무게의 오렌지들을 만들어내는 클래스 오렌지를 만들어보자.    
 
-```python
-class Orange:
-    def __init__(self, w, c):
-        #init이라는 특별 매쏘드는 두 개의 인스탄스변수 weight와 color를 만든다.
-        self.weight = w
-        self.color = c
-        #평소에 선언할 때와는 다르게 정의하는 값이 등호의 뒤에 와있다
-        print("Created!")
-```    
+    ```python
+    class Orange:
+        def __init__(self, w, c):
+            #init이라는 특별 매쏘드는 두 개의 인스탄스변수 weight와 color를 만든다.
+            self.weight = w
+            self.color = c
+            #평소에 선언할 때와는 다르게 정의하는 값이 등호의 뒤에 와있다
+            print("Created!")
+    ```    
 
-이렇게 새 객체를 만드는 것을 인스턴스화한다고 한다.
-<br>
-* 지름 파라미터를 받아서 문자열을 출력하는 클래스 써클을 만들어보자
+    이렇게 새 객체를 만드는 것을 인스턴스화한다고 한다.
+    <br>
+    * 지름 파라미터를 받아서 문자열을 출력하는 클래스 써클을 만들어보자
 
-```python
-class Circle:
-  pi = 3.14
-  def __init__(self, diameter):
-    print("New circle with diameter: {d}".format(d=diameter))
-    #"출력하고싶은내용{변수}".format(변수=파라미터)
-teaching_table = Circle(36)
-#결과 : New circle with diameter: 36
-```  
-전에 배웠던 포맷함수가 사용되었는데 파이썬 3.8부터는 print(f"{var=}") 이렇게만 써도 된다도 한다. 
-(출처 : https://www.daleseo.com/python-f-strings/) 
+    ```python
+    class Circle:
+    pi = 3.14
+    def __init__(self, diameter):
+        print("New circle with diameter: {d}".format(d=diameter))
+        #"출력하고싶은내용{변수}".format(변수=파라미터)
+    teaching_table = Circle(36)
+    #결과 : New circle with diameter: 36
+    ```  
+    전에 배웠던 포맷함수가 사용되었는데 파이썬 3.8부터는 print(f"{var=}") 이렇게만 써도 된다도 한다. 
+    (출처 : https://www.daleseo.com/python-f-strings/) 
 
 * 클래스로부터 인스탄스 변수를 생성하고 해당 객체들에게 변수를 할당하자
 
-```python
-class Store:
- pass
-```
-붕어빵틀에 해당하는 클래스 변수 만들기  
+    ```python
+    class Store:
+    pass
+    ```
+    붕어빵틀에 해당하는 클래스 변수 만들기  
 
-```python
-alternative_rocks = Store() 
-isabelles_ices = Store()
-#스토어 클래스에서 찍어내는 인스턴스변수들 가게 2곳
-alternative_rocks.store_name = "Alternative Rocks" 
-isabelles_ices.store_name = "Isabelle's Ices"
-#해당 인스턴스변수들에게 가게이름 속성변수를 할당한다. 
-#(assign instance variables to these objects using the same attribute notation that was used for accessing class variables.)
-```
+    ```python
+    alternative_rocks = Store() 
+    isabelles_ices = Store()
+    #스토어 클래스에서 찍어내는 인스턴스변수들 가게 2곳
+    alternative_rocks.store_name = "Alternative Rocks" 
+    isabelles_ices.store_name = "Isabelle's Ices"
+    #해당 인스턴스변수들에게 가게이름 속성변수를 할당한다. 
+    #(assign instance variables to these objects using the same attribute notation that was used for accessing class variables.)
+    ```
 <br>
 
 ## 궁금한 부분
@@ -97,24 +98,24 @@ initialize(초기화)와 instantiate(인스턴스화)의 정확한 뜻을 알아
 
 * initialize(초기화)
 
-<div class="message">
-확보된 메모리 영역을 어떤 값으로 채우거나 쓰레기 값을 일정한 값으로 바꾸는 것 - https://blog.naver.com/netgarng88
-</div>
+    <div class="message">
+    확보된 메모리 영역을 어떤 값으로 채우거나 쓰레기 값을 일정한 값으로 바꾸는 것 - https://blog.naver.com/netgarng88
+    </div>
 
 
 * instantiate(인스턴스화)
 
-<div class="message">
-인스턴스화는 클래스 내의 객체에 대해 특정한 변형을 정의하고, 이름을 붙인 다음, 그것을 물리적인 어떤 장소에 위치시키는 등의 작업을 통해, 인스턴스를 만드는 것을 의미한다. - http://www.terms.co.kr/instance.htm
-</div>  
+    <div class="message">
+    인스턴스화는 클래스 내의 객체에 대해 특정한 변형을 정의하고, 이름을 붙인 다음, 그것을 물리적인 어떤 장소에 위치시키는 등의 작업을 통해, 인스턴스를 만드는 것을 의미한다. - http://www.terms.co.kr/instance.htm
+    </div>  
 
-<img src = "../public/img/instantiate2.png">  
+    <img src = "../public/img/instantiate2.png">  
 
-```python
-#인스턴스 생성하기
-new_orange = Orange()
-#새 인스턴스 변수 이름 = 클래스()
-```
+    ```python
+    #인스턴스 생성하기
+    new_orange = Orange()
+    #새 인스턴스 변수 이름 = 클래스()
+    ```
 
 그림을 보니 무슨 개념인지 조금 알 것 같지만 아직은 잘 모르겠다.
 
