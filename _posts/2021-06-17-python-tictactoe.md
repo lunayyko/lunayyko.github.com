@@ -1,6 +1,6 @@
 ---
 layout: post
-category: 파이썬
+category: python
 tag: [입문, 프로젝트]
 title: 파이썬 프로젝트 틱택토 06.17 TIL
 ---
