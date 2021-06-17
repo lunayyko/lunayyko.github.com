@@ -63,7 +63,7 @@ def handle_turn():
 
 여기까지 멈추고 코드를 복사 붙여넣기해서 한 번 돌려보면 내가 입력한 숫자에 해당하는 판에 X자가 표시되는 화면을 볼 수 있다.
 
-<img src = ../public/img/tictactoe1.png>
+<img src = "../public/img/tictactoe1.png">
 
 ## 게임 플레이
 ```python
@@ -138,9 +138,13 @@ def play_game():
     display_board()
         
     while game_still_going:
+
         handle_turn(current_player)
+
         check_if_game_over()
+
         flip_player()
+
     #게임이 끝났으면
     if winner == "X" or winner == "O":
         print("우승자는"+ winner+"!")
@@ -239,8 +243,7 @@ def check_if_tie():
         game_still_going = False
 ```
 
-입력 예외처리정도를 제외하고 이제 거의 다 만들었다!  
-턴 처리하기로 가서 누구 차례인지 쓰고 차례를 바꾸자
+입력 예외처리정도를 제외하고 이제 거의 다 만들었다!  입력 예외처리를 추가하자
 
 ## 턴 처리하기
 ```python
