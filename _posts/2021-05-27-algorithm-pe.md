@@ -131,13 +131,13 @@ return n - len(_lost)
 
 간결하다.
 
-### 오늘의 단축키
+## 오늘의 단축키
 VS code Prettier 패키지의 코드 정리 단축키를 설정했다
 cmd + shift + i : 
 
 <img src = "../public/img/prettier.png">
 
-### 더 공부할 부분
+## 주요 포인트 및 생각해볼 점
 
 _reserve = [r for r in reserve if r not in lost] 
 파이썬 반복문+조건문 써보고 익숙해지기 

@@ -149,6 +149,7 @@ class HomeInsurance(InsurancePolicy):
 [1, 2] + [3, 4] == [1, 2, 3, 4]
 ```
 
-* 주요 포인트 및 생각해볼 점 
+## 주요 포인트 및 생각해볼 점
+
   Polymorphism is an abstract concept that covers a lot of ground, but defining class hierarchies that all implement the same interface is a way of introducing polymorphism to our code.?
   이 부분이 무슨 뜻일까?

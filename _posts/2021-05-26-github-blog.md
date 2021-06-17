@@ -60,6 +60,6 @@ Command + shift + F   vs code 내의 열린 폴더 전부에서 찾기
 
 ### 더 공부할 부분
 
-https://honbabzone.com/jekyll/start-gitHubBlog/
+(혼밥존 블로그- 깃헙 블로그 업데이트하기)[https://honbabzone.com/jekyll/start-gitHubBlog/]
 - <del>Admin 페이지 세팅하기</del> 
 - <del>disqus 추가하기</del>
