@@ -1,23 +1,23 @@
 ---
 layout: post
 category: python
-tag: [기초, 내용 추가하기, 나중에 살펴보기, 질문, TIL]
+tag: [기초, 내용 추가하기, 나중에 살펴보기, TIL]
 title: 코데카데미 파이썬 기초과정 요약 - 함수와 인자
 ---
 
-# 매개변수와 인수 (Parameters and Arguments)
-<br>
-<div class="message">
-매개변수(parameter)는 함수의 정의 안에 있는 변수를 말한다</div> 
+## 매개변수와 인수 (Parameters and Arguments)
 
 <div class="message">
-인수(argument)는 함수를 호출할 때 패스되는 값이다</div>  
+매개변수(parameter)는 함수의 정의 안에 있는 변수를 말한다<br>
+인수(argument)는 함수를 호출할 때 패스되는 값이다
+</div>  
 
 <img src="../public/img/param-arg.png">  
 
-쉽게 외우자면 들어가는건 매개변수 나오는(?)건 인수... 인.. 인변... 인수..    
+쉽게 외우자면 들어가는건 매개변수 나오는건 인수   
 
-함수의 인수는 파이썬에서 꼭 필요로된다. 그래서 두 개의 매개변수를 정의하고 함수에 두 개의 인수를 패스하는게 표준함수의 정의이다. 
+함수의 인수는 파이썬에서 꼭 필요로된다.   
+그래서 두 개의 매개변수를 정의하고 함수에 두 개의 인수를 패스하는게 표준함수의 정의이다. 
 <br>
 
 ## 키워드 인수 (Keyword Arguments)
@@ -28,7 +28,8 @@ title: 코데카데미 파이썬 기초과정 요약 - 함수와 인자
 
 파이썬에서 함수를 호출할 때, 우리는 매개변수를 함수 정의할 때 썼던 순서 그대로 나열해야되는데 키워드 인수를 사용하면 그렇지 않아도 된다. 
 
-함수가 선택적인 디폴트 인수를 많이 갖고 있을 때나 매개변수의 순서를 알기 어려울 때 키워드 인수를 사용하는 것이 유용한다.  
+함수가 선택적인 디폴트 인수를 많이 갖고 있을 때나 매개변수의 순서를 알기 어려울 때 키워드 인수를 사용하는 것이 유용한다.    
+
 다음과 같은 함수가 선택적인 디폴트 인수를 많이 가지고 있는 함수이다.  
 
 ```python
@@ -45,9 +46,8 @@ log_message(message="Hello from the past", date="November 20, 1693")
 # 4개의 인수가 어떤 순서로 정의될 지 확실하지 않기 때문에 우리는 함수를 호출하기 위해서 매개변수 이름을 쓸 수 있다
 ```
 
-우리가 함수를 호출하면서 신택스 <em>message</em>="Hello from the past" 를 사용한 점에 주의하자. 
+함수를 호출하면서<em>message</em>="Hello from the past" 구문을 사용한 점에 주의하자. 
 여기서 이 키워드 message는 우리가 인수를 패스하고자하는 매개변수의 이름이어야한다.  
-<br>
 
 ## 변형 가능한 객체를 디폴트 인수로 사용하지 않는다
 
@@ -68,7 +68,6 @@ def update_order(new_item, current_order=None):
   current_order.append(new_item)
   return current_order
 ```
-<br>
 
 ## None
 
@@ -108,6 +107,3 @@ list_sort_return = sort_this_list.sort()
 print(list_sort_return)
 #결과 : None
 ```
-
-## 주요 포인트 및 생각해볼 점
-  해석할 때 용어집을 만들어야할까?

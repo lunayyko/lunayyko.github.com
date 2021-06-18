@@ -1,7 +1,7 @@
 ---
 layout: post
 category: javascript
-tag: [기초, 나중에 살펴보기, 질문]
+tag: [기초, 나중에 살펴보기]
 title: 자바스크립트 기초 - 변수 06.04 TIL
 ---
 
