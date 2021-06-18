@@ -1,7 +1,8 @@
 ---
 layout: post
 category: 알고리즘
-title: 프로그래머스 체육복 풀이 05.27 TIL
+tag: [프로그래머스, 기초, TIL]
+title: 프로그래머스 level 1 체육복
 ---
 
 <a href="https://programmers.co.kr/learn/challenges">프로그래머스</a> 챌린지 중 Level 1 맨처음에 해당하는 체육복 챌린지.  

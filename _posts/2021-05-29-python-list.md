@@ -1,8 +1,8 @@
 ---
 layout: post
 category: python
-tag: [기초, 나중에 살펴보기]
-title: 코데카데미 파이썬 기초과정 요약 - 리스트의 이해 05.29 TIL
+tag: [기초, 나중에 살펴보기, TIL, codecademy]
+title: 코데카데미 파이썬 기초과정 요약 - 리스트의 이해
 ---
 
 ## 리스트의 이해 List Comprehension

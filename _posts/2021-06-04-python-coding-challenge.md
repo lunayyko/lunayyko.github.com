@@ -1,8 +1,8 @@
 ---
 layout: post
 category: python
-tag: [입문, 내용 추가하기]
-title: 코데카데미 파이썬 기초과정 요약 - 코딩챌린지 06.04 TIL
+tag: [입문, 내용 추가하기, TIL, codecademy]
+title: 코데카데미 파이썬 기초과정 요약 - 코딩챌린지
 ---
 
 - 사용된 알파벳 갯수를 출력하는 함수를 만들어보자

@@ -1,7 +1,8 @@
 ---
 layout: post
 category: python
-title: 코데카데미 파이썬 기초과정 요약 - 클래스 06.01 TIL
+tag : [기초, TIL, codecademy]
+title: 코데카데미 파이썬 기초과정 요약 - 클래스
 ---
 
 클래스를 살펴보기에 앞서 클래스 안의 함수를 지칭하는 매쏘드를 살펴보자.

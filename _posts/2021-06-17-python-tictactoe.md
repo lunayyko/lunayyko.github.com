@@ -1,8 +1,8 @@
 ---
 layout: post
 category: python
-tag: [입문, 프로젝트]
-title: 파이썬 프로젝트 틱택토 06.17 TIL
+tag: [입문, 프로젝트, TIL]
+title: 파이썬 프로젝트 틱택토
 ---
 
 틱택토 게임을 만들어보자!   

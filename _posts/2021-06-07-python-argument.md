@@ -1,8 +1,8 @@
 ---
 layout: post
 category: python
-tag: [기초, 내용 추가하기, 나중에 살펴보기, 질문]
-title: 코데카데미 파이썬 기초과정 요약 - 함수와 인자 06.07 TIL
+tag: [기초, 내용 추가하기, 나중에 살펴보기, 질문, TIL]
+title: 코데카데미 파이썬 기초과정 요약 - 함수와 인자
 ---
 
 # 매개변수와 인수 (Parameters and Arguments)

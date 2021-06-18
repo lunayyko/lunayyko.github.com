@@ -1,7 +1,8 @@
 ---
 layout: post
 category: python
-title: 코데카데미 파이썬 기초과정 요약 - 딕셔너리 05.31 TIL
+tag : [기초, TIL, codecademy]
+title: 코데카데미 파이썬 기초과정 요약 - 딕셔너리
 ---
 
 # Dictionaries  

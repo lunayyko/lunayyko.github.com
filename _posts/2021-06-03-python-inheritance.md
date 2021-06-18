@@ -1,8 +1,8 @@
 ---
 layout: post
 category: python
-tag: [기초, 내용 추가하기, 질문]
-title: 코데카데미 파이썬 기초과정 요약 - 상속과 다형성 06.03 TIL
+tag: [기초, 내용 추가하기, 질문, TIL, codecademy]
+title: 코데카데미 파이썬 기초과정 요약 - 상속과 다형성
 ---
 
 # 상속과 다형성

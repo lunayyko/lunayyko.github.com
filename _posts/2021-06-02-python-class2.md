@@ -1,8 +1,8 @@
 ---
 layout: post
 category: python
-tag: [입문, 나중에 살펴보기, 질문]
-title: 코데카데미 파이썬 기초과정 요약 - 클래스2 06.02 TIL
+tag: [입문, 나중에 살펴보기, 질문, TIL, codecademy]
+title: 코데카데미 파이썬 기초과정 요약 - 클래스2
 ---
 
 * 원의 넓이 구하는 클래스 만들기
