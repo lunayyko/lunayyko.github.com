@@ -49,6 +49,11 @@ log_message(message="Hello from the past", date="November 20, 1693")
 함수를 호출하면서<em>message</em>="Hello from the past" 구문을 사용한 점에 주의하자. 
 여기서 이 키워드 message는 우리가 인수를 패스하고자하는 매개변수의 이름이어야한다.  
 
+## 디폴트 인수 (Default Arguments)
+인수값을 넣지 않고 호출했을 때 출력되는 인수이다.
+
+<img src="../public/img/defaultp.png">
+
 ## 변형 가능한 객체를 디폴트 인수로 사용하지 않는다
 
 디폴트 인수를 갖고 함수를 만들 때, 빈 리스트를 쓰고싶겠지만 그렇게하면 안 된다.  
