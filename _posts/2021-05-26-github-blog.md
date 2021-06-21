@@ -62,4 +62,4 @@ Command + shift + F   vs code 내의 열린 폴더 전부에서 찾기
 
 (혼밥존 블로그- 깃헙 블로그 업데이트하기)[https://honbabzone.com/jekyll/start-gitHubBlog/]
 - <del>Admin 페이지 세팅하기</del> 
-- <del>disqus 추가하기</del>
+- <del>disqus 추가하기</del> - 06.21 디스쿠스 광고가 너무 많이 붙어서 삭제했다. 
