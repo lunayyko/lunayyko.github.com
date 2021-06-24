@@ -457,17 +457,3 @@ def flip_player():
 play_game()
 
 ```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
