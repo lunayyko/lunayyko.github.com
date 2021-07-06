@@ -1,6 +1,6 @@
 ---
 layout: post
-category: 알고리즘
+category: algorithm
 tag: [프로그래머스, 기초, TIL]
 title: 프로그래머스 level 1 체육복
 ---

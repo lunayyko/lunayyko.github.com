@@ -1,6 +1,6 @@
 ---
 layout: post
-category: 셋업
+category: setup
 tag: [Jekyll, TIL]
 title: 깃헙 블로그 만들기
 ---
