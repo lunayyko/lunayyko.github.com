@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: http://lunayyko.github.io/sitemap.xml
