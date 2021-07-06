@@ -2,7 +2,7 @@
 layout: post
 category: HTML/CSS
 tag: [기초, 위코드, TIL]
-title: CSS 레이아웃
+title: HTML/CSS - CSS 레이아웃
 ---
 
 CSS를 처음 배웠을때 레이아웃을 잡는게 가장 어려웠던 기억이 난다.  
@@ -17,9 +17,9 @@ grid, flex등 여러가지 새로운 방법들이 등장했지만 역시 display
 
 ## inline, inline-block, block 에 대해서
 
-display:inline은 요소를 마치 텍스트처럼 취급한다. 
-display:block은 <strong>가로로 갈 수 있는 끝까지 공간을 차지한다.</strong>
-display:inline-block은 요소를 블럭처럼 취급하지만 옆에 공간이 남으면 다음 요소를 끼워넣는 것을 허락한다.
+display:inline은 요소를 마치 텍스트처럼 취급한다.   
+display:block은 <strong>가로로 갈 수 있는 끝까지 공간을 차지한다.</strong>  
+display:inline-block은 요소를 블럭처럼 취급하지만 옆에 공간이 남으면 다음 요소를 끼워넣는 것을 허락한다.  
 ## float
 
 float 속성은 요소를 한 쪽으로 띄워서 정렬하는데 쓰인다.
