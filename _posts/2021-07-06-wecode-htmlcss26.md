@@ -1,0 +1,106 @@
+---
+layout: post
+category: HTML/CSS
+tag: [기초, 위코드, TIL]
+title: 위코드 리플릿 과제 - Wecolor Picker 컴포넌트
+---
+
+## 구현 화면
+
+<img src="../public/img/colors.png">
+
+<p class="codepen" data-height="300" data-default-tab="html,result" data-slug-hash="yLbeQQv" data-user="lunayyko" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+  <span>See the Pen <a href="https://codepen.io/lunayyko/pen/yLbeQQv">
+  </a> by Luna YooYoung Ko (<a href="https://codepen.io/lunayyko">@lunayyko</a>)
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
+
+## HTML
+
+```html
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<title>repl.it</title>
+	<link href="style.css" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+	<link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+</head>
+
+<body>
+	<div class="colorBox">
+		<div class="colorSquare">
+			<span>#709fb0</span>
+      </div>
+      <div class="bottom">
+        <button class="heartBox">
+          <i class="fas fa-heart"></i>
+          &nbsp&nbsp
+          <strong>451</strong>
+        </button>
+        <div class="days"> 
+          <strong>3days</strong>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+```
+## CSS
+
+```css
+* {
+  box-sizing:border-box; 
+}
+body{
+  font-size:24px;
+  font-family: 'Open Sans', sans-serif;
+}
+.colorBox{
+  width: 520px;
+  height:580px;
+  background-color:#EBEFF3;
+  border-radius:20px;
+  margin: 0 auto;
+  padding:40px;
+}
+.colorSquare span{
+  display:none;
+  position:absolute;
+  top:360px;
+  background-color:#578291;
+  padding: 4px 12px;
+}
+.colorSquare:hover span{
+  display:block;
+  opacity:1;
+  color:white;
+}
+.colorSquare{
+  position:relative;
+  background-color:#709fb0;
+  color: #709fb0;
+  width: 440px;
+  height:420px;
+  border-radius:20px;
+}
+.bottom{
+  display: flex;
+  justify-content: space-between;
+  padding-top:24px;
+}
+button {
+  border: 2px solid lightgrey;
+  padding:12px 20px;
+  border-radius:12px;
+  font-size:24px;
+}
+.days{
+  align-self:center;
+}
+```
+
