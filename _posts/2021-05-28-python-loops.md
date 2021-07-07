@@ -5,13 +5,29 @@ tag: [기초, TIL, codecademy]
 title: 코데카데미 파이썬 기초과정 요약 - 반복문
 ---
 
-영어의 압박을 이겨내고 코데카데미의 파이썬 기초과정을 풀고 있다. 앞의 내용을 숙지하지 못한 상태에서 뒤로가니 너무 어려워져서 그동안 배운 부분을 복습할 겸 기초과정을 요약하기로 했다.
+영어의 압박을 이겨내고 코데카데미의 파이썬 기초과정을 풀고 있다.   
+앞의 내용을 숙지하지 못한 상태에서 뒤로가니 너무 어려워져서 그동안 배운 부분을 복습할 겸 기초과정을 요약하기로 했다.
 
 # 반복문
 ## For loops
 
-먼저, list는 변수를 묶어서 처리할 수 있도록 만들어진 목록 형식의 데이터 타입이다. 
-예를 들어서 <strong>list = [0,1,2,3,4]</strong> 이면 이 리스트의 길이는 5이고 해당 리스트를 for loops 에서 in 뒤에 넣게되면 아래에 들여쓰여진 출력 명령을 5번 시행하라는 뜻이 된다.
+for loops을 돌리는데에는 두 가지 방법이 있는데, 똑같은 연산을 n번 수행하라고 하거나
+해당 리스트의 모든 원소 i에 해당 연산을 수행하라고 할 수 있다.  
+
+첫번째를 먼저 보자면 
+``` python
+for list in 3:
+    print("아무거나 원하는거")
+
+# 출력결과
+# 아무거나 원하는거
+# 아무거나 원하는거
+# 아무거나 원하는거
+```
+뒤의 숫자를 list나 range로 갈음할 수 있다.
+list는 변수를 묶어서 처리할 수 있도록 만들어진 목록 형식\[0,1,2]의 데이터 타입이다. 
+예를 들어서 <strong>list = [0,1,2,3,4]</strong> 일때, 이 리스트의 길이는 5이기 때문에
+해당 리스트를 in 뒤에 넣게되면 아래에 들여쓰여진 출력 명령을 5번 시행하라는 뜻이 된다.
 
 ``` python
 for <temporary variable> in <list of length 5>:
@@ -25,13 +41,13 @@ for <temporary variable> in <list of length 5>:
 # 아무거나 원하는거
 ```
 
-두번째로, range 는 연속된 숫자로 이루어진 객체를 만드는 함수이다. 
+range 는 연속된 숫자로 이루어진 객체를 만드는 함수이다. 
 ``` python
 print(list(range(3)))
 [0, 1, 2]
 ```
 
-range를 리스트 대신 사용할 수 있다.
+range를 숫자나 리스트 대신 사용하면 아래와 같다.
 
 ``` python
 for temp in range(5):
@@ -47,9 +63,11 @@ for temp in range(5):
 
 ## While loops
 
+while 반복문은 주어진 조건이 참인 동안에 연산을 수행하는 반복문이다.
 ``` python
 countdown = 10
 while countdown >= 0:
+    #카운트다운이 0이상이 참인 동안에 연산을 수행
     print(countdown)
     countdown -= 1
 print("발사!")
@@ -70,7 +88,7 @@ print("발사!")
 ``` python
 python_topics=["var","control flow","loops","modules","classes"]
 length = len(python_topics)
-#파이썬토픽스의 길이는 5가 된다.
+#파이썬토픽스의 길이는 5
 index = 0
 #변수 선언
 
@@ -87,6 +105,8 @@ while index < length
 ```
 
 ## Loop Control : Continue
+
+앞서 말한 반복문의 두번째 사용예시로, 리스트 내의 모든 원소애 대해 연산을 수행해주는 반복문은 아래와 같이 쓴다.
 
 ``` python
 ages = [12,38,34,26,21,19,67,17]
@@ -141,8 +161,10 @@ for i in range(3):
 # 5
 # 5
 ```
+5를 출력하라는 연산을 3번 반복한다
 
 ``` python
+print(range(3)) # [0,1,2]
 for i in range(3):
     print(i)
 #결과
@@ -150,6 +172,7 @@ for i in range(3):
 # 1
 # 2
 ```
+range(3)의 원소 i 를 모두 출력한다. 
 
 
 

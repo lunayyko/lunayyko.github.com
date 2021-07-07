@@ -10,17 +10,17 @@ grid, flex등 여러가지 새로운 방법들이 등장했지만 크로스브�
 
 # position : relative, absolute, fixed
 
-기준이 되고자 하는 부모 요소에게 position: relative을 주고 자식에게 position:absolute를 줌으로서 자식 요소가 부모 요소를 기준으로 상대적으로 움직일 수 있게 한다. 
+기준이 되고자 하는 부모 요소에게 relative을 주고 자식에게 absolute를 줌으로서 자식 요소가 부모 요소를 기준으로 상대적으로 움직일 수 있게 한다. 
 
 꼭 반대여야될 것 같은데 아니어서 처음에 외울때 헷갈릴 수 있다.  
 처음 외울때는 부모가 어린 자식(absolute)에게 유연하게 대응(relative)한다고 생각하면 좋을 것 같다.
-
-position: relative을 주고 자식에게 position:absolute를 주는 방법으로 레이아웃을 조절하는 것이 많이 쓰인다.
 
 <figure>
 <img src='{{"../public/img/position.png"}}' alt="position: relative와 absolute가 적용된 이미지">
 <figurecaption> 출처: w3school </figurecaption>
 </figure>
+
+부모 요소에 position:relative을 주고 자식 요소에게 position:absolute를 주는 방법으로 레이아웃을 만든다.
 
 position:fixed 는 말그대로 움직이지 않도록 고정하는데 사용한다.
 
@@ -28,7 +28,7 @@ position:fixed 는 말그대로 움직이지 않도록 고정하는데 사용한
 
 <img src='{{"../public/img/css-display.png"}}'>
 
-display:inline은 요소를 마치 텍스트처럼 취급한다.   
+display:inline은 요소를 텍스트처럼 취급해서 안에 들어있는 컨텐츠만큼 공간을 차지한다.
 display:block은 <strong>가로로 갈 수 있는 끝까지 공간을 차지한다.</strong>  
 display:inline-block은 요소를 블럭처럼 취급하지만 옆에 공간이 남으면 다음 요소를 끼워넣는 것을 허락한다.  
 
