@@ -11,7 +11,7 @@ title: 자바스크립트 - 시계, 언어 변경
 
 ## 시계
 
-<img src="../public/img/clock.png">
+![포폴에 반영된 시계](/public/img/clock.png)
 
 * html 
 
@@ -114,8 +114,8 @@ setInterval(getTime, 1000);
 
 ## 언어 변경
 
-<img src="../public/img/lang-1.png">
-<img src="../public/img/lang-2.png">
+![포폴에 반영된 시계](public/img/lang-1.png)
+![포폴에 반영된 시계2](/public/img/lang-2.png)
 
 
 * html

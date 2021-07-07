@@ -136,7 +136,7 @@ return n - len(_lost)
 VS code Prettier 패키지의 코드 정리 단축키를 설정했다
 cmd + shift + i : 
 
-<img src = "../public/img/prettier.png">
+![prettier 단축키 세팅](/public/img/prettier.png)
 
 ## 주요 포인트 및 생각해볼 점
 

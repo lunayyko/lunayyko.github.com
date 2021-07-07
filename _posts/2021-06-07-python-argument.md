@@ -12,7 +12,7 @@ title: 코데카데미 파이썬 기초과정 요약 - 매개변수(Parameter)�
 인수(argument)는 함수를 호출할 때 패스되는 값이다
 </div>  
 
-<img src='{{"../public/img/param-arg.png"}}'> 
+![매개변수와 인수](/public/img/param-arg.png)
 
 들어가는건 매개변수 나오는건 인수! 함수의 인수는 파이썬에서 꼭 필요하다.   
 두 개의 매개변수를 정의하고 함수에 두 개의 인수를 패스하는게 표준함수의 정의이다. 
@@ -49,13 +49,13 @@ log_message(message="Hello from the past", date="November 20, 1693")
 
 ## 인수의 위치 
 
-<img src='{{"../public/img/python-function-definition-arguments-kind-and-order.jpeg"}}'> 
+![인수의 위치와 순서](/public/img/python-function-definition-arguments-kind-and-order.jpeg)
 
 
 ## 디폴트 인수 (Default Arguments)
 인수값을 넣지 않고 호출했을 때 출력되는 인수이다.
 
-<img src="../public/img/defaultp.png">
+![디폴트 인수](/public/img/defaultp.png)
 
 ## 변형 가능한 객체를 디폴트 인수로 사용하지 않는다
 

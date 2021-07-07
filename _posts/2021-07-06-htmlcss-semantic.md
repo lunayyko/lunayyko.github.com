@@ -16,9 +16,7 @@ title: HTML/CSS - Semantic Web 과 Semantic Tag
 
 부분 별로 어떤 내용인지 설명하기위한 시맨틱 요소들은 아래와 같은 것들이 있다.
 
-<figure>
-<img src= '{{"../public/img/img_sem_elements.gif"}}'>
-</figure>
+![기본 시맨틱 태그](/public/img/img_sem_elements.gif)
 
 이외에도 이런 것들이 있다.  
 

@@ -63,7 +63,7 @@ def handle_turn():
 
 여기까지 멈추고 코드를 복사 붙여넣기해서 한 번 돌려보면 내가 입력한 숫자에 해당하는 판에 X자가 표시되는 화면을 볼 수 있다.
 
-<img src = "../public/img/tictactoe1.png">
+![틱택토 게임화면](../public/img/tictactoe1.png)
 
 ## 게임 플레이
 ```python
@@ -288,7 +288,7 @@ def handle_turn(player):
     display_board()
 ```
 
-<img src = "../public/img/tictactoe2.png">
+![틱택토 게임화면2](/public/img/tictactoe2.png)
 
 게임 만들기가 완료되었다~!!!
 

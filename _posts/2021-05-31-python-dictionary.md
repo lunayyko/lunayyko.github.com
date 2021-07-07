@@ -67,7 +67,7 @@ title: 코데카데미 파이썬 기초과정 요약 - 딕셔너리
     ```  
 ## Scrabble 단어게임  
 스크래블은 영어 알파벳 블럭을 이용해서 단어를 만들어서 알파벳 블럭마다 주어진 점수를 얻는 게임이다.  
-<img src="../public/img/scrabble.jpeg">  
+![스크래블](/public/img/scrabble.jpeg) 
 ```python
 letters=["A","B","C"..."y","Z"]
 points = [1,3,6,... 5,10]

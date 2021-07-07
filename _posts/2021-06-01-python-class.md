@@ -34,7 +34,7 @@ class Orange:
 </div>  
 
 <br>
-<img src = "../public/img/instantiate1.jpeg">    
+![인스턴스화](/public/img/instantiate1.jpeg)   
 <br>
 
 * 다른 색과 무게의 오렌지들을 만들어내는 클래스 오렌지를 만들어보자.    
@@ -96,27 +96,26 @@ init 매쏘드는 클래스가 인스턴스화 될때마다 호출된다?
 
 initialize(초기화)와 instantiate(인스턴스화)의 정확한 뜻을 알아보자.
 
+## initialize(초기화)
 
-* initialize(초기화)
-
-    <div class="message">
-    확보된 메모리 영역을 어떤 값으로 채우거나 쓰레기 값을 일정한 값으로 바꾸는 것 - https://blog.naver.com/netgarng88
-    </div>
+<div class="message">
+확보된 메모리 영역을 어떤 값으로 채우거나 쓰레기 값을 일정한 값으로 바꾸는 것 - https://blog.naver.com/netgarng88
+</div>
 
 
-* instantiate(인스턴스화)
+## instantiate(인스턴스화)
 
-    <div class="message">
-    인스턴스화는 클래스 내의 객체에 대해 특정한 변형을 정의하고, 이름을 붙인 다음, 그것을 물리적인 어떤 장소에 위치시키는 등의 작업을 통해, 인스턴스를 만드는 것을 의미한다. - http://www.terms.co.kr/instance.htm
-    </div>  
+<div class="message">
+인스턴스화는 클래스 내의 객체에 대해 특정한 변형을 정의하고, 이름을 붙인 다음, 그것을 물리적인 어떤 장소에 위치시키는 등의 작업을 통해, 인스턴스를 만드는 것을 의미한다. - http://www.terms.co.kr/instance.htm
+</div>  
 
-    <img src = "../public/img/instantiate2.png">  
+![인스턴스화2](/public/img/instantiate2.png)
 
-    ```python
-    #인스턴스 생성하기
-    new_orange = Orange()
-    #새 인스턴스 변수 이름 = 클래스()
-    ```
+```python
+#인스턴스 생성하기
+new_orange = Orange()
+#새 인스턴스 변수 이름 = 클래스()
+```
 
 그림을 보니 무슨 개념인지 조금 알 것 같지만 아직은 잘 모르겠다.
 
