@@ -2,7 +2,7 @@
 layout: post
 category: python
 tag: [기초, TIL]
-title: 파이썬 - 가변 인수(*args), 키워드 인수(**kwargs), 인수의 순서
+title: 파이썬 - 가변 인수(*args), 키워드 인수(**kwargs)
 ---
 
 전 포스팅에서 키워드인수, 디폴트 인수에 대해 간단하게 다루었는데 이번에는 가변인수와 키워드 인수에 대해서 자세히 살펴보고, 각 인수들의 위치에 대해서 얘기해보겠다.
@@ -33,6 +33,19 @@ function(1,2,3,4,5,'a','b',[6,7,8],{'a':3, 'b':8})
 출처: [매일 꾸준히, 더 깊이](https://engineer-mole.tistory.com/97)
 
 가변인수는 개수가 정해져있는 위치 인수 뒤에 써주어야하고 1개만 사용할 수 있다.
+
+## 언패킹
+
+```python
+x = [10, 20, 30]
+print_numbers(*x)
+10
+20
+30
+```
+
+print_numbers에 10, 20, 30이 들어있는 리스트 x를 넣고 *만 붙였는데도 숫자가 각 줄에 출력되었다. 즉, 리스트(튜플) 앞에 *를 붙이면 언패킹(unpacking)이 되어서 print_numbers(10, 20, 30)과 똑같은 동작이 된다. 말 그대로 리스트의 포장을 푼다는 뜻이다.
+[출처: 코딩 도장](https://dojang.io/mod/page/view.php?id=2345)
 
 # 키워드 인수 (Keyword Arguments)
 
@@ -105,7 +118,7 @@ TypeError: random_password() takes 0 positional arguments but 4 were given
 예시 출처 : https://treyhunner.com/2018/04/keyword-arguments-in-python/
 
 
-# 키워드 가변 인수 (variable length keyword arguments, arbitrary keyword arguments) **kwargs
+# 가변 키워드 인수 (variable length keyword arguments) **kwargs
 
 파이썬은 다른 프로그래밍 언어와 달리 함수가 받아들이는 인수의 이름을 알 수 있다.  
 
@@ -113,14 +126,8 @@ TypeError: random_password() takes 0 positional arguments but 4 were given
 def f(x, y, **kwargs):
     ...
 ```
-
-가변인수에 이름을 붙여주면 키워드 가변인수이고 이름을 알기때문에 위치에 상관없이 쓸 수 있다.  
-
-```python
-f(2, 3, flag=True, mode='fast', header='debug')
-```
-
 '**'오퍼레이터는 함수로 하여금 여러 개의 키워드 인수를 받아들이도록 한다. 
+
 ```python
 def f(x, y, **kwargs):
     # x -> 2
@@ -150,21 +157,36 @@ foo(2, 9, 12, 34, x=3, name="bob")
 
 출처: 위코드
 
-디폴트 인수는 위치 인수의 뒤에 위치해야 한다. 인수 값은 순서대로 지정이 될텐데 값이 무엇이든 될 수 있는 기본 인수가 디폴트인수 뒤에 오게 되면 선언된 값이 다시 변할 수 있도록 바뀌게 되서 디폴트인수가 기본 인수 뒤에 와야하는 것 같다.
+함수를 정의할 때 default value parameter를 non-default value parameter 앞에 정의하면 안되는 이유1
+```python
+def multiply(a=2,b):
+    print(a*b)
 
+multiply(2)
+```
+메소드를 위와 같이 정의하면 SyntaxError: non-default argument follows default argument 가 발생한다. 그 이유는 만약에 메소드를 호출할 때 인자값을 1개만 전달하면 생략된 인자가 a 인지 b 인지 알 수가 없기 때문이다. 따라서 b 에도 기본값을 지정해주거나 기본값을 지정해준 인자를 맨 뒤로 이동시켜 메소드를 정의하면 문제를 해결할 수 있다.
 
-## 인수의 위치 
+```python
+def multiply(a,b=2):
+    print(a*b)
 
-![인수의 위치와 순서](/public/img/python-function-definition-arguments-kind-and-order.jpeg)
+>> multiply(2)
+4
+```
+[출처: 우공이산 블로그](https://hyun0k.tistory.com/entry/TIL-10-Function-Parameters)
 
-모든 인수의 위치는 정리하자면 위와 같다. 
+함수를 정의할 때 default value parameter를 non-default value parameter 앞에 정의하면 안되는 이유2
+```python
+def remove_x(word, x='i'):
+	return ''.join(word.split(x))
 
-위치 인수 > 디폴트 인수 > 가변인수 > 키워드 인수 > 키워드 가변인수
-
-## 예시
-
-가변인수를 위치인수 앞에 쓰면 이렇게 에러가 나게된다.
-![위치 인수의 위치](/pubilc/img/args-position.png)
-
-
-
+remove_x('mississippi')
+'msssspp'
+```
+첫번째 함수는 내가 받을 인수가 word에 해당한다는 것이 확실하다.
+```python
+def remove_x(x='i', word):
+	return ''.join(word.split(x))
+SyntaxError: non-default argument follows default argument
+``` 
+두번째 함수는 내가 받은 인수가 i를 디폴트로 가지는 x인수 인지 word인수 인지 확실하지 않다.
