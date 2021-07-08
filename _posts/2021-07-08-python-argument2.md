@@ -1,11 +1,11 @@
 ---
 layout: post
 category: python
-tag: [기초, TIL]
+tag: [기초, 나중에 살펴보기, TIL]
 title: 파이썬 - 가변 인수(*args), 키워드 인수(**kwargs)
 ---
 
-전 포스팅에서 키워드인수, 디폴트 인수에 대해 간단하게 다루었는데 이번에는 가변인수와 키워드 인수에 대해서 자세히 살펴보고, 각 인수들의 위치에 대해서 얘기해보겠다.
+전 포스팅에서 키워드인수, 디폴트 인수에 대해 간단하게 다루었는데 이번에는 가변인수와 가변 키워드인수에 대해서 자세히 살펴본다.
 
 # 가변 인수 (variable length arguments) *args
 
@@ -44,7 +44,7 @@ print_numbers(*x)
 30
 ```
 
-print_numbers에 10, 20, 30이 들어있는 리스트 x를 넣고 *만 붙였는데도 숫자가 각 줄에 출력되었다. 즉, 리스트(튜플) 앞에 *를 붙이면 언패킹(unpacking)이 되어서 print_numbers(10, 20, 30)과 똑같은 동작이 된다. 말 그대로 리스트의 포장을 푼다는 뜻이다.
+리스트(튜플) 앞에 *를 붙이면 언패킹(unpacking)이 되어서 print_numbers(10, 20, 30)과 똑같은 동작이 된다. 말 그대로 리스트의 포장을 푼다는 뜻이다.
 [출처: 코딩 도장](https://dojang.io/mod/page/view.php?id=2345)
 
 # 키워드 인수 (Keyword Arguments)
@@ -56,7 +56,7 @@ print_numbers에 10, 20, 30이 들어있는 리스트 x를 넣고 *만 붙였는
 2. 읽기 쉽게 인수의 위치를 바꿀 수 있다.
 3. 이름을 붙여줌으로서 각 인수가 나타내는 것이 무엇인지 더 분명히 알 수 있다.  
 
-아래 함수는 output_file 과 contents 문자열을 받아서 압출파일을 만드는 함수이다.
+아래 함수는 output_file 과 contents 문자열을 받아서 압축파일을 만드는 함수이다.
 
 ```python
 def write_gzip_file(output_file, contents):
@@ -71,7 +71,7 @@ def write_gzip_file(output_file, contents):
         gzip_out.write(contents)
 ```
 
-첫번째 인수는 디폴트 값으로 None을 가지고 있는 파일이름 인수이다. 파일 객체 또는 파일이름 둘 다가 아닌 둘 중 하나만 GzipFile에 넘겨주면 되기 때문에 첫번째 인수로 쓰였던 파일이름이 필요하지 않다.
+첫번째 인수는 디폴트 값으로 None을 가지고 있는 파일이름 인수이다. 파일 객체 또는 파일이름 둘 다가 아닌 둘 중 하나만 GzipFile에 넘겨주면 되기 때문에 첫번째 인수로 쓰였던 파일이름이 필요하지 않다. -> 잘 모르겠음
 compresslevel도 디폴트값이 9이기 때문에 써주지 않아도 된다.
 
 ```python
@@ -83,7 +83,7 @@ def write_gzip_file(output_file, contents):
 
 ## *의 사용 : 위치 인수말고 키워드 인수만 입력받고 싶을 때
 
-위치변수가 아닌 키워드 인수만 받고 싶을 때는 *뒤에 아무것도 붙이지 않고 써주면 된다. 
+위치인수가 아닌 키워드 인수만 받고 싶을 때는 *뒤에 아무것도 붙이지 않고 써주면 된다. 
 
 ```python
 from random import choice, shuffle
@@ -103,7 +103,7 @@ def random_password(*, upper, lower, digits, length):
     return "".join(chars)
 ```
 
-이 함수는 이름이 써져있는 인수만 받을 수 있다. 
+이 함수는 이름이 써져있는 인수(키워드 인수)만 받을 수 있다. 
 ```python
 >>> random_password(upper=1, lower=1, digits=1, length=8)
 'oNA7rYWI'
@@ -115,12 +115,12 @@ Traceback (most recent call last):
 TypeError: random_password() takes 0 positional arguments but 4 were given
 ```
 
-예시 출처 : https://treyhunner.com/2018/04/keyword-arguments-in-python/
+출처 : https://treyhunner.com/2018/04/keyword-arguments-in-python/
 
 
 # 가변 키워드 인수 (variable length keyword arguments) **kwargs
 
-파이썬은 다른 프로그래밍 언어와 달리 함수가 받아들이는 인수의 이름을 알 수 있다.  
+파이썬은 다른 프로그래밍 언어와 달리 함수가 받아들이는 인수의 이름을 알 수 있다. (키워드 인수를 쓸 수 있다)
 
 ```python
 def f(x, y, **kwargs):
@@ -134,7 +134,7 @@ def f(x, y, **kwargs):
     # y -> 3
     # kwargs -> { 'flag': True, 'mode': 'fast', 'header': 'debug' }
 ``` 
-주어진 인수들은 **뒤에 쓰인 인수의 이름에 딕셔너리 형태로 저장된다.(키:값 두 개 가 있어야 하니까) 
+주어진 인수들은 **뒤에 쓰인 인수의 이름에 딕셔너리 형태로 저장된다.(키:값 두 개가 있어야 하니까) 
 
 ```python
 def foo(a, b, *varargs, **kwargs):
