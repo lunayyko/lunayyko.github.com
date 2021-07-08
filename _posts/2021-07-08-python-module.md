@@ -2,7 +2,7 @@
 layout: post
 category: python
 tag: [기초, TIL]
-title: 파이썬 - 모듈
+title: 파이썬 - 모듈(Module)과 패키지(Package)
 ---
 
 # 모듈
@@ -41,36 +41,16 @@ import된 모듈과 패키지들을 딕셔너리 형태로 저장하고 있고 �
 
 ## calculator 패키지 만들기
 
-```python
-class Calculator:
-    def addition(self):
-        print(a + b)
-    def subtraction(self):
-        print(a - b)
-    def multiplication(self):
-        print(a * b)
-    def division(self):
-        print(a / b)
-a = int(input("Enter first number:"))
-b = int(input("Enter first number:"))
-obj = Calculator()
-choice = 1
-while choice != 0:
-    print("1. ADDITION")
-    print("2. SUBTRACTION")
-    print("3. MULTIPLICATION")
-    print("4. DIVISION")
-    choice = int(input("Enter your choice:"))
-```
+주어진 코드대로 패키지를 만들고 실행하면 다음과 같은 에러가 나온다.
 
-[출처 : 코드스피디](https://www.codespeedy.com/python-program-to-create-a-class-which-performs-basic-calculator-operations/)
+![계산기 패키지 경로 에러](/public/img/calculator-package-error.png)
 
+>ImportError: attempted relative import with no known parent package
 
-## main.py에서 상대경로로 add_and_mutiply 를 임포트 했을 때 발생하는 에러를 확인하고, 다음의 파이썬 공식 문서를 참고해서 main module 에서는 패키지의 모듈을 어떻게 임포트 해야하는지 블로깅 해주세요.
-
+상위패키지를 못 찾아서 발생하는 에러다. main은 항상 절대경로를 이용해야한다.
 ## add_and_multiply.py에서 multiply함수를 절대경로와 상대경로도 각각 임포트 해보고 main 모듈과 차이점을 생각해보고 결과를 출력해 보세요.
 
-## __init__.py 파일의 역할에 대해서도 정리해서 블로깅 해주세요.
+add_and_multiply.py 는 패키지 안에 들어있는 모듈이기 때문에 절대경로와 상대경로 모두 실행되며, main.py는 패키지 안에 들어있지 않기 때문에 상대경로는 실행이 안되고 절대경로만 실행이 된다.
+## __init__.py의 역할
 
-
-
+해당 디렉토리가 패키지의 일부임을 알려주는 역할을 한다. python3.3 버전부터는 __init__.py 가 없어도 패키지로 인식한다. 하지만 하위호환을 위해 생성하는 것이 안전하다.
