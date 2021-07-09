@@ -17,6 +17,22 @@ title: 데코레이터(decorator)
 
 출처: https://hckcksrl.medium.com/ 
 
+## 예시1
+
+```python
+def welcome_decorator(self):
+  def wrapper():
+    return self() + "welcome to WECODE!"
+  return wrapper
+
+
+@welcome_decorator
+def greeting():
+    return "Hello, "
+
+print(greeting())
+```
+## 예시2
 example.py
 ```python
 class Decorator:
@@ -33,7 +49,7 @@ class Decorator:
 def example():
     return '클래스'
 
-example()
+#example() 실행
 '''''''''
 전처리
 클래스
@@ -41,7 +57,7 @@ example()
 '''''''''
 ```
 
-## 장고에서의 사용 예시
+## 장고에서의 예시3
 
 ```python
 from django.http import HttpResponse
