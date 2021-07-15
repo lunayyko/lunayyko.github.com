@@ -1,6 +1,6 @@
 ---
 layout: post
-category: algorithm
+category: algorithm(python)
 tag: [기초, TIL]
 title: 파이썬과 자바스크립트 비교 - 백준 10430 나머지
 ---
