@@ -1,7 +1,7 @@
 ---
 layout: post
 category: python
-tag: [입문, 프로젝트, TIL]
+tag: [기초, 프로젝트, TIL]
 title: 파이썬 프로젝트 틱택토
 ---
 

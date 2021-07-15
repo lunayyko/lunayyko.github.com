@@ -1,7 +1,7 @@
 ---
 layout: post
 category: python
-tag: [입문, TIL]
+tag: [기초, TIL]
 title: 데코레이터(decorator)
 ---
 

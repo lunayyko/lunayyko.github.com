@@ -1,8 +1,8 @@
 ---
 layout: post
 category: python
-tag: [기초, TIL]
-title: 파이썬 - 클래스 Class
+tag: [기초, 위코드, TIL]
+title: 파이썬 - 데이터베이스 클래스 구현
 ---
 
 ## Database 라는 이름의 class를 구현해 주세요.
@@ -82,11 +82,12 @@ class Database:
   def __init__(self, name, size):
     self.name = name
     self.size = size
-    self.db = {} #?
+    self.db = {} #db라는 빈 리스트를 생성한다
   
   def insert(self, field, value):
     if len(self.db) < self.size:
-      self.db[field] = value
+      self.db[field] = value 
+      #db의 해당 필드값에 값을 넣는다
 
   def select(self, field):
     if field in self.db:

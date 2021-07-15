@@ -1,7 +1,7 @@
 ---
 layout: post
 category: python
-tag: [기초, 나중에 살펴보기, TIL]
+tag: [기초, 위코드, 나중에 살펴보기, TIL]
 title: 파이썬 - 가변 인수(*args), 키워드 인수(**kwargs)
 ---
 

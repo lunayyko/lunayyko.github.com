@@ -1,7 +1,7 @@
 ---
 layout: post
 category: python
-tag: [기초, TIL]
+tag: [기초, 위코드, TIL]
 title: 파이썬 - 모듈(Module)과 패키지(Package)
 ---
 

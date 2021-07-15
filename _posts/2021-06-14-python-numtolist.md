@@ -1,10 +1,9 @@
 ---
 layout: post
 category: python
-tag: [기초, 나중에 살펴보기, TIL]
+tag: [기초, TIL, 복습]
 title: 파이썬 숫자,문자,리스트,맵 연습
 ---
-
 ## 주어진 숫자의 길이와 모든 자리수의 합을 구해보자
 
 * 짧은 코드
