@@ -45,8 +45,8 @@ DATABASES = DATABASES
 ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
-    # 'django.contrib.admin',
-    # 'django.contrib.auth',
+    # 'django.contrib.admin', #admin도 
+    # 'django.contrib.auth', #login auth도 직접 만들어쓸 예정이다
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
@@ -87,13 +87,14 @@ CORS_ALLOW_HEADERS = (
     'user-agent',
     'x-csrftoken',
     'x-requested-with',
-		#만약 허용해야할 추가적인 헤더키가 있다면?(사용자정의 키) 여기에 추가하면 됩니다.
+	#만약 허용해야할 추가적인 헤더키가 있다면?(사용자정의 키) 여기에 추가하면 됩니다.
 )
 ```
+위와 같이 settings.py를 추가 및 수정한다.
 
-추가 및 수정
+### my_setting.py 파일 추가 
 
-### my_setting.py 파일 추가 (manage.py있는 디렉토리에)
+manage.py있는 디렉토리에 my_setting.py라는 새 파일을 만들어서 추가한다. 
 
 ```python
 #클라우드에 올리지 않는, 키를 보관하는 파일
@@ -129,13 +130,18 @@ mysql -u root -p #마이sql시작
 ```
 
 ```sql
-create database 데이터베이스이름 character set utf8mb4 collate utf8mb4_general_ci; --utf8설정
-show databases; --db보여주기
-use wecode_23 쉘 명령어인가..? --사용할 db골라주기
+show databases; --mysql의 모든 db스키마?들 보여주기
+use wecode_23; --사용할 db골라주기
+
+create database 데이터베이스이름 character set utf8mb4 collate utf8mb4_general_ci; --데이터베이스 생성 및 utf8설정
+
 show tables; --테이블들 보여주기
 select * from django_migrations; --장고 마이그레이션 보여주기
-desc products; --프로덕츠 내림차순으로 보여주기
+
+desc products; --프로덕츠 테이블이 잘 만들어졌는지 보여준다
 ```
+마지막 명령어를 치면 해당 테이블 컬럼들의 조건식들이 잘 만들어졌는지 볼 수 있다. 
+![products 테이블](/public/img/table_products.png)
 
 mysql 나가기 키는 \q
 
@@ -636,6 +642,9 @@ pythong manage.py runserver
 
 ## migration
 
+<details markdown="1">
+<summary>models.py 펼쳐서 보기/접기</summary>
+
 ```python
 from django.db import models
 
@@ -715,13 +724,37 @@ class Nutrition(models.Model):
     def __str__(self):
         return self.name
 ```
+</details>
+
+처음에 뭔가 잘못 만들어서 마이그레이션 파일을 지우고 초기화했다.
+
+### migration 초기화하기
+
+데이터베이스를 다 날려도 괜찮은 경우에 아래의 방법으로 마이그레이션을 재설정할 수 있다. 
+1. 마이그레이션 폴더에서 \__init__.py을 제외한 모든 파일을 삭제하거나 Unix OS의 경우 아래 명령어를 실행한다.
+```shell
+find . -path "*/migrations/*.py" -not -name "__init__.py" -delete
+find . -path "*/migrations/*.pyc"  -delete
+```
+2. sql에서 모든 테이블을 드랍한다.
+```sql
+DROP DATABASE westarbucks_db; --db 전체 삭제
+create database westarbucks_db character set utf8mb4 collate utf8mb4_general_ci; --데이터베이스 생성 및 utf8설정
+```
+3. 마이그레이션을 다시 실행한다. 
+```python
+python manage.py makemigrations
+python manage.py migrate
+```
+[출처: How to Reset Migrations ](https://simpleisbetterthancomplex.com/tutorial/2016/07/26/how-to-reset-migrations.html)
 
 ## migration 만들고 migrate 실행하기
 
 ```python
 python manage.py makemigrations 
 #모델의 변경사항을 파악, 설계도 작성(하고나서 만들어진 파일을 잘 살펴본다)
-python manage.py showmigrations products 0001 #현재 migrations가 어떤 상태인지 살펴보기
+python manage.py showmigrations products 0001 
+#현재 migrations가 어떤 상태인지 살펴보기
 python manage.py sqlmigrate 
 #실제 데이터베이스에 전달되는 SQL 쿼리문을 확인
 python manage.py migrate 
@@ -730,7 +763,9 @@ python manage.py migrate
 migration을 만드는 것과 migrate는 각각 
 클래스에 맞게 설계도를 만들고 설계한대로 데이터베이스를 건설하겠다는 뜻이라고 할 수 있다. 
 
-## 쉘에서 CRUD하기
+## QuerySet으로 CRUD하기
+
+※ QuerySet: 장고에서 만든 클래스의 인스턴스. 객체들이 모여 있는 리스트.
 
 ### CREATE
 
@@ -738,15 +773,33 @@ migration을 만드는 것과 migrate는 각각
 
 ```python
 python manage.py shell #파이썬에서 쉘 열기
->>>from products.models import Product
+>>>from products.models import Menu
 #쉘에서 장고를 연결해주려면 import해야함, 시작 전 작성한 모델 클래스 import
->>> products.object.create(name = “강경훈”, age =20) #이런식으로 쿼리셋 작성
+>>> Menu.objects.create(name = '음료')  #class명.objects.method명(~~)
 ```
 exit() 하면 쉘을 종료할 수 있다.
+
+주의 : shell을 켤때마다 from products.models import Menu 클래스를 임포트해주어야한다.
+
+위와같이 입력하면 Menu클래스를 이용하여 '음료'가 name컬럼에 삽입된 것을 볼 수 있다.
+![쿼리셋 create 결과1](/public/img/create1.png) 
+왠지 모르겠지만 쌍따옴표를 쓰니까 에러가 나서 작은따옴표를 썼다.
 
 ### READ
 
 get은 쿼리셋을 1개, all(전부)과 filter는 쿼리셋을 많이 불러올 수 있고 쿼리셋에 담겨온 데이터들은 for문을 사용할 수 있다. filter는 쿼리셋을 0개 불러올 수도 있다.
+
+```shell
+>>> from products.models import Menu
+>>> Menu.objects.all()
+#<QuerySet [<Menu: 음료>, <Menu: 푸드>]
+Menu.objects.get(name="음료")
+#<Menu: 음료>
+Menu.objects.filter(name="음료")
+#<QuerySet [<Menu: 음료>]>
+Menu.objects.filter(name="음료").values()
+#<QuerySet [{'id': 1, 'name': '음료'}]>
+```
 
 ## UPDATE
 
