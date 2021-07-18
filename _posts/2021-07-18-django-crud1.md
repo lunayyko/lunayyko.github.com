@@ -141,11 +141,11 @@ mysql 나가기 키는 \q
 
 ## gitignore추가 (manage.py가 존재하는 디렉토리에)
 
-toptal.com/developers/gitignore 에서 python,pycharm,visualstudiocode,vim,macos,linux,zsh을 추가해서 파일을 만들어 넣다.
+toptal.com/developers/gitignore 에서 python,pycharm,visualstudiocode,vim,macos,linux,zsh을 추가해서 파일을 만들어 넣는다.
 
-<summary>git ignore 펼쳐서 보기</summary>
+<details markdown="1">
+<summary>git ignore 펼쳐서 보기/접기</summary>
 
-<div markdown="1">
 ```python
 
 # Created by https://www.toptal.com/developers/gitignore/api/python,pycharm,visualstudiocode,vim,macos,linux,zsh
@@ -618,7 +618,7 @@ zsdoc/data
 
 # End of https://www.toptal.com/developers/gitignore/api/python,pycharm,visualstudiocode,vim,macos,linux,zsh
 ```
-</div>
+</details>
 
 ## 실행
 
@@ -631,7 +631,8 @@ pythong manage.py runserver
 ## ERD테이블
 
 ![스타벅스 페이지의 ERD](/public/img/starbucks_erd.png)
-스타벅스 페이지를보고 데이터 관계도를 만들고 이를 보고 생성된 앱의 models.py에 migration을 만들어준다.
+스타벅스 페이지를 보고 데이터 관계도를 만든다.
+새로 생성된 앱의 models.py에 아래 migration을 넣어서 데이터베이스 토대를 만들어준다.
 
 ## migration
 
@@ -641,17 +642,22 @@ from django.db import models
 class Menu(models.Model):
     name = models.CharField(max_length=45)
     #id는 장고가 자동으로 만들어주니까 클래스 객체에 안 넣어도 됨
+    
     class Meta: #테이블 이름 지정
         db_table = 'menus' #안 쓰면 products_menus라고 컬럼이름 자동 생성
+    
     def __str__(self):
         return self.name
 
 class Category(models.Model):
     name = models.CharField(max_length=45)
     menu = models.ForeignKey('Menu', on_delete=models.CASCADE, default='')
-    #default에러가 떠서 디폴트를 추가했다 #외래키 쓸 때 장고가 알아서 _id를 붙여서 데이터베이스에 넘겨서 _id를 안 써도 된다.
+    #default에러가 떠서 디폴트를 추가했다 
+    #외래키 쓸 때 장고가 알아서 _id를 붙여서 데이터베이스에 넘겨서 _id를 안 써도 된다.
+    
     class Meta:
         db_table='categories'
+    
     def __str__(self):
         return self.name
 
@@ -661,28 +667,34 @@ class Product(models.Model):
     description = models.TextField(max_length=300, default='')
     isnew = models.BooleanField(default=False)
     category = models.ForeignKey('Category', on_delete=models.CASCADE) #cascade : 부모개체가 사라지면 자식도 사라지도록
+    
     class Meta:
         db_table = 'products'
+    
     def __str__(self):
         return self.name
 
 class Image(models.Model):
     image_url = models.URLField(max_length=2000)
     product = models.ForeignKey('Product', on_delete=models.CASCADE)
+    
     class Meta:
         db_table = 'images'
+    
     def __str__(self):
         return self.name
 
 class Allergy(models.Model):
     name = models.CharField(max_length=45)
     products = models.ManyToManyField('Product', through='AllergyProduct')
+    
     class Meta:
         db_table = 'allergies'
 
 class AllergyProduct(models.Model):
     allergy = models.ForeignKey('Allergy',on_delete=models.CASCADE)
     product = models.ForeignKey('Product', on_delete=models.CASCADE)
+    
     class Meta:
         db_table = 'allergies_products'
 
@@ -696,8 +708,10 @@ class Nutrition(models.Model):
     size_ml = models.CharField(max_length=45,  null=True)
     size_fluid_ounce = models.CharField(max_length=45,  null=True)
     product = models.OneToOneField('Product', on_delete=models.CASCADE)
+    
     class Meta:
         db_table = 'nutritions'
+    
     def __str__(self):
         return self.name
 ```
@@ -705,14 +719,16 @@ class Nutrition(models.Model):
 ## migration 만들고 migrate 실행하기
 
 ```python
-python manage.py makemigrations #모델의 변경사항을 파악, 설계도 작성
+python manage.py makemigrations 
+#모델의 변경사항을 파악, 설계도 작성(하고나서 만들어진 파일을 잘 살펴본다)
 python manage.py showmigrations products 0001 #현재 migrations가 어떤 상태인지 살펴보기
-python manage.py sqlmigrate #실제 데이터베이스에 전달되는 SQL 쿼리문을 확인
-python manage.py migrate #자동으로 migration을 실행
+python manage.py sqlmigrate 
+#실제 데이터베이스에 전달되는 SQL 쿼리문을 확인
+python manage.py migrate 
+#자동으로 migration을 실행
 ```
-
-makemigration 클래스에 맞게 설계도를 만듦(설계도 확인)  
-migrate 설계한대로 데이터베이스에 적용시키겠다(건설?)
+migration을 만드는 것과 migrate는 각각 
+클래스에 맞게 설계도를 만들고 설계한대로 데이터베이스를 건설하겠다는 뜻이라고 할 수 있다. 
 
 ## 쉘에서 CRUD하기
 
@@ -725,8 +741,8 @@ python manage.py shell #파이썬에서 쉘 열기
 >>>from products.models import Product
 #쉘에서 장고를 연결해주려면 import해야함, 시작 전 작성한 모델 클래스 import
 >>> products.object.create(name = “강경훈”, age =20) #이런식으로 쿼리셋 작성
-exit() #쉘 종료하기
 ```
+exit() 하면 쉘을 종료할 수 있다.
 
 ### READ
 
