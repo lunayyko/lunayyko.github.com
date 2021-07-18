@@ -679,9 +679,10 @@ class Product(models.Model):
     
     class Meta:
         db_table = 'products'
-    
-    def __str__(self):
-        return self.name
+
+    # def __str__(self):
+    #     return self.name
+    # 객체에 name이 없는데 위의 매쏘드를 넣었다가 쿼리셋 작성시 Attribution 에러가 났었다.
 
 class Image(models.Model):
     image_url = models.URLField(max_length=2000)
@@ -689,9 +690,6 @@ class Image(models.Model):
     
     class Meta:
         db_table = 'images'
-    
-    def __str__(self):
-        return self.name
 
 class Allergy(models.Model):
     name = models.CharField(max_length=45)
@@ -720,9 +718,7 @@ class Nutrition(models.Model):
     
     class Meta:
         db_table = 'nutritions'
-    
-    def __str__(self):
-        return self.name
+
 ```
 </details>
 
