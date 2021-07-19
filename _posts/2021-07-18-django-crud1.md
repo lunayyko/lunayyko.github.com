@@ -5,6 +5,9 @@ tag: [입문, 위코드, TIL]
 title: 장고 설정, CRUD1
 ---
 
+개인적으로 복습할 용도로 명령어 위주로 적었어서 혹시 전체적인 흐름에 대해서 더 잘 알고싶다면 아래 두 분의 블로그를 추천한다.
+[홍데브님의 블로그](https://hong-dev.github.io/django/initial_setting/)
+[cmin님의 블로그](https://velog.io/@cmin95/Django-C.R.U.D-1-1)
 # 장고 설정
 
 ## 장고 프로젝트 시작
@@ -94,6 +97,7 @@ CORS_ALLOW_HEADERS = (
 
 ### my_setting.py 파일 추가 
 
+시크릿 키와 디비정보가 깃에 공개적으로 노출되지 않도록 빼기 위해서  
 manage.py있는 디렉토리에 my_setting.py라는 새 파일을 만들어서 추가한다. 
 
 ```python
@@ -108,7 +112,7 @@ DATABASES = {
         'PORT': '3306',
     }
 }
-SECRET_KEY ='_9^=58g2r*r(6@q7ugn!fxg-!fo48$7af9i4yn9-1$+bw(i'
+SECRET_KEY ='_9^=58g2r*r(6@q7ugn!fxg-!fo48$7af9i4yn9-1$+...'
 #setting.py에 있던 시크릿 키를 붙여넣음
 ```
 
@@ -130,24 +134,16 @@ mysql -u root -p #마이sql시작
 ```
 
 ```sql
-show databases; --mysql의 모든 db스키마?들 보여주기
-use wecode_23; --사용할 db골라주기
-
-create database 데이터베이스이름 character set utf8mb4 collate utf8mb4_general_ci; --데이터베이스 생성 및 utf8설정
-
-show tables; --테이블들 보여주기
-select * from django_migrations; --장고 마이그레이션 보여주기
-
-desc products; --프로덕츠 테이블이 잘 만들어졌는지 보여준다
+show databases; --mysql의 모든 db들 보여주기
+use [데이터베이스이름]; --사용할 db골라주기
+create database [데이터베이스이름] character set utf8mb4 collate utf8mb4_general_ci; --데이터베이스 생성 및 utf8설정(한중일)
+show tables; --db안의 모든 테이블들 보여주기
 ```
-마지막 명령어를 치면 해당 테이블 컬럼들의 조건식들이 잘 만들어졌는지 볼 수 있다. 
-![products 테이블](/public/img/table_products.png)
-
 mysql 나가기 키는 \q
 
 ## gitignore추가 (manage.py가 존재하는 디렉토리에)
 
-toptal.com/developers/gitignore 에서 python,pycharm,visualstudiocode,vim,macos,linux,zsh을 추가해서 파일을 만들어 넣는다.
+toptal.com/developers/gitignore 에서 python,pycharm,visualstudiocode,vim,macos,linux,zsh을 추가해서 파일을 만들어 넣는다. 그리고 마지막에 my_settings.py도 추가해준다.
 
 <details markdown="1">
 <summary>git ignore 펼쳐서 보기/접기</summary>
@@ -759,6 +755,13 @@ python manage.py migrate
 migration을 만드는 것과 migrate는 각각 
 클래스에 맞게 설계도를 만들고 설계한대로 데이터베이스를 건설하겠다는 뜻이라고 할 수 있다. 
 
+## SQL
+```sql
+select * from django_migrations; --장고 마이그레이션 보여주기
+desc products; --프로덕츠 테이블이 잘 만들어졌는지 보여준다
+```
+마지막 명령어를 치면 해당 테이블 컬럼들의 조건식들이 잘 만들어졌는지 볼 수 있다. 
+![products 테이블](/public/img/table_products.png)
 ## QuerySet으로 CRUD하기
 
 ※ QuerySet: 장고에서 만든 클래스의 인스턴스. 객체들이 모여 있는 리스트.
