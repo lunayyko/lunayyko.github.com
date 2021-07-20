@@ -641,9 +641,6 @@ my_setting.py
 ```python
 pythong manage.py runserver
 ```
-
-# CRUD 2
-
 ## migration을 위한 models.py작성
 
 ```python
@@ -719,7 +716,7 @@ DATABASES = {
 #settings.py에서 이걸 지워야된다
 ```
 
-### CREATE
+### 쿼리셋을 이용한 shell에서의 CREATE
 
 ```python
 python manage.py shell 
@@ -741,7 +738,7 @@ python manage.py shell
 ```
 ![dog 테이블](/public/img/dog_db.png) 
 
-### READ
+### 쿼리셋을 이용한 shell에서의 READ
 
 ```shell
 >>> Dog.objects.all()
@@ -761,10 +758,7 @@ httpie는 파이썬으로 개발된 http 클라이언트 유틸리티로 개발 
 curl에 비해서 사용이 쉽고 가독성이 좋다. 
 
 ## View 작성하기
-
-### READ
-
-자원(resource)를 읽어 올 때, http method 중에 GET method를 사용합니다. url만 사용합니다.
+### READ를 위한 get method
 
 ```python
 # dog>views.py
@@ -814,8 +808,11 @@ urlpatterns = [
 ]
 ```
 여기가 부모 urls.py 이다. 여기는 server로 오는 요청을 경로를 처리하는 파일이라고 생각하면 된다.
-> localhost:8000/dog  
-위의 경로로 dog app을 사용하겠다는 요청이 오면 다시 상세 app으로 보내주는 역할을 한다. 그 역할을 하는 것이 바로 include 이다. 그러면 그 해당 app 의 urls.py로 보내준다.  
+
+> localhost:8000/dog
+
+위의 경로로 dog app을 사용하겠다는 요청이 오면 다시 상세 app으로 보내주는 역할을 한다.   
+그 역할을 하는 것이 바로 include 이다. 그러면 그 해당 app 의 urls.py로 보내준다.  
 근데 처음 startapp 으로 app 을 생성했을 때 urls.py는 존재하지 않는다. 그렇기 때문에 dog app 안에 새로 생성해줘여한다.
 
 ```python
@@ -846,7 +843,7 @@ urlpatterns = [
     └── urls.py : main urls.py (부모, 요청 url 분석을 가장 먼저 하는 위치)
 ```
 
-### CREATE
+### CREATE를 위한 post method
 
 POST방식으로 개와 주인 데이터를 추가해보자.
 
@@ -872,8 +869,13 @@ class OwnerView(View):
         owners = Owner.objects.all()
         results=[]
         for owner in owners:
-            dogs = [{"이름":dog.name} for dog in Dog.objects.filter(owner_id=owner.id)]
-            #for문부터 읽어서, model에서 owner의 포린키 아이디(owner_id)가 오너의 아이디(owner.id)와 일치하는 개들을 filter로 불러와서 "이름": 값 형태로 dogs라는 변수에 저장한다.
+            dogs = 
+            [
+                {"이름":dog.name} for dog in Dog.objects.filter(owner_id=owner.id)
+            ]
+            #for문부터 읽어서, model에서 owner의 포린키 아이디(owner_id)가 
+            #오너의 아이디(owner.id)와 일치하는 개들을 filter로 불러와서 
+            #"이름": 값 형태로 dogs라는 변수에 저장한다.
             results.append(
             {
                 "name" : owner.name,
@@ -888,7 +890,7 @@ class DogView(View):
         data = json.loads(request.body)
         name = data['name']
         owner = Owner.objects.get(name = data['owner'])
-        # 프론트에서 준 데이터에서 오너의 이름을 가져오고 그거를 owner라는 변수에 대입 /Objects 출력
+        # 프론트에서 준 데이터에서 오너의 이름을 가져오고 owner라는 변수에 대입 /Objects 출력
         dog = Dog.objects.create(name = name, owner = owner)
         return JsonResponse({'Message':'Created'}, status=201)
 
@@ -925,5 +927,4 @@ http -v GET 127.0.0.1:8000/dog/owner
 이 부분은 나는 다른 분 블로그를 보고 안 썼으면 정말 몰랐을 것 같다.
 ```python
 dogs = [{"이름":dog.name} for dog in Dog.objects.filter(owner_id=owner.id)]
-#for문부터 읽어서, model에서 owner의 포린키 아이디(owner_id)가 오너의 아이디(owner.id)와 일치하는 개들을 filter로 불러와서 "이름": 값 형태로 dogs라는 변수에 저장한다.
 ```
