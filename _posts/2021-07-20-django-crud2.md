@@ -859,10 +859,12 @@ from .models import Dog, Owner
 class OwnerView(View):
     def post(self, request):
         data  = json.loads(request.body)
-        #view는 받아온 json 데이터를 template의 html 파일로 전달하고 템플릿으로 전달된 json 데이터는 자바스크립트에 의해 활용할 수 있는 형태로 다시 받아온다. 자바스크립트를 통해서 json 데이터를 자유롭게 사용할 수 있다.
+        # view는 받아온 json 데이터를 template의 html 파일로 전달하고 템플릿으로 전달된 json 데이터는 자바스크립트에 의해 활용할 수 있는 형태로 다시 받아온다. 자바스크립트를 통해서 json 데이터를 자유롭게 사용할 수 있다.
         name = data['name']
+        # 받아온 json데이터 중 변수 name의 키값을 name변수에 저장한다 
         email= data['email']
         Owner.objects.create(name = name, email=email)        
+        # Owner모델을 이용해서 받아온 name과 email의 값을 가진 데이터를 추가한다.
         return JsonResponse({'Message':'Created'}, status=201)
 
     def get(self, request):
@@ -873,9 +875,9 @@ class OwnerView(View):
             [
                 {"이름":dog.name} for dog in Dog.objects.filter(owner_id=owner.id)
             ]
-            #for문부터 읽어서, model에서 owner의 포린키 아이디(owner_id)가 
-            #오너의 아이디(owner.id)와 일치하는 개들을 filter로 불러와서 
-            #"이름": 값 형태로 dogs라는 변수에 저장한다.
+            # for문부터 읽어서, model에서 owner의 포린키 아이디(owner_id)가 
+            # 오너의 아이디(owner.id)와 일치하는 개들을 filter로 불러와서 
+            # "이름": 값 형태로 dogs라는 변수에 저장한다.
             results.append(
             {
                 "name" : owner.name,
@@ -890,8 +892,9 @@ class DogView(View):
         data = json.loads(request.body)
         name = data['name']
         owner = Owner.objects.get(name = data['owner'])
-        # 프론트에서 준 데이터에서 오너의 이름을 가져오고 owner라는 변수에 대입 /Objects 출력
+        # 프론트에서 준 데이터인 오너의 이름을 가진 데이터들을 불러와서 owner변수에 저장
         dog = Dog.objects.create(name = name, owner = owner)
+        # Dog모델을 이용해서 받아온 name과 owner의 값을 가진 데이터를 추가한다.
         return JsonResponse({'Message':'Created'}, status=201)
 
     def get(self, request):

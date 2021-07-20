@@ -5,9 +5,9 @@ tag: [입문, 위코드, TIL]
 title: 장고 설정, CRUD1
 ---
 
-개인적으로 복습할 용도로 명령어 위주로 적었어서 혹시 전체적인 흐름에 대해서 더 잘 알고싶다면 아래 두 분의 블로그를 추천한다.
-[홍데브님의 블로그](https://hong-dev.github.io/django/initial_setting/)
-[cmin님의 블로그](https://velog.io/@cmin95/Django-C.R.U.D-1-1)
+개인적으로 복습할 용도로 명령어 위주로 적었어서 혹시 전체적인 흐름에 대해서 더 잘 알고싶다면 아래 두 분의 블로그를 추천한다.  
+[홍데브님의 블로그](https://hong-dev.github.io/django/initial_setting/)  
+[cmin님의 블로그](https://velog.io/@cmin95/Django-C.R.U.D-1-1)  
 # 장고 설정
 
 ## 장고 프로젝트 시작
@@ -20,6 +20,7 @@ conda activate 가상환경이름
 conda info --envs #설정한 가상환경 리스트 확인
 ```
 - Database 생성
+
 ```python
 mysql.server start
 mysql -u root -p #마이sql시작
@@ -53,8 +54,9 @@ python manage.py startapp 앱이름 #앱 생성(manage.py가 존재하는 디렉
 from pathlib        import Path #기존에 settings.py 에 있는 코드
 from my_settings   import DATABASES, SECRET_KEY
 
-SECRET_KEY = SECRET_KEY
-DATABASES = DATABASES
+#시크릿 키와 데이터베이스 변수는 my_settings파일을 만들어서 갈음한다.
+SECRET_KEY = SECRET_KEY # 기존의 시크릿키 변수 삭제 후 대체
+DATABASES = DATABASES # 기존의 데이터베이스 변수 삭제 필수!
 ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
@@ -153,14 +155,18 @@ mysql 나가기 키는 \q
 
 ## gitignore추가 (manage.py가 존재하는 디렉토리에)
 
-소스를 공유하기 위해 깃을 사용하지만 올리고 싶은것 올리고 싶지 않은것, 올려서는 안되는 것들이 존재하고 이를 구분하기 위해 깃이 설치된 디렉토리에 `.gitignore`파일을 생성해서 관리해야 한다.
+소스를 공유하기 위해 깃을 사용하지만 올리고 싶은것 올리고 싶지 않은것, 올려서는 안되는 것들이 존재하고 이를 구분하기 위해 깃이 설치된 디렉토리에 `.gitignore`파일을 생성해서 관리해야 한다.  
+
 gitignore.io
-위의 사이트에서 사용하는 환경에 해당하는 키워드를 선택하면, 자동으로 .gitignore 파일에 정의할 요소들을 생성 해준다.
+
+위의 사이트에서 사용하는 환경에 해당하는 키워드를 선택하면, 자동으로 .gitignore 파일에 정의할 요소들을 생성해준다.
 > python,pycharm,visualstudiocode,vim,macos,linux,zsh
+
 이 키워드들을 추가해서 파일을 만들고 마지막에 my_settings.py도 추가해준다.
 
 보안관련파일과 크롤링파일
 > my_settings.py (보안 관련 파일은 github에 업로드되면 안된다.) 
+
 > *.csv (crwaling한 파일 역시 업로드하지 않는다.)
 
 <details markdown="1">
@@ -739,7 +745,7 @@ class Nutrition(models.Model):
 ```
 </details>
 
-처음에 뭔가 잘못 만들어서 마이그레이션 파일을 지우고 초기화했다.
+처음에 뭔가 잘못 만들어서 마이그레이션 파일을 지우고 초기화했다. models.py를 처음 만들때 정성스럽게 만들어야할 것 같다.
 
 ### migration 초기화하기
 
