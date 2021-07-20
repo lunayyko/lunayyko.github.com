@@ -12,28 +12,38 @@ title: 장고 설정, CRUD1
 
 ## 장고 프로젝트 시작
 
-- conda 가상환경 생성 및 가상환경 activate
+- Miniconda 가상환경 생성 및 가상환경 activate
 
 ```shell
 conda create -n 가상환경이름 python=3.8
-condo activate 가상환경이름
+conda activate 가상환경이름
 conda info --envs #설정한 가상환경 리스트 확인
 ```
-
+- Database 생성
+```python
+mysql.server start
+mysql -u root -p #마이sql시작
+```
+```sql
+mysql> create database "NAME" character set utf8mb4 collate utf8mb4_general_ci;
+```
 - 프로젝트 시작을 위한 python package 설치
 
 ```shell
 pip install 패키지이름 #파이썬 패키지 설치
-pip install mysqlclient # mysqlclient설치
+
+pip install Django #장고 설치
+pip install mysqlclient # mysqlclient설치 (mysql 먼저 설치 필요!!!)
 pip install django-cors-headers #CORS 해결을 위한 패키지
+
 pip freeze #가상환경 패키지 리스트 확인
-python -m pip install Django #장고 설치
 ```
 
 - 장고 프로젝트 생성
 
 ```shell
 django-admin startproject 프로젝트이름 #프로젝트 생성
+cd 프로젝트이름 #프로젝트 디렉토리로 들어감
 python manage.py startapp 앱이름 #앱 생성(manage.py가 존재하는 디렉토리에서)
 ```
 
@@ -143,7 +153,15 @@ mysql 나가기 키는 \q
 
 ## gitignore추가 (manage.py가 존재하는 디렉토리에)
 
-toptal.com/developers/gitignore 에서 python,pycharm,visualstudiocode,vim,macos,linux,zsh을 추가해서 파일을 만들어 넣는다. 그리고 마지막에 my_settings.py도 추가해준다.
+소스를 공유하기 위해 깃을 사용하지만 올리고 싶은것 올리고 싶지 않은것, 올려서는 안되는 것들이 존재하고 이를 구분하기 위해 깃이 설치된 디렉토리에 `.gitignore`파일을 생성해서 관리해야 한다.
+gitignore.io
+위의 사이트에서 사용하는 환경에 해당하는 키워드를 선택하면, 자동으로 .gitignore 파일에 정의할 요소들을 생성 해준다.
+> python,pycharm,visualstudiocode,vim,macos,linux,zsh
+이 키워드들을 추가해서 파일을 만들고 마지막에 my_settings.py도 추가해준다.
+
+보안관련파일과 크롤링파일
+> my_settings.py (보안 관련 파일은 github에 업로드되면 안된다.) 
+> *.csv (crwaling한 파일 역시 업로드하지 않는다.)
 
 <details markdown="1">
 <summary>git ignore 펼쳐서 보기/접기</summary>
@@ -619,6 +637,11 @@ zsdoc/data
 !/tests/\_output/.gitkeep
 
 # End of https://www.toptal.com/developers/gitignore/api/python,pycharm,visualstudiocode,vim,macos,linux,zsh
+
+#보안관련파일과 크롤링파일
+my_setting.py
+*.csv 
+
 ```
 </details>
 
@@ -702,16 +725,14 @@ class AllergyProduct(models.Model):
         db_table = 'allergies_products'
 
 class Nutrition(models.Model):
-    one_serving_kcal = models.DecimalField(max_digits=5, decimal_places=1, null=True)
-    sodium_mg = models.DecimalField(max_digits=5, decimal_places=1, null=True)
-    saturated_fat_g = models.DecimalField(max_digits=5, decimal_places=1, null=True)
-    sugars_g = models.DecimalField(max_digits=5, decimal_places=1, null=True)
-    protein_g = models.DecimalField(max_digits=5, decimal_places=1, null=True)
-    caffeine_mg = models.DecimalField(max_digits=5, decimal_places=1, null=True)
-    size_ml = models.CharField(max_length=45,  null=True)
-    size_fluid_ounce = models.CharField(max_length=45,  null=True)
+    kcal = models.DecimalField(max_digits=5, decimal_places=1, null=True)
+    sodium = models.DecimalField(max_digits=5, decimal_places=1, null=True)
+    s_fat = models.DecimalField(max_digits=5, decimal_places=1, null=True)
+    sugar = models.DecimalField(max_digits=5, decimal_places=1, null=True)
+    protein = models.DecimalField(max_digits=5, decimal_places=1, null=True)
+    caffeine = models.DecimalField(max_digits=5, decimal_places=1, null=True)
     product = models.OneToOneField('Product', on_delete=models.CASCADE)
-    
+
     class Meta:
         db_table = 'nutritions'
 
@@ -745,9 +766,9 @@ python manage.py migrate
 ```python
 python manage.py makemigrations 
 #모델의 변경사항을 파악, 설계도 작성(하고나서 만들어진 파일을 잘 살펴본다)
-python manage.py showmigrations products 0001 
+python manage.py showmigrations 
 #현재 migrations가 어떤 상태인지 살펴보기
-python manage.py sqlmigrate 
+python manage.py sqlmigrate [앱이름] [마이그레이션번호]
 #실제 데이터베이스에 전달되는 SQL 쿼리문을 확인
 python manage.py migrate 
 #자동으로 migration을 실행
@@ -764,8 +785,19 @@ desc products; --프로덕츠 테이블이 잘 만들어졌는지 보여준다
 ![products 테이블](/public/img/table_products.png)
 ## QuerySet으로 CRUD하기
 
-※ QuerySet: 장고에서 만든 클래스의 인스턴스. 객체들이 모여 있는 리스트.
+Django의 QuerySet API는 데이터 작업을 위한 포괄적인 메서드를 제공한다.  
+※ QuerySet: Django에 내장 된 일반적인 데이터 관리 기능  
+일반적으로 자주 사용되는 Model method를, 정확하게는 QuerySet method들은 아래와 같다.  
+Model method의 실행 결과는 QuerySet을 반환하거나 그렇지 않은 경우가 있다.  
 
+- Model method 종류
+`all()` , `filter()` , `exclude()` , `values()` , `values_list()` , `get()` , `create()` , 
+`count()` , `exists()` , `update()` , `delete()` , `first()` , `last()` ..
+- QuerySet을 반환하는 경우
+ `<QuerySet [<Category: Category object (1)>, <Category: Category object (2)>]>`
+(장고에서 만든 클래스의 인스턴스, 객체들이 모여 있는 리스트) 
+- 그렇지 않은 경우
+`<Category: Category object (1)>` , `9` , `True` ..
 ### CREATE
 
 장고에서 미리 있는 models.Model을 이용해서 Person.objects.create 매쏘드를 이용해서 데이터를 만들 수 있다.
@@ -784,6 +816,75 @@ exit() 하면 쉘을 종료할 수 있다.
 ![쿼리셋 create 결과1](/public/img/create1.png) 
 왠지 모르겠지만 쌍따옴표를 쓰니까 에러가 나서 작은따옴표를 썼다.
 
+이번에는 영양성분표를 넣어보자
+```python
+from products.models import Nutrition
+Nutrition.objects.create(product_id=1, one_serving_kcal=75, sodium_mg=20, saturated_fat_g=2, sugars_g=10, caffeine_mg=245)
+```
+product_id를 1로 하고 싶은데 내가 저번에 쓰다지웠다해서 그런지 product_id=1자리가 비워져있지 않다. 테이블을 드랍한 뒤에 다시 시도해본다.
+
+```sql
+mysql> drop table nutritions;
+```
+드랍했더니 테이블 자체가 사라져버렸다 ㅋㅋㅋㅋㅋ 원래 컬럼값이 마음에 안 들었으니 테이블을 sql구문으로 다시 만들어보자.
+
+```python
+class Nutrition(models.Model):
+    kcal = models.DecimalField(max_digits=5, decimal_places=1, null=True)
+    sodium = models.DecimalField(max_digits=5, decimal_places=1, null=True)
+    s_fat = models.DecimalField(max_digits=5, decimal_places=1, null=True)
+    sugar = models.DecimalField(max_digits=5, decimal_places=1, null=True)
+    protein = models.DecimalField(max_digits=5, decimal_places=1, null=True)
+    caffeine = models.DecimalField(max_digits=5, decimal_places=1, null=True)
+    product = models.OneToOneField('Product', on_delete=models.CASCADE)
+    
+    class Meta:
+        db_table = 'nutritions'
+```
+이걸 sql로 다시 쓰면 아래와 같다.
+
+```sql
+CREATE TABLE nutritions
+(
+    id INTEGER NOT NULL,
+    product_id INTEGER,
+    kcal DECIMAL(5,1),
+    sodium DECIMAL(5,1),
+    s_fat DECIMAL(5,1),
+    sugar DECIMAL(5,1),
+    protein DECIMAL(5,1),
+    caffeine DECIMAL(5,1),
+    PRIMARY KEY (id),
+    FOREIGN KEY (product_id) REFERENCES products (id)
+);
+```
+외래키가 중복된다고 에러가 난다! 
+
+>ERROR 3780 (HY000): Referencing column 'product_id' and referenced column 'id' in foreign key constraint 'nutritions_ibfk_1' are incompatible.
+
+sql문에서 외래키부분(FOREIGN KEY (product_id) REFERENCES products (id))을 제외하고 실행해서 테이블을 다시 만들었다.
+
+```sql
+ALTER TABLE nutritions
+ADD FOREIGN KEY (product_id) REFERENCES products(id);
+```
+위 명령어를 이용해 sql로 외래키를 추가하려고 했는데 3780에러가 계속 났다.  
+인터넷에서 검색하다보니 mysql에서 보이지는 않지만 외래키 constraint 설정되어있는 것과 관련이 있는 것 같다. 모든 constraint를 보는 명령어를 쳐봤다.
+
+```sql
+select * from information_schema.table_constraints where constraint_schema = 'westarbucks_db';
+```
+![sql - 모든 제약조건 출력](/public/img/constraints.png)
+
+에러에서 나왔던 외래키 constraint 'nutritions_ibfk_1'가 표에는 나오지 않는다.   
+그래도 지울 수 있을까 싶어서 아래 명령어를 쳐봤다. 
+
+>ALTER TABLE nutritions DROP CONTRAINT nutritions_ibfk_1; 
+
+> ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'nutritions_ibfk_1' at line 1
+
+문법을 틀린 것 같은데 너무 멀리 온 것 같으니까 싹 밀고 마이그레이션을 다시 해야겠다.
+
 ### READ
 
 get은 쿼리셋을 1개, all(전부)과 filter는 쿼리셋을 많이 불러올 수 있고 쿼리셋에 담겨온 데이터들은 for문을 사용할 수 있다. filter는 쿼리셋을 0개 불러올 수도 있다.
@@ -800,7 +901,11 @@ Menu.objects.filter(name="음료").values()
 #<QuerySet [{'id': 1, 'name': '음료'}]>
 ```
 
+values를 쓰면 제일 편하지만 처음에는 관계를 생각하면서 read하는걸 연습하기 위해서 다른 방법을 사용한다. - 위코드 멘토님
+
+
 ## UPDATE
 
 쿼리셋을 먼저 불러와야 update를 사용할 수 있다.  
 어떤 모델매쏘드가 어떤 데이터타입을 어떻게 반환하는지 알아야한다.
+
