@@ -754,6 +754,12 @@ python manage.py shell
 
 # CRUD2
 
+```
+brew install httpie
+```
+httpie는 파이썬으로 개발된 http 클라이언트 유틸리티로 개발 및 디버깅 용도로 사용 가능하다.   
+curl에 비해서 사용이 쉽고 가독성이 좋다. 
+
 ## View 작성하기
 
 ### READ
@@ -856,6 +862,7 @@ from .models import Dog, Owner
 class OwnerView(View):
     def post(self, request):
         data  = json.loads(request.body)
+        #view는 받아온 json 데이터를 template의 html 파일로 전달하고 템플릿으로 전달된 json 데이터는 자바스크립트에 의해 활용할 수 있는 형태로 다시 받아온다. 자바스크립트를 통해서 json 데이터를 자유롭게 사용할 수 있다.
         name = data['name']
         email= data['email']
         Owner.objects.create(name = name, email=email)        
@@ -866,6 +873,7 @@ class OwnerView(View):
         results=[]
         for owner in owners:
             dogs = [{"이름":dog.name} for dog in Dog.objects.filter(owner_id=owner.id)]
+            #for문부터 읽어서, model에서 owner의 포린키 아이디(owner_id)가 오너의 아이디(owner.id)와 일치하는 개들을 filter로 불러와서 "이름": 값 형태로 dogs라는 변수에 저장한다.
             results.append(
             {
                 "name" : owner.name,
@@ -896,10 +904,26 @@ class DogView(View):
         )
         return JsonResponse({'result':results}, status=200)
 ```
+/dog/dog 해야되는걸 모르고 한시간정도 헤메였는데 한성봉님의 블로그를 보고 알게되었다.
+[한성봉님의 블로그](https://velog.io/@ssaboo/TIL-no.49-Wecode-day.16Tue-django-C.R.U.D-2)
 
+## POST 로 주인과 강아지 추가
+```shell
 http -v POST 127.0.0.1:8000/dog/dog name="땅콩" owner="경훈"
+```
+![주인과 강아지 추가](/public/img/post1.png)
 
- /dog/dog 해야되는걸 모르고 한시간정도 헤메였다 ㅎㅎ
+## GET으로 데이터베이스 JSON파일 형식으로 출력
 
+```shell
+http -v GET 127.0.0.1:8000/dog/owner 
+```
+![전체 디비 출력](/public/img/dog_json.png)
+ 
+## 주요 포인트 및 생각해볼 점
 
-
+이 부분은 나는 다른 분 블로그를 보고 안 썼으면 정말 몰랐을 것 같다.
+```python
+dogs = [{"이름":dog.name} for dog in Dog.objects.filter(owner_id=owner.id)]
+#for문부터 읽어서, model에서 owner의 포린키 아이디(owner_id)가 오너의 아이디(owner.id)와 일치하는 개들을 filter로 불러와서 "이름": 값 형태로 dogs라는 변수에 저장한다.
+```
