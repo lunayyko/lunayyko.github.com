@@ -107,10 +107,10 @@ SyntaxError: EOL while scanning string literal
 >>> Actor.objects.get(id=1).movie.add(Movie.objects.get(id=3))
 ```
 영화와 배우 테이블에 데이터 삽입하고 연결한 결과
-![영화와 배우 테이블에 데이터 삽입하고 연결한 결과](/public/img/movie_db1.png)
+![영화와 배우 테이블에 데이터 삽입하고 연결한 결과](/public/img/movie_db2.png)
 
 영화와 배우 중간테이블에 데이터 삽입된 결과
-![영화와 배우 중간테이블에 데이터 삽입된 결과](/public/img/movie_db2.png) 
+![영화와 배우 중간테이블에 데이터 삽입된 결과](/public/img/movie_db1.png) 
 
 # View 작성하기
 
@@ -206,7 +206,7 @@ http -v GET 127.0.0.1:8000/movie/movie
 
 ## 추가 쿼리셋 연습문제
 
-1. 제시카 차스테인이 출연한 영화들을 리스트로 출력
+제시카 차스테인이 출연한 영화들을 리스트로 출력
 ```shell
 >>> a0 = Actor.objects.get(id = 1)
 >>> <Actor: JessicaChastain>
@@ -222,8 +222,9 @@ http -v GET 127.0.0.1:8000/movie/movie
 >>> <QuerySet [<Movie: martian>, <Movie: miss sloane>, <Movie: interstella>]>
 ```
 
-2. 인터스텔라에 출연한 배우들 리스트 출력
-```python
+인터스텔라에 출연한 배우들 리스트 출력
+
+```shell
 >>> Movie.objects.filter(title='interstella')
 <QuerySet [<Movie: interstella>]>
 
