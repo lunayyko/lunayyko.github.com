@@ -134,13 +134,13 @@ class ActorView(View):
         actors = Actor.objects.all()
         results=[]
         for actor in actors:
-            for movie in actor.movie.all():
-            # 해당 배우가 출연한 영화를 모두 가져온다.
-                results.append(
-                {
-                    "name" : actor.first_name + ' ' + actor.last_name,
-                    "starred in" : movie.title 
-                }
+            #movies = [{movie.title for movie in actor.movie.all()}]
+            # for movie in actor.movie.all():
+            results.append(
+            {
+                "name" : actor.first_name + ' ' + actor.last_name,
+                "Filmography" : [{"movie" : movie.title} for movie in actor.movie.all()]
+            }
         )
         return JsonResponse({'result':results}, status=200)
 
@@ -160,7 +160,7 @@ class MovieView(View):
 ```shell
 http -v GET 127.0.0.1:8000/movie/actor
 ```
-![결과1](/public/img/result1.png)
+![결과1](/public/img/result2.png)
 
 
 ## urls.py
