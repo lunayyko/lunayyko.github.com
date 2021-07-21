@@ -91,7 +91,7 @@ MIDDLEWARE = [
     # 'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'corsheaders.middleware.CorsMiddleware', #추가
+    'corsheaders.middleware.CorsMiddleware', #추가함
 ]
 ##CORS
 CORS_ORIGIN_ALLOW_ALL=True
@@ -120,6 +120,9 @@ CORS_ALLOW_HEADERS = (
 )
 ```
 위와 같이 settings.py를 추가 및 수정한다.
+미들웨어에서 csrf와 auth를 주석으로 만들었어야되는데 잘못해서 그 전 줄을 주석화했다가  
+RuntimeError: Model class django.contrib.auth.models.Permission doesn't declare an explicit app_label and isn't in an application in INSTALLED_APPS.  
+에러가 계속 났었다. 수업을 들으면서 어떤 코드를 쓰거나 지울 때 그걸 왜 쓰는지 알고 써야될 것 같다.   
 
 ### my_setting.py 파일 추가 
 
@@ -859,7 +862,9 @@ from .models import Dog, Owner
 class OwnerView(View):
     def post(self, request):
         data  = json.loads(request.body)
-        # view는 받아온 json 데이터를 template의 html 파일로 전달하고 템플릿으로 전달된 json 데이터는 자바스크립트에 의해 활용할 수 있는 형태로 다시 받아온다. 자바스크립트를 통해서 json 데이터를 자유롭게 사용할 수 있다.
+        # view는 받아온 json 데이터를 template의 html 파일로 전달하고 
+        # 템플릿으로 전달된 json 데이터는 자바스크립트에 의해 활용할 수 있는 
+        # 형태로 다시 받아온다. 자바스크립트로 json데이터를 자유롭게 사용할 수 있다.
         name = data['name']
         # 받아온 json데이터 중 변수 name의 키값을 name변수에 저장한다 
         email= data['email']
@@ -890,11 +895,17 @@ class OwnerView(View):
 class DogView(View):
     def post(self, request):
         data = json.loads(request.body)
-        name = data['name']
-        owner = Owner.objects.get(name = data['owner'])
+        # owner = Owner.objects.get(name = data['owner']) 이렇게 해서 owner = owner라고 써줘도 됨
         # 프론트에서 준 데이터인 오너의 이름을 가진 데이터들을 불러와서 owner변수에 저장
-        dog = Dog.objects.create(name = name, owner = owner)
+        dog = Dog.objects.create(
+            name = data['name'], 
+            owner_id = data['owner_id']
+        )
         # Dog모델을 이용해서 받아온 name과 owner의 값을 가진 데이터를 추가한다.
+
+            if not Owner.objects.filter(id=data["owner_id"].exists():
+                return JsonResponse({"message": "Owner_does_not_exist", status=404})
+            
         return JsonResponse({'Message':'Created'}, status=201)
 
     def get(self, request):
@@ -916,6 +927,7 @@ class DogView(View):
 ```shell
 http -v POST 127.0.0.1:8000/dog/dog name="땅콩" owner="경훈"
 ```
+owner="경훈" 이렇게 이름으로 찾아도 되지만 owner_id=3 해서 pk으로 주고받는것이 정석이다. 
 ![주인과 강아지 추가](/public/img/post1.png)
 
 ## GET으로 데이터베이스 JSON파일 형식으로 출력

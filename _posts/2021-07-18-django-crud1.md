@@ -804,6 +804,107 @@ Model method의 실행 결과는 QuerySet을 반환하거나 그렇지 않은 �
 (장고에서 만든 클래스의 인스턴스, 객체들이 모여 있는 리스트) 
 - 그렇지 않은 경우
 `<Category: Category object (1)>` , `9` , `True` ..
+
+## QuerySet을 반환하지않는 Model method
+### create() 
+Table에 데이터를 추가(INSERT) 해주는 method로, 생성된 인스턴스를 반환해준다.
+```python
+In  : Category.objects.create(name='콜드브루')
+Out : <Category: Category object (1)>
+
+#category 변수에 반환된 값을 저장하고, 생성된 data를 사용할 수 있다.
+#인스턴스로 반환되므로 category.name으로 class 안에 변수에 접근할 수 있다.
+In  : category = Category.objects.create(name='콜드브루')
+In  : category.name
+Out : '콜드브루'
+
+참고) save method : INSERT 또는 UPDATE
+Category(name='콜드브루').save()
+```
+### get()
+지정된 조회 매개 변수와 일치하는 인스턴스를 반환합니다.이 매개 변수는 필드 조회에 설명 된 형식이어야합니다.
+```python
+In  : Category.objects.get(id=1)
+Out : <Category: Category object (1)>
+```
+### update()
+지정된 필드에 대해 업데이트 쿼리를 수행하고 일치하는 행 수를 반환한다. 
+(일부 행에 이미 새 값이있는 경우 업데이트 된 행 수와 같지 않을 수 있음).
+```python
+In  : Category.objects.filter(name='탄산').update(name='콜드브루')
+Out : 2 #총 업데이트된 row 개수
+```
+### delete()
+QuerySet의 모든 행에 대해 SQL 삭제 쿼리를 수행하고 삭제 된 개체 수와 개체 유형별 삭제 횟수가 있는 dictionary를 반환합니다.
+```python
+In  : Category.objects.filter(name='qp').delete()
+Out : (1, {'products.Category': 1})
+```
+### save()
+INSERT 또는 UPDATE 를 수행하는 method로, 단일 객체에 대해서 업데이트를 수행할 때 많이 사용된다.
+```python
+In  : category = Category.objects.get(id=2)
+Out : <Category: Category object (2)>
+
+In  : category.name
+Out : '브루드커피'
+
+In  : category.name = 'new name'
+In  : category.save()
+
+In  : category.name
+Out : 'new name'
+```
+
+## QuerySet을 반환하는 Model method
+
+### all()
+한 테이블의 모든 레코드를 가져오려면 아래와 같이 all() method를 사용합니다. 그 결과로 QuerySet 을 반환합니다. 이때, QuerySet 안에는 각각 인스턴스가 포함되어 있습니다.
+```python
+In  : Category.objects.all()
+Out : <QuerySet [<Category: Category object (2)>, <Category: Category object (3)>, <Category: Category object (4)>, <Category: Category object (5)>, <Category: Category object (6)>, <Category: Category object (7)>]>
+
+In  : for category in Category.objects.all()
+		print(category.name)
+
+#아래와 같이 인스턴스들이 담겨 있는 QuerySet이 반환되기 때문에, 모든 속성에 접근해서 데이터를 관리할 수 있습니다.
+Out : 티
+      브루드커리
+      브루드커피
+      콜드브루
+      콜드브루
+```
+### filter() & exclude()
+한 테이블의 특정 레코드를 가져오려면 필터를 사용할 수 있다. filter() method는 가장 자주 사용하는 필터 기능이다. filter(**kwargs): 키워드 인자로 주어진 lookup 조건에 일치하는 레코드들의 QuerySet을 반환한다.
+```python
+case1
+In  : Category.objects.filter(name='브루드커피')
+Out : [<Category: Category object (3)>, <Category: Category object (4)>]
+
+case2
+In  : Category.objects.filter(name='브루드커피').filter(id=3)
+Out : [<Category: Category object (3)>]
+
+case3
+In  : Category.objects.filter(name='브루드커피').exclude(id=3)
+Out : [<Category: Category object (4)>]
+```
+### values()
+iterable로 사용될 때 모델 인스턴스가 아닌 dictionary을 포함하는 QuerySet을 반환합니다.
+```python
+In  : Category.objects.filter(name='브루드커피')
+Out : [<Category: Category object (3)>, <Category: Category object (4)>]
+
+In  : Category.objects.filter(name='브루드커피').values()
+Out : <QuerySet [{'id': 3, 'name': '브루드커피', 'created_at': datetime.datetime(2020, 9, 8, 5, 43, 30, 4068, tzinfo=<UTC>), 'updated_at': datetime.datetime(2020, 9, 8, 5, 43, 30, 21801, tzinfo=<UTC>)}, {'id': 4, 'name': '브루드커피', 'created_at': datetime.datetime(2020, 9, 8, 5, 43, 30, 4068, tzinfo=<UTC>), 'updated_at': datetime.datetime(2020, 9, 8, 5, 43, 30, 21801, tzinfo=<UTC>)}]>
+```
+### values_list()
+values_list() method는 dictionary를 반환하는 대신 반복 될 때 튜플을 반환한다는 점을 제외하면 values ()와 유사합니다. 각 튜플에는 values_list () 호출에 전달 된 각 필드 또는 표현식의 값이 포함되어 있으므로 첫 번째 항목이 첫 번째 필드입니다.
+
+```python
+In  : Category.objects.filter(name='브루드커피').values_list()
+Out : <QuerySet [(3, '브루드커피', datetime.datetime(2020, 9, 8, 5, 43, 30, 4068, tzinfo=<UTC>), datetime.datetime(2020, 9, 8, 5, 43, 30, 21801, tzinfo=<UTC>)), (4, '브루드커피', datetime.datetime(2020, 9, 8, 5, 43, 30, 4068, tzinfo=<UTC>), datetime.datetime(2020, 9, 8, 5, 43, 30, 21801, tzinfo=<UTC>))]>
+```
 ### CREATE
 
 장고에서 미리 있는 models.Model을 이용해서 Person.objects.create 매쏘드를 이용해서 데이터를 만들 수 있다.
@@ -815,12 +916,12 @@ python manage.py shell #파이썬에서 쉘 열기
 >>> Menu.objects.create(name = '음료')  #class명.objects.method명(~~)
 ```
 exit() 하면 쉘을 종료할 수 있다.
-
 주의 : shell을 켤때마다 from products.models import Menu 클래스를 임포트해주어야한다.
 
-위와같이 입력하면 Menu클래스를 이용하여 '음료'가 name컬럼에 삽입된 것을 볼 수 있다.
-![쿼리셋 create 결과1](/public/img/create1.png) 
+위와같이 입력하면 Menu클래스를 이용하여 '음료'가 name컬럼에 삽입된 것을 볼 수 있다.  
 왠지 모르겠지만 쌍따옴표를 쓰니까 에러가 나서 작은따옴표를 썼다.
+
+![쿼리셋 create 결과1](/public/img/create1.png) 
 
 이번에는 영양성분표를 넣어보자
 ```python
@@ -832,7 +933,7 @@ product_id를 1로 하고 싶은데 내가 저번에 쓰다지웠다해서 그�
 ```sql
 mysql> drop table nutritions;
 ```
-드랍했더니 테이블 자체가 사라져버렸다 ㅋㅋㅋㅋㅋ 원래 컬럼값이 마음에 안 들었으니 테이블을 sql구문으로 다시 만들어보자.
+드랍했더니 테이블 자체가 사라져버렸다 ㅋㅋㅋㅋㅋ 원래 컬럼값이 마음에 안 들었으니 테이블을 sql구문으로 다시 만들어보자. 데이터만 지우려면 Truncate를 사용해야한다.
 
 ```python
 class Nutrition(models.Model):
@@ -907,8 +1008,14 @@ Menu.objects.filter(name="음료").values()
 #<QuerySet [{'id': 1, 'name': '음료'}]>
 ```
 
-values를 쓰면 제일 편하지만 처음에는 관계를 생각하면서 read하는걸 연습하기 위해서 다른 방법을 사용한다. - 위코드 멘토님
+values를 쓰면 제일 편하지만 처음에는 관계를 생각하면서 read하는걸 연습하기 위해서 다른 방법을 사용한다. - 위코드 멘토님  
 
+07.20 쿼리셋을 충분히 연습하지 않았어서 CRUD2를 할 때 복잡한 쿼리셋을 써야하면서 애를 먹었다. 뒤로 가니까 이런 식으로 사용하게 되는데 연습을 충분히 하지 않아서 그런지 잘 모르겠다. 다른 학우분들은 value+for문을 사용하고 있는데 보면서 물어보고 더 공부해봐야겠다.
+```python
+Owner.objects.get(name = data['owner'])
+
+[{"이름":dog.name, "나이":dog.age} for dog in Dog.objects.filter(owner_id=owner.id)] 
+```
 
 ## UPDATE
 
