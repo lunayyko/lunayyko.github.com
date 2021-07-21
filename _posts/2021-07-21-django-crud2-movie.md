@@ -217,8 +217,26 @@ http -v GET 127.0.0.1:8000/movie/movie
 >>> {movie.title for movie in a0.movie.all()}
 >>> {'interstella', 'martian', 'miss sloane'}
 
+>>> Movie.objects.filter(actor__id=1)
+#역참조할 때는 밑줄을 두 개 
+>>> <QuerySet [<Movie: martian>, <Movie: miss sloane>, <Movie: interstella>]>
 ```
 
 2. 인터스텔라에 출연한 배우들 리스트 출력
-3. 
+```python
+>>> Movie.objects.filter(title='interstella')
+<QuerySet [<Movie: interstella>]>
+
+>>> m1 = Movie.objects.get(title='interstella')
+#위의 filter는 쿼리셋이기 때문에 변수로 쓰려면 get으로 한 개만 받아서 넣어줘야한다.
+
+>>> m1.actor_set.all()
+#역참조할 때는 _set 추가
+>>> <QuerySet [<Actor: JessicaChastain>, <Actor: TimotheeChalamet>]>
+
+>>> {actor.first_name +' '+ actor.last_name for actor in m1.actor_set.all()}
+>>> {'Jessica Chastain', 'Timothee Chalamet'}
+```
+
+
 
