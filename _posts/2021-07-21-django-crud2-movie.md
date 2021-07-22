@@ -211,11 +211,17 @@ http -v GET 127.0.0.1:8000/movie/movie
 >>> a0 = Actor.objects.get(id = 1)
 >>> <Actor: JessicaChastain>
 
->>> a0.movie.all()
+>>> a0.movie.all() #여러개의 쿼리셋으로 받기
 >>> <QuerySet [<Movie: martian>, <Movie: miss sloane>, <Movie: interstella>]>
+
+>>> list(a0.movie.all()) #리스트 형태로 받기
+>>> [<Movie: martian>, <Movie: miss sloane>, <Movie: interstella>]
 
 >>> {movie.title for movie in a0.movie.all()}
 >>> {'interstella', 'martian', 'miss sloane'}
+
+>>> [movie.title for movie in list(a0.movie.all())]
+>>> ['martian', 'miss sloane', 'interstella']
 
 >>> Movie.objects.filter(actor__id=1)
 #역참조할 때는 밑줄을 두 개 
@@ -238,6 +244,21 @@ http -v GET 127.0.0.1:8000/movie/movie
 >>> {actor.first_name +' '+ actor.last_name for actor in m1.actor_set.all()}
 >>> {'Jessica Chastain', 'Timothee Chalamet'}
 ```
+이렇게 쿼리셋을 연습해서 배우가 출연한 영화들을 리스트로 출력해봤다. 
+![영화 리스트 출력](/public/img/movies_in_list.png)
 
-
+```python
+class ActorView(View):
+    def get(self, request):
+        actors = Actor.objects.all()
+        results=[]
+        for actor in actors:
+            results.append(
+                {
+                    "name" : actor.first_name + ' ' + actor.last_name,
+                    "Filmography" : [movie.title for movie in list(actor.movie.all())]
+                }
+            )
+        return JsonResponse({'result':results}, status=200)
+```
 
