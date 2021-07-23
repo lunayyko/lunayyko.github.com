@@ -157,6 +157,8 @@ class MovieView(View):
         )
         return JsonResponse({'result':results}, status=200)
 ```
+
+## GET으로 데이터베이스 JSON파일 형식으로 출력
 ```shell
 http -v GET 127.0.0.1:8000/movie/actor
 ```
@@ -188,11 +190,8 @@ urlpatterns = [
 ]
 ```
 
-## GET으로 데이터베이스 JSON파일 형식으로 출력
+## SQL 테이블 출력
 
-```shell
-http -v GET 127.0.0.1:8000/movie/movie
-```
 ![전체 디비 출력](/public/img/movie_db.png)
  
 ## 주요 포인트 및 생각해볼 점
