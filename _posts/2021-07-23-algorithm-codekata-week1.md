@@ -1,6 +1,6 @@
 ---
 layout: post
-category: algorithm
+category: algorithm(python)
 tag: [입문, 위코드, TIL]
 title: 코드카타 1주차 
 ---
