@@ -40,6 +40,7 @@ def two_sum(nums, target):
   for i in range(len(nums)):
     for j in range(len(nums)):
       if nums[i]+nums[j] == target:
+        #주어진 수 둘의 조합이 합쳐서 target이 되는 경우 해당 수 출력
         return [i,j]
 ```
 
@@ -78,10 +79,12 @@ return: 321
 def reverse(number):
   if number > 0:
       return int(str(number)[::-1])
+      #양수일때는 그냥 뒤집기
   if number < 0:
       return int('-'+str(number*-1)[::-1])
+      #음수일때는 -뺐다가 붙임
   else:
-      return 0
+      return 0 #0일때는 0
 ```
 
 ## DAY3
@@ -125,12 +128,12 @@ def get_len_of_str(s):
     for i in str_list:
         if i in temp_list:
             temp_list=[]
-        
+            #2.해당 알파벳이 이미 리스트에 있다면 리스트를 비운다 
         temp_list.append(i)
-
+        #1.처음 나오는 알파벳들을 리스트에 넣는다
         if len(temp_list) > max_len:
             max_len = len(temp_list)
-            
+            #3. 리스트의 길이가 현재까지 갱신된 최고 길이보다 길면 최고 길이를 갈음한다
     return max_len
 ```
 
@@ -176,6 +179,7 @@ return false
 ```python
 def same_reverse(num):
   return str(num) == str(num)[::-1]
+  #뒤집어서 같으면 True 다르면 False 반환
 ```
 
 ## DAY5
@@ -204,11 +208,15 @@ return은 ''
 def get_prefix(strs):
     answer=[]
     strs = sorted(strs)
+    #sort하면 a, ab, abc, ac 이렇게 정렬이 된다
     if strs == []:
       return ''
+    #빈문자열 예외처리
     for i in range(len(strs[-1])):
         if strs[0][i] == strs[-1][i]:
+          #첫문자와 마지막문자의 알파벳 비교
             answer.append(strs[0][i])
+            #같으면 답에 넣는다 
         else:
           break
     return ''.join(answer)
