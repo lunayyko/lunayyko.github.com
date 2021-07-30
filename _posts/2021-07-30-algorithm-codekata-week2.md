@@ -220,12 +220,21 @@ def most_common(nums,k):
 
 ### 사고과정
 첫번째로 위치한 높은 막대와 두번쨰로 위치한 높은 막대를 찾는다.
-둘 사이의 거리 * 두번째로 높은 막대의 높이 : 담기는 물의 면적
-
+둘 사이의 거리 * 두번째로 높은 막대의 높이 : 담기는 물의 면적  
+이라고 생각했는데 틀렸다.     
+낮은 막대라도 면적이 더 넓을 수 있기 때문에 모든 두 막대 조합의 넓이를 구하고 그 중 가장 넓은 면적을 반환하는 것이 맞는 방법이다. 
 ### 제출코드
 
 ```python
 def get_max_area(height):
-  return
+    result = []
 
+    for i in range(len(height)-1):
+        for j in range(i+1, len(height)):
+            if height[i] > height[j]:
+                result.append(height[j]*(j-i))
+            else:
+                result.append(height[i]*(j-i))
+    print(max(result))
+    return max(result)
 ```
