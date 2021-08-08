@@ -29,6 +29,7 @@ mysql -u root -p #마이sql시작
 mysql> create database "NAME" character set utf8mb4 collate utf8mb4_general_ci;
 ```
 - 프로젝트 시작을 위한 python package 설치
+컴퓨터에 mysql응용프로그램이 켜져있으면 터미널로 열리지 않을 수 있다. 
 
 ```shell
 pip install 패키지이름 #파이썬 패키지 설치
@@ -57,7 +58,10 @@ from my_settings   import DATABASES, SECRET_KEY
 #시크릿 키와 데이터베이스 변수는 my_settings파일을 만들어서 갈음한다.
 SECRET_KEY = SECRET_KEY # 기존의 시크릿키 변수 삭제 후 대체
 DATABASES = DATABASES # 기존의 데이터베이스 변수 삭제 필수!
-ALLOWED_HOSTS = ['*']
+
+ALLOWED_HOSTS = ['*'] #수정 : 모두 접속 가능
+
+APPEND_SLASH = False #추가 : 슬래시 자동으로 삽입하지 않음
 
 INSTALLED_APPS = [
     # 'django.contrib.admin', #admin도 
@@ -66,19 +70,26 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'corsheaders', # 추가
-    'products', #새로 만든 앱 이름 추가
+    'corsheaders', # corsheaders 추가
+    'products', #앱을 새로 만들면 여기에 추가해야한다
 ]
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    # 'django.middleware.csrf.CsrfViewMiddleware',
-    # 'django.contrib.auth.middleware.AuthenticationMiddleware',
+    # 'django.middleware.csrf.CsrfViewMiddleware', csrf 주석처리
+    # 'django.contrib.auth.middleware.AuthenticationMiddleware', auth 주석처리
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'corsheaders.middleware.CorsMiddleware', #추가
+    'corsheaders.middleware.CorsMiddleware', #corsheaders middleware 추가
 ]
+
+# 데이터베이스 부분 삭제
+# 뒷부분 생략
+
+#REMOVE_APPEND_SLASH_WARNING 추가
+APPEND_SLASH = False
+
 ##CORS
 CORS_ORIGIN_ALLOW_ALL=True
 CORS_ALLOW_CREDENTIALS = True
@@ -656,6 +667,36 @@ my_setting.py
 ```python
 pythong manage.py runserver
 ```
+
+## requirements.txt 추가
+
+```python
+pip freeze > requirements.txt
+```
+이렇게 manage.py가 있는 디렉토리에 설치된 라이브러리의 버전을 명시해준다.
+
+```python
+Django==3.2.6
+django-cors-headers==3.7.0
+mysql-client==0.0.1
+PyMySQL==1.0.2 #맥 M1의 경우 설치한 파일
+```
+장고에서 자동으로 설치되는 것을 제외하고 직접 설치한 것들만 남겨주면 좋다.
+
+## 디렉토리 구조
+
+(참고) 프로젝트 디렉토리 구조 구조
+.
+└── suntae
+    ├── manage.py
+    ├── my_settings.py
+    └── westagram
+        ├── \__init__.py
+        ├── asgi.py
+        ├── settings.py
+        ├── urls.py
+        └── wsgi.py
+
 
 # CRUD 1
 
