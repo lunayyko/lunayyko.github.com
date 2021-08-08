@@ -74,176 +74,144 @@ def complex_number_multiply(a, b):
 
 ### 문제
 
-숫자로 이루어진 배열인 nums를 인자로 전달합니다.
+문자로 구성된 배열을 input으로 전달하면, 문자를 뒤집어서 return 해주세요.
 
-숫자중에서 과반수(majority, more than a half)가 넘은 숫자를 반환해주세요. 
+* 새로운 배열을 선언하면 안 됩니다.
+* 인자로 받은 배열을 수정해서 만들어주세요.
 
-예를 들어, 
-```python
-nums = [3,2,3]
-return 3
+```
+Input: ["h","e","l","l","o"]
+Output: ["o","l","l","e","h"]
 
-nums = [2,2,1,1,1,2,2]
-return 2
+Input: ["H","a","n","n","a","h"]
+Output: ["h","a","n","n","a","H"]
 ```
 
-# 가정
-`nums` 배열의 길이는 무조건 `2` 이상입니다.
-
-### 사고과정
-
-유니크한 숫자 세트 리스트 만들고, 각 숫자가 나온 개수를 카운트하고 두 개를 zip으로 묶어준다.
-카운트가 과반수 이상이면 해당 키를 반환한다.
+## 제출 코드
 
 ```python
-import statistics
-
-def more_than_half(nums):
-    key_list = list(set(nums))
-    value_list = []
-    for i in key_list:
-        value_list.append(nums.count(i))
-    arr = list(zip(key_list, value_list))
-    return key_list[value_list.index(max(value_list))]  
-    # arr = {x:y for x,y in zip(key_list, value_list)}
-```
-
-자주나온 숫자를 많이 나온 순서대로 뽑아주는 카운터 내장함수를 사용하면 빠르고 간편하게 답을 찾을 수 있다.
-
-```python
-from collections import Counter
-
-def more_than_half(nums):
-  return Counter(nums).most_common(1)[0][0]
-  # 카운터 매쏘드 내에 most_common함수를 사용하면 (n)개가 순서대로 출력됨
+def reverse_string(s):
+    print (list(reversed(s)))
+    return list(reversed(s))
 ```
 
 ## DAY3
 
 ### 문제
 
-s는 여러 괄호들로 이루어진 String 인자입니다.
-s가 유효한 표현인지 아닌지 true/false로 반환해주세요. 
+양수로 이루어진 m x n 그리드를 인자로 드립니다.
+상단 왼쪽에서 시작하여, 하단 오른쪽까지 가는 길의 요소를 다 더했을 때,가장 작은 합을 찾아서 return 해주세요.
 
-종류는 '(', ')', '[', ']', '{', '}' 으로 총 6개 있습니다. 아래의 경우 유효합니다.
+한 지점에서 우측이나 아래로만 이동할 수 있습니다.
 
-한 번 괄호를 시작했으면, 같은 괄호로 끝내야 한다.
-괄호 순서가 맞아야 한다.
+Input:
+[
+&nbsp;&nbsp;  [1,3,1],
+&nbsp;&nbsp;  [1,5,1],
+&nbsp;&nbsp;  [4,2,1]
+]
 
-예를 들어 아래와 같습니다.  
+Output: 7
 
-```python
-s = "()"
-return true
+설명: 1→3→1→1→1 의 합이 제일 작음
 
-s = "()[]{}"
-return true
+## 제출코드
 
-s = "(]"
-return false
+이 문제는 풀지 못하고 다른 블로그를 찾아봤다.
 
-s = "([)]"
-return false
-
-s = "{[]}"
-return true
-```
-
-### 제출 코드
+https://velog.io/@langssi/Python-Code-Kata-Day13
 
 ```python
-def is_valid(string):
-    paren_dict = {'(':')', '{':'}', '[':']'}
-    temp = []
-    for ch in string:
-      if ch in list(paren_dict.keys()):
-        #괄호가 열렸다면
-        temp.append(ch)
-        #열린 괄호를 템프에 넣는다
-      else:
-        #괄호가 열리지 않았다면
-        if not temp:
-          #템프리스트가 비어있다면(열린 적 없음)
-          return False
-        else:
-          #템프리스트 안에 뭔가 들어있다면
-          if ch != paren_dict[temp.pop()]:
-            #템프리스트의 가장 마지막 원소를 빼낸 것이 parent_dict의 닫힌괄호와 짝이 맞지 않는다면
-            return False
-        if temp: #템프리스트 안에 내용물이 남아있다면
-            return False
-    return True
+def min_path_sum(grid):
+  m = len(grid)
+  n = len(grid[0])
+    
+  ### 1
+  for i in range(1, n):
+      grid[0][i] += grid[0][i-1]
+  for i in range(1, m):
+      grid[i][0] += grid[i-1][0]
+        
+  ### 2
+  for i in range(1, m):
+      for j in range(1, n):
+          grid[i][j] += min(grid[i-1][j], grid[i][j-1])
+  return grid[-1][-1] 
 ```
 
 ## DAY4
 
 ### 문제
 
-`nums`는 숫자로 이루어진 배열입니다.
+# 문제
+주어진 숫자 배열에서, 0을 배열의 마지막쪽으로 이동시켜주세요.
+원래 있던 숫자의 순서는 바꾸지 말아주세요.
 
-가장 자주 등장한 숫자를 `k` 개수만큼 return 해주세요.  
+* 새로운 배열을 생성해서는 안 됩니다.
 
-```python
-nums = [1,1,1,2,2,3],
-k = 2
-
-return [1,2]
-
-nums = [1]
-k = 1
-
-return [1]
+```
+Input: [0,1,0,3,12]
+Output: [1,3,12,0,0]
 ```
 
 ### 제출코드
 
 ```python
-def most_common(nums,k):
-    num_list = []
-    ans_list = []
-    for i in set(nums):
-        num_list.append(nums.count(i))  
-    ans_list = list(zip(num_list, set(nums)))
-    ans_list = sorted(ans_list)
-    print(ans_list)
-    answer = []
-    for i in range(k):
-        answer.append((ans_list.pop()[1]))
-        print(answer)
-    return answer
+def move_zeroes(nums):
+    num_of_zero = nums.count(0)
+    for i in range(num_of_zero):
+      nums.remove(0)
+      nums.append(0)
+    return nums
 ```
 
-## DAY5
+## DAY5 재귀 알고리즘
 
-### 문제
-인자인 height는 숫자로 이루어진 배열입니다.그래프로 생각한다면 y축의 값이고, 
-높이 값을 갖고 있습니다. 
+오늘은 재귀알고리즘에 대한 문제입니다.
+재귀(recursion)란, 자신을 정의할 때 자기 자신을 호출하는 방법을 뜻합니다. 프로그래밍의 함수정의에서 많이 사용됩니다.
 
-아래의 그래프라면 height 배열은 [1, 8, 6, 2, 5, 4, 8, 3, 7] 입니다.
+예)
+```python
+def countdown(n):
+  print(n)
+  countdown(n-1)
 
-![Graph](https://media.vlpt.us/images/khmin1017/post/5338b2d2-46cc-479a-8e0f-88aec95002f4/%EA%B7%B8%EB%9E%98%ED%94%84.png)
+countdown(10);
+```
+countdown 함수는 받은 인자를 출력합니다.
+그런데 위의 함수를 실행하면 10에서 시작해서 무한으로 마이너스 값까지 내려갑니다.
 
-저 그래프에 물을 담는다고 생각하고, 물을 담을 수 있는 가장 넓은 면적의 값을 반환해주세요.  
-### 가정
-배열의 길이는 2이상입니다.
+그래서 재귀함수는 아래의 절차가 꼭 필요합니다.
+언제 멈출것인가?
 
-### 사고과정
-첫번째로 위치한 높은 막대와 두번쨰로 위치한 높은 막대를 찾는다.
-둘 사이의 거리 * 두번째로 높은 막대의 높이 : 담기는 물의 면적  
-이라고 생각했는데 틀렸다.     
-낮은 막대라도 면적이 더 넓을 수 있기 때문에 모든 두 막대 조합의 넓이를 구하고 그 중 가장 넓은 면적을 반환하는 것이 맞는 방법이다. 
+위를 고려해 0이 되면 더이상 재귀를 이어나가지 않도록 종료 조건을 추가하겠습니다.
+
+```python
+def countdown(n):
+  print(n)
+  
+  if (n == 0):
+    return None
+  
+  countdown(n-1)
+
+countdown(10);
+```
+
+재귀의 이론은 위와 같이 아주 간단합니다. 
+재귀를 더 공부하고 싶은 분은 인터넷에 재귀 문제를 찾아 더 풀어보셔도 좋고, 알고리즘 책에서 재귀 부분만 더 읽으셔도 좋습니다.
+## 문제
+재귀를 사용하여 팩토리얼(factorial)을 구하는 함수를 구현해주세요.
+팩토리얼이란 1에서부터 n까지의 정수를 모두 곱한것을 말합니다.
+
+1! = 1
+2! = 1 * 2
+5! = 1 * 2 * 3 * 4 * 5
 ### 제출코드
 
 ```python
-def get_max_area(height):
-    result = []
-
-    for i in range(len(height)-1):
-        for j in range(i+1, len(height)):
-            if height[i] > height[j]:
-                result.append(height[j]*(j-i))
-            else:
-                result.append(height[i]*(j-i))
-    print(max(result))
-    return max(result)
+def factorial(n):
+    if n <= 1:
+      return 1
+    return n * factorial(n-1)
 ```
