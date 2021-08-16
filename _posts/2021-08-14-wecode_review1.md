@@ -8,6 +8,7 @@ title: 위코드 한 달 백엔드 회고록
 ## 1차 프로젝트 데모 영상 & 인터뷰 영상
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/FrYmsBVp_G0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+데모가 끝나고 2분 8초부터 팀원들 인터뷰가 나온다!
 
 ## 프로젝트 회고록 (감정)
 
