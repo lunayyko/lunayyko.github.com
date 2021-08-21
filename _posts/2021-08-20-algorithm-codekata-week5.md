@@ -151,8 +151,12 @@ def reverseString(str):
   return reverseString(str[:-1])
 ```
 
-### 제출답안
+### 모범답안
 ```python
+def reverseString(str):
+    if len(str)==1:
+        return str[0]
+    return str[-1] + reverseString(str[:-1])
 ```
 
 # DAY4
@@ -209,11 +213,64 @@ linkedList.deleteAtIndex(1)  // linked list는 이제 1->3
 linkedList.get(1)            // returns 3
 ```
 
-### 제출답안
-```python
-```
-
 ### 모범답안
 
 ```python
+class Node:
+  def __init__(self, value):
+    self.val = value
+    self.next = self.pre = None
+        
+  def getNext(self):
+    return self.next
+  
+
+class MyLinkedList():
+  
+  def __init__(self):
+    self.head = None
+  
+      
+  def get(self, index):
+    current = self.head
+    while index > 0 :
+      current = current.getNext()
+      index -= 1
+    return current.val
+  
+  
+  def addAtHead(self, val):
+    newNode = Node(val)
+    newNode.next = self.head
+    self.head = newNode
+      
+      
+  def addAtTail(self, val):
+    newNode = Node(val)
+    current = self.head
+    while current.next != None :
+      current = current.getNext()
+    
+    current.next = newNode
+      
+  
+  def addAtIndex(self, index, val):
+    newNode = Node(val)
+    current = self.head
+    while index > 1 :
+      current = current.getNext()
+      index -= 1
+
+    newNode.next = current.getNext()
+    current.next = newNode
+    
+  
+  def deleteAtIndex(self, index):
+    current = self.head
+    while index > 1 :
+      current = current.getNext()
+      index -= 1
+    
+    current.next = current.getNext().getNext()
+
 ```
