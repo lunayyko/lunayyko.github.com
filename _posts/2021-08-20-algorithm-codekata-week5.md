@@ -2,12 +2,12 @@
 layout: post
 category: algorithm(python)
 tag: [입문, 위코드, TIL]
-title: 코드카타 4주차 
+title: 코드카타 5주차 
 ---
 
 # DAY1
 
-### Selection Sort(선택정렬)
+## Selection Sort(선택정렬)
 
 정렬 알고리즘은 순서가 없던 데이터를 순서대로 바꾸어 나열하는 알고리즘입니다.
 정렬을 하는 방법은 여러가지가 있는데, 그 중에 유명한 알고리즘은 아래 4가지가 있습니다.
@@ -39,7 +39,7 @@ Selection sort is noted for its simplicity, and it has performance advantages ov
 세 번째는 index 2부터 3까지.. 이런식으로 가장 작은 수를 선택해서 순서대로 교체하는 것을 선택정렬이라고 합니다.
 
 
-### Problem Statement
+## Problem Statement
 nums라는 정렬되지 않은 숫자 배열을 주면, 오름차순(1,2,3..10) 으로 정렬된 배열을 return해주세요.
 선택정렬 알고리즘으로 구현하셔야겠죠??
 
@@ -56,7 +56,7 @@ def selectionSort(nums):
 
 # DAY2
 
-### 버블정렬(Bubble Sort)
+## 버블정렬(Bubble Sort)
 버블 정렬은 인접한 데이터를 교환해서 정렬하는 알고리즘입니다.
 알고리즘의 정렬되는 모습이 마치 거품처럼 보인다고 해서 붙여진 이름입니다.아래 그림을 한 번 봐주세요.
 아마 바로 이해되실 것입니다.
@@ -93,7 +93,7 @@ def selectionSort(nums):
 이런식으로 계속 비교하고 교체하면 됩니다.!
 
 
-# Problem
+## Problem
 
 `nums`라는 배열을 주면, 버블정렬 알고리즘으로 배열을 정렬해주세요.
 ## 사고 과정
@@ -120,7 +120,7 @@ def bubbleSort(arr):
 
 # DAY3
 
-### 재귀(Recursion)
+## 재귀(Recursion)
 
 이전에 재귀를 배웠었습니다.
 오늘은 재귀를 이용해 문제를 풀어주세요.
@@ -161,7 +161,7 @@ def reverseString(str):
 
 # DAY4
 
-### 연결리스트(Linked List)
+## 연결리스트(Linked List)
 
 아래 설명을 먼저 읽어주세요. 
 linked list에 대한 설명입니다.
