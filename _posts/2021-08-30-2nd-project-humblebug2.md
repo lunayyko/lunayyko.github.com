@@ -258,9 +258,9 @@ s3_resource = boto3.resource(
                  aws_access_key_id     = ACCESS_KEY_ID,
                  aws_secret_access_key = SECRET_ACCESS_KEY,
              )
+bucket = s3_resource.Bucket(name='버켓 이름')
 #삭제하는 명령어1
 bucket.Object('키값, 예를 들어 d457d1b0-169d-487a-950f-ef0cca576ad01.png').delete()
 #삭제하는 명령어2
 s3_client.delete_object(Bucket='humble', Key ='d457d1b0-169d-487a-950f-ef0cca576ad01.png')
-
 ```
