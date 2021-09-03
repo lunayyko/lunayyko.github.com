@@ -241,7 +241,7 @@ class ProjectModify(View):
         return JsonResponse({"MESSAGE": 'SUCCESS'}, status=204)
 ```
 
-### 쿼리셋에서 이미지 삭제하는 코드
+### 쉘을 통해서 AWS s3서버에서 이미지 삭제하는 코드
 
 ```python
 import boto3
