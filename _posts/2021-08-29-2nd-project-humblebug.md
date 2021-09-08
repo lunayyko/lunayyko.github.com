@@ -2,7 +2,7 @@
 layout: post
 category: django
 tag: [입문, 위코드, TIL, 프로젝트]
-title: 위코드 두번째 프로젝트 험블벅 백엔드 1 ERD, view 코드
+title: 위코드 두번째 프로젝트 험블벅 1 ERD, view 코드
 ---
 
 ## 텀블벅 클론코딩 
@@ -23,7 +23,7 @@ title: 위코드 두번째 프로젝트 험블벅 백엔드 1 ERD, view 코드
 
 ### ProjectListView
 
-1. 필터 + limit, offset + 쿼리셋 최적화 코드가 들어가있다.
+- 필터 + limit, offset + 쿼리셋 최적화 코드가 들어가있다.
 
 ```python
 class ProjectListView(View):

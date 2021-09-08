@@ -2,7 +2,7 @@
 layout: post
 category: django
 tag: [입문, 위코드, TIL, 프로젝트]
-title: 위코드 첫번째 프로젝트 탱고플레이트 백엔드 2 views.py
+title: 위코드 첫번째 프로젝트 탱고플레이트 2 RESTful API, property등
 ---
 
 ## view의 분류 기준

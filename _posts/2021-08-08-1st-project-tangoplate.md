@@ -2,7 +2,7 @@
 layout: post
 category: django
 tag: [입문, 위코드, TIL, 프로젝트]
-title: 위코드 첫번째 프로젝트 탱고플레이트 백엔드 1 ERD, models.py
+title: 위코드 첫번째 프로젝트 탱고플레이트 1 ERD, models.py
 ---
 
 ## 망고플레이트 클론코딩 
@@ -12,11 +12,11 @@ title: 위코드 첫번째 프로젝트 탱고플레이트 백엔드 1 ERD, mode
 ![erd](/public/img/tangoplate_erd.png)
 
 
-1. 레스토랑, 장소, 카테고리, 가격대 테이블
+- 레스토랑, 장소, 카테고리, 가격대 테이블
 
 레스토랑에는 아이디, 이름, 주소, 전화번호 이외에 필터 기능을 만들기 위한 위치 아이디, 카테고리 아이디, 가격대 아이디를 넣었고 메뉴테이블과 연결해서 레스토랑마다 가지고 있는 메뉴와 해당 메뉴의 가격이 나오도록 했다.
 
-2. 리뷰, 별점, 위시리스트 테이블
+- 리뷰, 별점, 위시리스트 테이블
 
 리뷰에는 레스토랑 아이디, 유저아이디, 리뷰 내용과 작성 날짜 및 수정날짜를 넣었다.
 리뷰 한 개당 여러개의 사진이 들어갈 수 있도록 (일대다관계) 리뷰이미지 테이블을 따로 만들었다.  
@@ -28,7 +28,7 @@ title: 위코드 첫번째 프로젝트 탱고플레이트 백엔드 1 ERD, mode
 
 2021.08.13 -> 리뷰를 받고 별점을 리뷰테이블에 넣는걸로 수정했다. 테이블을 여러 개 만드는 것보다 컬럼을 여러 개 넣는 것이 비용이 덜 든다.
 
-3. 쿠폰(잇딜) 테이블
+- 쿠폰(잇딜) 테이블
 
 쿠폰 테이블에는 레스토랑 아이디, 가격, 설명, 사용기간을 넣고 쿠폰 역시 사진이 일대다관계로 연결될 것이라서 쿠폰 이미지 테이블을 따로 만들었는데 망고플레이트의 잇딜 페이지를 보면 잇딜1개당 사진이 1개 들어있어서 이미지를 쿠폰 테이블에 같이 넣었어도 되었을 것 같다.
 
@@ -36,7 +36,7 @@ title: 위코드 첫번째 프로젝트 탱고플레이트 백엔드 1 ERD, mode
 
 장고 앱 내에 coupons, restaurants, reviews, users 앱을 네개 만들고 각각 해당 모델을 넣었다. 
 
-1. users : User, Rating, WishList
+- users : User, Rating, WishList
 
 ```python
 from django.db          import models
@@ -71,7 +71,7 @@ class WishList(models.Model):
         db_table = 'wishlist'
 ```
 
-2. restaurants : Restaurant, Menu, Location, Category, ServingPrice
+- restaurants : Restaurant, Menu, Location, Category, ServingPrice
 
 ```python
 from django.db    import models
@@ -117,7 +117,7 @@ class ServingPrice(models.Model):
 
 ```
 
-3. reviews : Review, ReviewImage
+- reviews : Review, ReviewImage
 
 ```python
 from django.db          import models
@@ -142,7 +142,7 @@ class ReviewImage(models.Model):
         db_table = 'review_images'
 ```
 
-4. coupon : Coupon, CouponImage
+- coupon : Coupon, CouponImage
 
 ```python
 from django.db          import models
