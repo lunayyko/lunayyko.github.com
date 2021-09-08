@@ -32,27 +32,23 @@ title: 위코드 첫번째 프로젝트 탱고플레이트 백엔드 2 views.py
   <tbody>
     <tr>
       <td>/customers</td>
-      <td>/customers/1</td>
-      <td>/customers/1/orders</td>
-    </tr>
-    <tr>
       <td>새 고객 만들기</td>
-      <td>Error</td>
-      <td>고객 1에 대한 새 주문 만들기</td>
-    </tr>
-    <tr>
       <td>모든 고객 검색</td>
-      <td>고객 1에 대한 세부 정보 검색</td>
-      <td>고객 1에 대한 모든 주문 검색</td>
+      <td>고객 대량 업데이트</td>
+      <td>모든 고객 제거</td>
     </tr>
     <tr>
-      <td>고객 대량 업데이트</td>
+      <td>/customers/1</td>
+      <td>Error</td>
+      <td>고객 1에 대한 세부 정보 검색</td>
       <td>고객 1이 있는 경우 고객 1의 세부 정보 업데이트</td>
-      <td>고객 1의 주문 대량 업데이트	</td>
-    </tr>
-     <tr>
-      <td>모든 고객 제거</td>
       <td>고객 1 제거</td>
+    </tr>
+    <tr>
+      <td>/customers/1/orders</td>
+      <td>고객 1에 대한 새 주문 만들기</td>
+      <td>고객 1에 대한 모든 주문 검색</td>
+      <td>고객 1의 주문 대량 업데이트</td>
       <td>고객 1의 모든 주문 제거</td>
     </tr>
   </tbody>
