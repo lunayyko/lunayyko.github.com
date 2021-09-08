@@ -15,7 +15,50 @@ title: 위코드 첫번째 프로젝트 탱고플레이트 백엔드 2 views.py
 프로젝트를 진행하다보니 뷰를 리소스 기준으로 나누는 것이 URI를 봤을때 어떤 기능인 지 알 수 있게(restful한 API) 작성하기 좋았다.  
 예를 들어서 처음에는 레스토랑앱과 리뷰 앱을 따로 만들었는데 리뷰 페이지는 식당페이지에 붙어있었으니, 리뷰를 식당 앱에 같이 넣었으면 좋았겠다. 아래의 구조가 최적화된 뷰의 구조일 것 같다. 
 
-![추천 엔드포인트]('/public/img/view_endpoint.png')
+![추천 엔드포인트](/public/img/view_endpoint.png)
+
+*** 참고 RESTful API 작성 기준 ***
+
+<table>
+  <thead>
+    <tr>
+      <th>리소스</th>
+      <th>POST</th>
+      <th>GET</th>
+      <th>PUT</th>
+      <th>DELETE</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>/customers</td>
+      <td>/customers/1</td>
+      <td>/customers/1/orders</td>
+    </tr>
+    <tr>
+      <td>새 고객 만들기</td>
+      <td>Error</td>
+      <td>고객 1에 대한 새 주문 만들기</td>
+    </tr>
+    <tr>
+      <td>모든 고객 검색</td>
+      <td>고객 1에 대한 세부 정보 검색</td>
+      <td>고객 1에 대한 모든 주문 검색</td>
+    </tr>
+    <tr>
+      <td>고객 대량 업데이트</td>
+      <td>고객 1이 있는 경우 고객 1의 세부 정보 업데이트</td>
+      <td>고객 1의 주문 대량 업데이트	</td>
+    </tr>
+     <tr>
+      <td>모든 고객 제거</td>
+      <td>고객 1 제거</td>
+      <td>고객 1의 모든 주문 제거</td>
+    </tr>
+  </tbody>
+</table>
+
+[출처: RESTful web API 디자인](https://docs.microsoft.com/ko-kr/azure/architecture/best-practices/api-design)
 
 ## 기억에 남는 코드 및 로직 
 
