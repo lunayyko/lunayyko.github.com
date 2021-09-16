@@ -5,7 +5,8 @@ tag: [django, TIL]
 title: Django에서 API문서 관리 Swagger 사용법
 ---
 
-1. 스웨거 설치 
+![스웨거](public/image/swagger_ex_2.png)
+## 스웨거 설치 
 
 django-rest-swagger 패키지는 더이상 관리안해서 drf-yasg를 쓰도록 추천한다고 한다.  
 출처: https://hyeonyeee.tistory.com/66 [hyeoneee's blog]  
@@ -14,7 +15,7 @@ django-rest-swagger 패키지는 더이상 관리안해서 drf-yasg를 쓰도록
 pip install -U drf-yasg
 ```
 
-2. 설정 파일
+### 설정 파일
 
 ```python
 INSTALLED_APPS = [
@@ -65,7 +66,7 @@ urlpatterns += [
 ]
 ```
 
-3. 뷰에 데코레이터 작성하기
+### 뷰에 데코레이터 작성하기
 
 ```python
 class SuperAdminView(APIView):
@@ -110,6 +111,5 @@ class SuperAdminView(APIView):
 스웨거 페이지 상에서 데이터를 입출력해볼 수 있다.
 
 
-!(스웨거)[public/image/swagger_ex_1.png]
-!(스웨거)[public/image/swagger_ex_2.png]
+![스웨거](public/image/swagger_ex_1.png)
 
