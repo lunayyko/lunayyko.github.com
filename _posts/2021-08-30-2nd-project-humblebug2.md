@@ -7,9 +7,25 @@ title: 위코드 두번째 프로젝트 험블벅 2 AWS S3 코드, 리팩토링
 
 ## 텀블벅 클론코딩 
 
-### AWS S3
+2차 프로젝트로 험블벅을 클론코딩하면서 프로젝트 이미지를 AWS S3서버에 올리는 코드를 작성했다.  
 
-1. 권한 관리
+https://github.com/boto/boto3/tree/develop/docs/source/guide  
+
+여기에 들어가보면 AWS공식 라이브러리인 boto3를 쓰는 예시가 자세히 잘 나와있다. 
+예를 들어서 Access permission을 받는 코드는 다음과 같다.  
+
+![permission](/public/image/aws_access_permission.png)
+
+### AWS S3 권한 설정
+
+권한 관리를 위해서 버킷 정책을 아래와같이 작성했다. 프로젝트 이미지라서 비회원한테도 보여야되니까 퍼블릭 엑세스 차단을 전부 해제했다.
+
+*** 권한 설정 비디오 튜토리얼 ***
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/dGM53tHXGfY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+버킷 정책은 아래와 같이 했는데 버킷정책에 대한 자세한 내용은 AWS 사용설명서에 나와있는걸 읽어보면 된다.
+https://docs.aws.amazon.com/ko_kr/AmazonS3/latest/userguide/example-policies-s3.html
 
 ```python
 {
@@ -138,22 +154,21 @@ class CloudStorage:
     #AWS 관련 데이터를 변수로 넣는다
         
     def upload_file(self, file):
-        unique_id = str(uuid.uuid4()) + file.name
-        return self.client.upload_fileobj(
-            file,
-            self.BUCKET_NAME,
-            unique_id,
-            ExtraArgs = {
-                'ContentType' : file.content_type
-            }
+        file_url = "사용하는 회사의 aws url.ap-northeast-2.rds.amazonaws.com/" + str(uuid.uuid1()) + file.name
+        self.client.upload_fileobj(
+                        file,
+                        self.BUCKET_NAME,
+                        file_url,
+                        ExtraArgs={
+                            "ContentType": file.content_type
+                        }
         )
-    #여기에서 만든 unique_id키 값을 뷰에서 사용하고 싶은데 어떻게 하면 전달할 수 있는지 모르겠다!!!!!!!!1
+        return file_url
 
-    def delete_file(self, main_image_url, project_id):
-        main_image_url = Project.objects.get(id=project_id).main_image_url
+    def delete_file(self, file_url, project_id):
+        main_image_url = Project.objects.get(id=project_id).file_url
         bucket = self.resource.Bucket(name=BUCKET_NAME)
-        # bucket.delete_object(Key = main_image_url)
-        bucket.Object(key = main_image_url).delete()
+        bucket.Object(key = file_url).delete()
     #AWS관련 액션들을 매쏘드로 넣는다
 
 class ProjectUpload(View):
@@ -162,15 +177,12 @@ class ProjectUpload(View):
         cloud_storage = CloudStorage(ACCESS_KEY_ID, SECRET_ACCESS_KEY, BUCKET_NAME)
         try:
             data = request.POST
-            file = request.FILES.get('image')
 
-            if file:
-                cloud_storage.upload_file(file)
-                #그러면 이렇게 한 줄로 업로드할 수 있다.
-                unique_id = str(uuid.uuid4()) + file.name
-                #이 코드에는 에러가 있는데 unique_id를 위에서 전달받아 쓰지를 못해서 uuid붙인 값에 또 uuid를 붙이는 참사가 일어나고 있다. 그래서 나중에 수정/삭제하고자할 때 이 값을 찾을 수가 없다.
+            if request.FILES:
+                file_url = (cloud_storage.upload_file(file))
+                #그러면 이렇게 한 줄로 업로드하고 리턴 받은 url을 가져와서 사용할 수 있다.
 
-            if not file:
+            if not request.FILES:
                 return JsonResponse({'MESSAGE' : 'IMAGE_EMPTY'}, status=400)
 
             Project.objects.create(
@@ -180,7 +192,7 @@ class ProjectUpload(View):
                     description    = data.get('description'),
                     end_date       = data.get('end_date')[0:4]+'-'+data.get('end_date')[5:7]+'-'+data.get('end_date')[8:10],
                     category_id    = data.get('category_id'),
-                    main_image_url = 'https://humble.s3.ap-northeast-2.amazonaws.com/' + unique_id
+                    main_image_url = file_url
                     #삭제하고 싶을 때는 앞에 url을 빼고 키값만 넣어줘야한다.
                     )
             return JsonResponse({'MESSAGE':'SUCCESS'}, status = 200)
@@ -200,13 +212,10 @@ class ProjectModify(View):
 
             if not Project.objects.filter(id=project_id, user_id=request.user.id).exists():
                 return JsonResponse({'MESSAGE':'NOT_EXISTS'}, status=400)
-            
-            file = request.FILES.get('image')
 
-            if file:
-                cloud_storage.delete_file(file, main_image_url)
-                file = request.FILES.get('image')
-                main_image_url = 'https://humble.s3.ap-northeast-2.amazonaws.com/' + unique_id
+            if request.FILES:
+                cloud_storage.delete_file(file, file_url)
+                file_url = (cloud_storage.upload_file(file))
                 
             if not file:
                 main_image_url = Project.objects.get(id=project_id).main_image_url
@@ -218,7 +227,7 @@ class ProjectModify(View):
                     description    = data.get('description'),
                     end_date       = data.get('end_date')[0:4]+'-'+data.get('end_date')[5:7]+'-'+data.get('end_date')[8:10],
                     category_id    = data.get('category_id'),
-                    main_image_url = main_image_url
+                    file_url = file_url
                     )
             return JsonResponse({'MESSAGE':'SUCCESS'}, status = 200)
 
@@ -233,8 +242,8 @@ class ProjectModify(View):
         if not Project.objects.filter(id=project_id, user_id=user.id).exists():
             return JsonResponse({'MESSAGE':'NOT_EXISTS'}, status=400)
         
-        main_image_url = Project.objects.get(id=project_id).main_image_url        
-        cloud_storage.delete_file(main_image_url, project_id)
+        file_url = Project.objects.get(id=project_id).file_url        
+        cloud_storage.delete_file(file_url, project_id)
 
         Project.objects.get(id=project_id, user_id=user.id).delete()
 
