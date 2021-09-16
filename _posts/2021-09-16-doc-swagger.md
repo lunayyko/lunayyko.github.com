@@ -113,5 +113,5 @@ class SuperAdminView(APIView):
 스웨거 페이지 상에서 데이터를 입출력해볼 수 있다.
 
 
-![스웨거](/public/image/swagger_ex_1.png)
+![스웨거](/public/img/swagger_ex_1.png)
 
