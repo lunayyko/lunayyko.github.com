@@ -5,6 +5,7 @@ tag: [django, TIL]
 title: Django에서 API문서 관리 Swagger 사용법
 ---
   
+## 스웨거 예시
 
 ![스웨거](/public/img/swagger_ex_2.png)
 
@@ -17,7 +18,7 @@ django-rest-swagger 패키지는 더이상 관리안해서 drf-yasg를 쓰도록
 pip install -U drf-yasg
 ```
 
-### 설정 파일
+### 파일 설정
 
 ```python
 INSTALLED_APPS = [
@@ -27,6 +28,8 @@ INSTALLED_APPS = [
 ]
 ```
 'django.contrib.auth' 부분 주석처리했으면 풀어주기
+
+### urls.py
 
 ```python
 #urls.py
