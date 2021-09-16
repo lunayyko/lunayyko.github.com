@@ -112,9 +112,10 @@ class SuperAdminView(APIView):
     #실제 함수
 ```
 
-이렇게 하면 서버를 구동했을 때 스웨거 페이지(http://localhost:8000/swagger-ui) 상에 표시가 되고   
-스웨거 페이지 상에서 데이터를 입출력해볼 수 있다.
-
+이렇게 하면 서버를 구동했을 때 스웨거 페이지(http://localhost:8000/swagger-ui) 상에 표시가 되고 페이지 상에서 데이터를 입출력!!!해볼 수 있다.
 
 ![스웨거](/public/img/swagger_ex_1.png)
+
+배포가 되면 스웨거가 이렇게 오픈이 되서 서버구동 없이도 url을 통해서 아무나 접근할 수도 있다.  
+https://api-we.stockfolio.ai/swagger
 
