@@ -697,9 +697,6 @@ PyMySQL==1.0.2 #맥 M1의 경우 설치한 파일
 
 필요한 게시판의 데이터 관계도를 만들고 새로 생성된 앱의 models.py에 아래 migration을 넣어서 데이터베이스 토대를 만들어준다.
 
-<details markdown="1">
-<summary>models.py 펼쳐서 보기/접기</summary>
-
 ```python
 #project > users > models.py
 from django.db import models
