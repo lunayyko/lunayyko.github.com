@@ -2,8 +2,12 @@
 layout: post
 category: django
 tag: [입문, 위코드, TIL, 프로젝트]
-title: 위코드 두번째 프로젝트 험블벅 3 카카오 소셜로그인
+title: 위코드 두번째 프로젝트 험블벅 3 카카오 소셜로그인, 최종 구현 영상
 ---
+
+## 험블벅 최종 구현 영상
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/qUSai5QtndI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## 카카오 소셜로그인
 
