@@ -5,7 +5,10 @@ tag: [입문, TIL]
 title: 장고 게시판 CRUD 복습
 ---
 
-복습을 위해서 장고에서 게시판 CRUD하는 것을 다시 해보았다.
+게시판 CRUD하는 것을 다시 해보았다.
+모든 코드는 [깃 레포](https://github.com/lunayyko/wantedxwecode)에서 확인할 수 있다.
+![게시판CRUD](/public/img/board_crud.png)
+
 
 ## 장고 프로젝트 시작
 
@@ -670,22 +673,24 @@ PyMySQL==1.0.2 #맥 M1의 경우 설치한 파일
 
 ```python
 (참고) 프로젝트 디렉토리 구조 구조
-└── mysite
+└── wantedxwecode(mysite)
     ├── manage.py
     ├── my_settings.py
     ├── READEME.md
     ├── requirements.txt
-    └── mysite
+    └── wantedxwecode(mysite)
         ├── \__init__.py
         ├── asgi.py
         ├── settings.py
         ├── urls.py
         └── wsgi.py
-    └── myapp
+    └── wanted(myapp)
         ├── \__init__.py
         ├── admin.py
         ├── apps.py
         ├── models.py
+        ├── urls.py(추가)
+        ├── decorator.py(추가)
         ├── tests.py
         └── views.py
 
@@ -696,25 +701,21 @@ PyMySQL==1.0.2 #맥 M1의 경우 설치한 파일
 필요한 게시판의 데이터 관계도를 만들고 새로 생성된 앱의 models.py에 아래 migration을 넣어서 데이터베이스 토대를 만들어준다.
 
 ```python
-#project > users > models.py
+#project > wanted > models.py
 from django.db import models
 
 class User(models.Model):
     name         = models.CharField(max_length=40, null=True)
-    #null=True를 넣으면 값이 들어오지 않아도 에러가 나지 않는다.
     email        = models.EmailField(max_length=200, unique=True)
     password     = models.CharField(max_length=200)
-    age          = models.PositiveIntegerField(null=True)
-    phone_number = models.CharField(max_length=60, null=True)
 
     class Meta:
-        db_table = 'users' #디비 이름 네이밍 컨벤션 : 소문자 복수형
+        db_table = 'users'
 
 class Post(models.Model): 
-    user = models.ForeignKey(User, on_delete=models.CASCADE, db_column='user_id')
-    #User테이블의 id를 참조하는 'user_id'이름의 컬럼을 만든다.
-    created_at = models.DateTimeField(auto_now_add=True)
-    text = models.CharField(max_length=300)
+    user        = models.ForeignKey(User, on_delete=models.CASCADE, db_column='user_id')
+    text        = models.CharField(max_length=300)
+    created_at  = models.DateTimeField(auto_now_add=True)
     
     class Meta:
         db_table = 'posts'
@@ -754,7 +755,7 @@ from users.models         import User
 
 from my_settings          import SECRET_KEY, const_algorithm
 
-class SignUpView(View):
+class SignUp(View):
     def post(self, request):
         try:
             data            = json.loads(request.body)
@@ -781,7 +782,7 @@ class SignUpView(View):
         except KeyError:
             return JsonResponse({"MESSAGE": "KEY_ERROR"}, status=400)
 
-class SignInView(View):
+class SignIn(View):
     def post(self, request):
         try:
             data     = json.loads(request.body)      
@@ -792,10 +793,9 @@ class SignInView(View):
                 return JsonResponse({'MESSAGE':'INVALID_VALUE'}, status = 401)
 
             if bcrypt.checkpw(password.encode('utf-8'),User.objects.get(email=email).password.encode('utf-8')):
-                nickname = User.objects.get(email = email).nickname
-                token = jwt.encode({'id':User.objects.get(email=email).id}, SECRET_KEY, algorithm=const_algorithm)
+                token = jwt.encode({'id':User.objects.get(email=email).id}, SECRET_KEY)
             
-                return JsonResponse({'TOKEN': token, "EMAIL":email, "NICKNAME":nickname}, status = 200)
+                return JsonResponse({'TOKEN': token}, status = 200)
 
             return JsonResponse({'MESSAGE':'INVALID_USER'}, status=401)
 
@@ -806,23 +806,29 @@ class SignInView(View):
 ## View.py 게시글 기능 구현
 
 ```python
-import json
+import json, re, bcrypt, jwt
 
-from django.views   import View
-from django.http    import JsonResponse
+from django.views          import View
+from django.http           import JsonResponse
 
-from django.core.paginator import Paginator
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
-from posts.models   import Post  
-from users.models   import User
+from .models               import User
+from .models               import Post as PostModel
+
+from my_settings           import SECRET_KEY
+
+from wanted.decorator      import login_decorator
 
 class Post(View):
+    @login_decorator
     def post(self, request):
         try:
             data = json.loads(request.body)
+            user = request.user
 
-            Post.objects.create( #디비에 값을 추가
-                user_id      = request.user.id, #요청을 수행하는 유저의 아이디 
+            PostModel.objects.create( #디비에 값을 추가
+                user_id  = user.id, #요청을 수행하는 유저의 아이디 
                 text     = data["text"]#입력받은 값
             )
             return JsonResponse({"message": "SUCCESS"}, status=201)
@@ -831,34 +837,38 @@ class Post(View):
             return JsonResponse({"message": "KEY_ERROR"}, status=400)
 
     def get(self, request):
-            posts = Post.objects.all() 
-            #업로드모델에 따라 객체를 다 가져와서 저장
+            post_list = PostModel.objects.all().order_by('id')
+            paginator = Paginator(post_list, 3)
+            # 한 페이지당 오브젝트 3개씩 나오게 설정
+            page      = int(request.GET.get('page',1))
+            # page라는 값으로 받을거고, 없으면 첫번째 페이지로
 
-            #posts 페이징 처리
-            page      = request.GET.get('page','1')
-            #GET 방식으로 정보를 받아오는 데이터
-            paginator = Paginator(posts, '10')
-            #Paginator(분할될 객체, 페이지 당 담길 객체수)
-            page_obj  = paginator.page(page)
-            #페이지 번호를 받아 해당 페이지를 리턴 get_page 권장
+            try:
+                posts = paginator.page(page)
+            except PageNotAnInteger:
+                posts = paginator.page(1)
+            except EmptyPage:
+                posts = paginator.page(paginator.num_pages)
+
             results = []
 
-            for post in posts: #저장된 객체들을 한 개씩 돌면서
-                results.append({
-                    "user_id"    : post.user_id,#글 객체의 유저아이디
-                    "text"       : post.text,
-                    "created_at" : post.created_at,
-                })
-            return JsonResponse(({"results": results}, {'page_obj':page_obj}), status=200)
+            results.append([{
+                        "post_id"    : post.id,
+                        "user_id"    : post.user_id,#글 객체의 유저아이디
+                        "text"       : post.text,
+                        "created_at" : post.created_at,
+                    } for post in posts ])
+            return JsonResponse({"page" : page, "results": results}, status=200)
 
 class PostModify(View):
+    @login_decorator
     def patch(self,request, post_id):
         try:
             data = json.loads(request.body)
-            post = Post.objects.get(id=post_id)
+            post = PostModel.objects.get(id=post_id)
             
             if post.user_id == request.user.id : #요청하는 유저가 글 쓴 사람이라면
-                Post.objects.update( 
+                PostModel.objects.filter(id=post_id).update( 
                     text     = data["text"]
                 )
                 return JsonResponse({"message": "SUCCESS"}, status=201)
@@ -866,10 +876,11 @@ class PostModify(View):
                 return JsonResponse({"message": "NOT_AUTHORIZED"}, status=403)
         except KeyError:
             return JsonResponse({"message": "KEY_ERROR"}, status=400)
-        
+    
+    @login_decorator
     def delete(self,request, post_id):
         try:
-            post = Post.objects.get(id=post_id)
+            post = PostModel.objects.get(id=post_id)
             if post.user_id == request.user.id:
                 post.delete()
                 return JsonResponse({"message": "SUCCESS"}, status=201)
@@ -880,29 +891,65 @@ class PostModify(View):
 
 ```
 
+## 로그인 데코레이터 
+
+```python
+import jwt
+
+from django.http            import JsonResponse
+from django.core.exceptions import ObjectDoesNotExist
+
+from my_settings            import SECRET_KEY
+from .models                import User
+
+def login_decorator(func):
+    def wrapper(self, request, *args, **kwargs):
+        #들어올 수 있는 인자를 모두 받도록 한다
+        try:
+            token         = request.headers.get("Authorization", None)
+            #헤더에서 Authorization(헤더에 있는 속성)을 가져와서 토큰에 저장한다.
+            user          = jwt.decode(token, SECRET_KEY, algorithms='HS256')
+            #토큰을 시크릿키를 이용해 디코드해서 유저 아이디를 알아내서 유저에 저장한다.
+            request.user  = User.objects.get(id = user['id'])
+            #유저의 아이디에 해당하는 유저객체를 리퀘스트.유저에 저장한다.
+
+            return func(self, request, *args, **kwargs)
+            #받은 인자들을 모두 전달해준다(예를 들어 이미지, 텍스트 등등)
+
+        except jwt.exceptions.DecodeError:
+            return JsonResponse({"message" : "INVALID_TOKEN"}, status=400)
+
+        except ObjectDoesNotExist:
+            return JsonResponse({"message" : "INVALID_USER"}, status=400)
+
+    return wrapper
+```
+
 ### 4. Urls.py 작성
 
 클라이언트의 요청을 받아서 게시판 뷰를 호출할 수 있도록 urls.py 를 작성해야합니다.
 
 ```python
-#상위 mysite프로젝트 폴더의 urls.py
+#상위 프로젝트 폴더의 urls.py
 from django.urls import path,include
 
 urlpatterns = [
-    path("users",include("users.urls")),
-    path("post",include("post.urls"))
+    path("",include("wanted.urls")),
 ]
 ```
 ```python
 
 #하위 post앱 폴더의 urls.py
 from django.urls import path
-from .views      import post
+from .views      import Post, PostModify, SignUp, SignIn
 
 urlpatterns = [
-    path("", Post.as_view()),
-    path("<int:post_id>", PostModify.as_view())
+    path("post", Post.as_view()),
+    path("post/<int:post_id>", PostModify.as_view()),
+    path("signup", SignUp.as_view()),
+    path("signin", SignIn.as_view()),
 ]
 ```
 POSTMAN을 이용해서 Headers에 Authorization값을 넣고 Body에 JSON형식으로 값을 넣어서 디비에 텍스트가 잘 입력된 모습을 볼 수 있다.
-![업로드](/public/img/upload.png)
+
+

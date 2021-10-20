@@ -14,7 +14,7 @@ https://github.com/boto/boto3/tree/develop/docs/source/guide
 여기에 들어가보면 AWS공식 라이브러리인 boto3를 쓰는 예시가 자세히 잘 나와있다. 
 예를 들어서 Access permission을 받는 코드는 다음과 같다.  
 
-![permission](/public/image/aws_access_permission.png)
+![permission](/public/img/aws_access_permission.png)
 
 ### AWS S3 권한 설정
 
