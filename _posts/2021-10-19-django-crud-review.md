@@ -950,6 +950,7 @@ urlpatterns = [
     path("signin", SignIn.as_view()),
 ]
 ```
-POSTMAN을 이용해서 Headers에 Authorization값을 넣고 Body에 JSON형식으로 값을 넣어서 디비에 텍스트가 잘 입력된 모습을 볼 수 있다.
+
+POSTMAN에서 회원가입으로 아이디를 하나 만들고 (비밀번호 유효성 검사 8자이상, 알파벳, 숫자 포함 필요) 글을 작성해보면 맨 위 그림과 같이 잘 작동되는 것을 볼 수 있다.
 
 
