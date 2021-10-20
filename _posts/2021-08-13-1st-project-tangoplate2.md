@@ -59,6 +59,36 @@ title: 위코드 첫번째 프로젝트 탱고플레이트 2 RESTful API, proper
 
 [출처: RESTful web API 디자인](https://docs.microsoft.com/ko-kr/azure/architecture/best-practices/api-design)
 
+## 탱고플레이트 최종 uri (RESTful API)
+
+```python
+#상위 프로젝트
+urlpatterns = [
+    path("users",include("users.urls")),
+    path("",include("restaurants.urls")),
+    path("restaurant",include("reviews.urls")),
+]
+#user 앱
+urlpatterns = [
+    path('/signup', SignUpView.as_view()),
+    path('/signin', SignInView.as_view()),
+    path('/restaurant/<int:restaurant_id>/wish', WishView.as_view()), 
+    path('/wishlist', WishListView.as_view()),
+    path("/signin/kakao/callback", KakaoSignIn.as_view()),
+]
+#review 앱
+urlpatterns = [
+    path('/<int:restaurant_id>/review', ReviewView.as_view()),
+    path('/<int:restaurant_id>/review/<int:review_id>', ReviewView.as_view()),
+]
+#restaurant 앱
+urlpatterns = [
+    path("restaurant/<int:restaurant_id>", RestaurantDetailView.as_view()),
+    path("", RestaurantListView.as_view()),
+    path("search", SearchView.as_view()),
+]
+```
+
 ## 기억에 남는 코드 및 로직 
 
 ### 쿼리셋 .last()

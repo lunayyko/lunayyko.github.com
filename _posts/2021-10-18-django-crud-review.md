@@ -2,10 +2,10 @@
 layout: post
 category: django
 tag: [입문, TIL]
-title: 장고 CRUD 복습
+title: 장고 게시판 CRUD 복습
 ---
 
-장고 복습을 위해서 장고에서 게시판 CRUD하는 것을 복습해본다.
+복습을 위해서 장고에서 게시판 CRUD하는 것을 다시 해보았다.
 
 ## 장고 프로젝트 시작
 
@@ -16,17 +16,22 @@ conda create -n 가상환경이름 python=3.8
 conda activate 가상환경이름
 conda info --envs #설정한 가상환경 리스트 확인
 ```
-- Database 생성
+## 데이터베이스 생성
 
-```python
-mysql.server start
+```shell
 mysql -u root -p #마이sql시작
 ```
+
 ```sql
-mysql> create database "NAME" character set utf8mb4 collate utf8mb4_general_ci;
+show databases; --mysql의 모든 db들 보여주기
+use [데이터베이스이름]; --사용할 db골라주기
+create database [데이터베이스이름] character set utf8mb4 collate utf8mb4_general_ci; --데이터베이스 생성 및 utf8설정(한중일)
+show tables; --db안의 모든 테이블들 보여주기
 ```
-- 프로젝트 시작을 위한 python package 설치
+mysql 나가기 키는 \q
 컴퓨터에 mysql응용프로그램이 켜져있으면 터미널로 열리지 않을 수 있다. 
+
+## 프로젝트 시작을 위한 python package 설치
 
 ```shell
 pip install 패키지이름 #파이썬 패키지 설치
@@ -38,19 +43,22 @@ pip install django-cors-headers #CORS 해결을 위한 패키지
 pip freeze #가상환경 패키지 리스트 확인
 ```
 
-- 장고 프로젝트 생성
+## 장고 프로젝트 생성
 
 ```shell
-django-admin startproject 프로젝트이름 #프로젝트 생성
+django-admin startproject 프로젝트이름 . #장고 프로젝트 생성
 cd 프로젝트이름 #프로젝트 디렉토리로 들어감
 python manage.py startapp 앱이름 #앱 생성(manage.py가 존재하는 디렉토리에서)
 ```
+이때 프로젝트 다음에 점 기호(.)가 있음에 주의하자. 점 기호는 현재 디렉터리를 의미한다. 위 명령의 의미는 현재 디렉터리를 기준으로 프로젝트를 생성하겠다는 의미이다.  
+
+.을 안 쓰면 현재 디렉터리 밑에 같은 이름의 앱 디렉터리가 생성되어 mysite/mysite와 같은 구조가 되어 버린다.
 
 ## settings.py 설정
 
 ```python
 from pathlib        import Path #기존에 settings.py 에 있는 코드
-from my_settings   import DATABASES, SECRET_KEY
+from my_settings   import DATABASES, SECRET_KEY #my_settings.py에서 가져와야한다
 
 #시크릿 키와 데이터베이스 변수는 my_settings파일을 만들어서 갈음한다.
 SECRET_KEY = SECRET_KEY # 기존의 시크릿키 변수 삭제 후 대체
@@ -84,10 +92,7 @@ MIDDLEWARE = [
 # 데이터베이스 부분 삭제
 # 뒷부분 생략
 
-#REMOVE_APPEND_SLASH_WARNING 추가
-APPEND_SLASH = False
-
-##CORS
+##CORS 부분 추가 
 CORS_ORIGIN_ALLOW_ALL=True
 CORS_ALLOW_CREDENTIALS = True
 
@@ -127,7 +132,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'westarbucks_db',
         'USER': 'root',
-        'PASSWORD': '',
+        'PASSWORD': '', #원하는 db 비밀번호
         'HOST': '127.0.0.1', #데이터베이스의 IP주소, 이건 각자의 컴퓨터
         'PORT': '3306',
     }
@@ -144,23 +149,6 @@ from django.urls import path
 urlpatterns = [
 ]
 ```
-
-## 데이터베이스 생성
-
-- mysql 데이터베이스 생성
-
-```shell
-mysql -u root -p #마이sql시작
-```
-
-```sql
-show databases; --mysql의 모든 db들 보여주기
-use [데이터베이스이름]; --사용할 db골라주기
-create database [데이터베이스이름] character set utf8mb4 collate utf8mb4_general_ci; --데이터베이스 생성 및 utf8설정(한중일)
-show tables; --db안의 모든 테이블들 보여주기
-```
-mysql 나가기 키는 \q
-
 ## gitignore추가 (manage.py가 존재하는 디렉토리에)
 
 소스를 공유하기 위해 깃을 사용하지만 올리고 싶은것 올리고 싶지 않은것, 올려서는 안되는 것들이 존재하고 이를 구분하기 위해 깃이 설치된 디렉토리에 `.gitignore`파일을 생성해서 관리해야 한다.  
@@ -680,20 +668,30 @@ PyMySQL==1.0.2 #맥 M1의 경우 설치한 파일
 
 ## 디렉토리 구조
 
+```python
 (참고) 프로젝트 디렉토리 구조 구조
-.
-└── suntae
+└── mysite
     ├── manage.py
     ├── my_settings.py
-    └── westagram
+    ├── READEME.md
+    ├── requirements.txt
+    └── mysite
         ├── \__init__.py
         ├── asgi.py
         ├── settings.py
         ├── urls.py
         └── wsgi.py
+    └── myapp
+        ├── \__init__.py
+        ├── admin.py
+        ├── apps.py
+        ├── models.py
+        ├── tests.py
+        └── views.py
 
+```
 
-# Model.py
+## Model.py
 
 필요한 게시판의 데이터 관계도를 만들고 새로 생성된 앱의 models.py에 아래 migration을 넣어서 데이터베이스 토대를 만들어준다.
 
@@ -712,19 +710,14 @@ class User(models.Model):
     class Meta:
         db_table = 'users' #디비 이름 네이밍 컨벤션 : 소문자 복수형
 
-#project > posts > models.py
-from django.db import models
-from users.models import User
-
-class Upload(models.Model): #나는 포스팅대신 업로드라는 이름을 사용했다
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE, db_column='user_id')
+class Post(models.Model): 
+    user = models.ForeignKey(User, on_delete=models.CASCADE, db_column='user_id')
     #User테이블의 id를 참조하는 'user_id'이름의 컬럼을 만든다.
     created_at = models.DateTimeField(auto_now_add=True)
     text = models.CharField(max_length=300)
     
     class Meta:
-        db_table = 'uploads'
-
+        db_table = 'posts'
 ```
 
 ## migration 만들고 migrate 실행하기
@@ -748,7 +741,69 @@ select * from django_migrations; --장고 마이그레이션 보여주기
 desc posts; --포스트 테이블이 잘 만들어졌는지 보여준다
 ```
 
-## View.py
+## View.py 회원가입, 로그인 구현
+
+```python
+#mysite > users > views.py
+import json, re, bcrypt, jwt
+
+from django.views         import View
+from django.http          import JsonResponse
+
+from users.models         import User  
+
+from my_settings          import SECRET_KEY, const_algorithm
+
+class SignUpView(View):
+    def post(self, request):
+        try:
+            data            = json.loads(request.body)
+            email           = data['email']
+            password        = data['password']
+            hashed_password = bcrypt.hashpw(password.encode('UTF-8'), bcrypt.gensalt())
+
+            if User.objects.filter(email=email).exists():
+                return JsonResponse({"MESSAGE": "EMAIL_ALREADY_EXIST"}, status=400)
+
+            if not re.match(r"^[a-zA-Z0-9+-_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$", email):
+                return JsonResponse({"MESSAGE": "INVALID_FORMAT"}, status=400)
+
+            if not re.match(r"^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$", password):
+                return JsonResponse({"MESSAGE": "INVALID_FORMAT"}, status=400)
+
+            User.objects.create(
+                name     =   data.get('name'), #선택적으로 입력받을 때
+                email    =   email,
+                password =   hashed_password.decode('UTF-8'),
+            )
+            return JsonResponse({"MESSAGE": "SUCCESS"}, status=201)
+
+        except KeyError:
+            return JsonResponse({"MESSAGE": "KEY_ERROR"}, status=400)
+
+class SignInView(View):
+    def post(self, request):
+        try:
+            data     = json.loads(request.body)      
+            email    = data['email']
+            password = data['password']        
+
+            if not User.objects.filter(email = email).exists():
+                return JsonResponse({'MESSAGE':'INVALID_VALUE'}, status = 401)
+
+            if bcrypt.checkpw(password.encode('utf-8'),User.objects.get(email=email).password.encode('utf-8')):
+                nickname = User.objects.get(email = email).nickname
+                token = jwt.encode({'id':User.objects.get(email=email).id}, SECRET_KEY, algorithm=const_algorithm)
+            
+                return JsonResponse({'TOKEN': token, "EMAIL":email, "NICKNAME":nickname}, status = 200)
+
+            return JsonResponse({'MESSAGE':'INVALID_USER'}, status=401)
+
+        except KeyError:
+            return JsonResponse({'MESSAGE':'KEY_ERROR'}, status = 400)
+```
+
+## View.py 게시글 기능 구현
 
 ```python
 import json
@@ -756,22 +811,19 @@ import json
 from django.views   import View
 from django.http    import JsonResponse
 
-from .models        import Upload as UploadModel 
-#AttributeError: type object 'Upload' has no attribute 'objects'
-#이 에러가 자꾸나서 스택오버플로우에서 찾은대로 as UploadModel로 갈음해주었다.
-from users.models   import User
-from users.utils    import login_decorator
-#데코레이터는 유저스앱안에 따로 유틸스파일에 들어있다.
+from django.core.paginator import Paginator
 
-class Upload(View):
+from posts.models   import Post  
+from users.models   import User
+
+class Post(View):
     def post(self, request):
         try:
             data = json.loads(request.body)
 
-            UploadModel.objects.create( #디비에 값을 추가
-                user_id      = User.objects.get(id = request.user.id),
-                #요청을 수행하는 유저의 아이디 
-                text     = data["text"]
+            Post.objects.create( #디비에 값을 추가
+                user_id      = request.user.id, #요청을 수행하는 유저의 아이디 
+                text     = data["text"]#입력받은 값
             )
             return JsonResponse({"message": "SUCCESS"}, status=201)
 
@@ -779,36 +831,53 @@ class Upload(View):
             return JsonResponse({"message": "KEY_ERROR"}, status=400)
 
     def get(self, request):
-            uploads = UploadModel.objects.all()
+            posts = Post.objects.all() 
             #업로드모델에 따라 객체를 다 가져와서 저장
+
+            #posts 페이징 처리
+            page      = request.GET.get('page','1')
+            #GET 방식으로 정보를 받아오는 데이터
+            paginator = Paginator(posts, '10')
+            #Paginator(분할될 객체, 페이지 당 담길 객체수)
+            page_obj  = paginator.page(page)
+            #페이지 번호를 받아 해당 페이지를 리턴 get_page 권장
             results = []
 
-            for upload in uploads: #저장된 객체들을 한 개씩 돌면서
+            for post in posts: #저장된 객체들을 한 개씩 돌면서
                 results.append({
-                    "user_id"      : upload.user_id.id,
-                    #객체의 유저아이디번호에 해당하는 id
-                    "text"     : upload.text,
-                    "created_at" : upload.created_at
+                    "user_id"    : post.user_id,#글 객체의 유저아이디
+                    "text"       : post.text,
+                    "created_at" : post.created_at,
                 })
-            return JsonResponse({"results": results}, status=200)
-    
-    def update(self,request, post_id):
-        if post.user_id = request.user.id:
-            UploadModel.objects.update( 
-                text     = data["text"]
-            )
-            return JsonResponse({"message": "SUCCESS"}, status=201)
-        else
-            return JsonResponse({"message": "NOT_AUTHORIZED"}, status=403)
-    
+            return JsonResponse(({"results": results}, {'page_obj':page_obj}), status=200)
+
+class PostModify(View):
+    def patch(self,request, post_id):
+        try:
+            data = json.loads(request.body)
+            post = Post.objects.get(id=post_id)
+            
+            if post.user_id == request.user.id : #요청하는 유저가 글 쓴 사람이라면
+                Post.objects.update( 
+                    text     = data["text"]
+                )
+                return JsonResponse({"message": "SUCCESS"}, status=201)
+            else:
+                return JsonResponse({"message": "NOT_AUTHORIZED"}, status=403)
+        except KeyError:
+            return JsonResponse({"message": "KEY_ERROR"}, status=400)
+        
     def delete(self,request, post_id):
-        if post.user_id = request.user.id:
-            UploadModel.object.delete(
-                id = post_id
-            )
-            return JsonResponse({"message": "SUCCESS"}, status=201)
-        else
-            return JsonResponse({"message": "NOT_AUTHORIZED"}, status=403)
+        try:
+            post = Post.objects.get(id=post_id)
+            if post.user_id == request.user.id:
+                post.delete()
+                return JsonResponse({"message": "SUCCESS"}, status=201)
+            else:
+                return JsonResponse({"message": "NOT_AUTHORIZED"}, status=403)
+        except KeyError:
+            return JsonResponse({"message": "KEY_ERROR"}, status=400)
+
 ```
 
 ### 4. Urls.py 작성
@@ -816,22 +885,24 @@ class Upload(View):
 클라이언트의 요청을 받아서 게시판 뷰를 호출할 수 있도록 urls.py 를 작성해야합니다.
 
 ```python
-#상위프로젝트폴더urls.py
+#상위 mysite프로젝트 폴더의 urls.py
 from django.urls import path,include
 
 urlpatterns = [
     path("users",include("users.urls")),
-    path("upload",include("upload.urls"))
+    path("post",include("post.urls"))
 ]
 ```
 ```python
-#하위앱폴더urls.py
+
+#하위 post앱 폴더의 urls.py
 from django.urls import path
-from .views      import Upload
+from .views      import post
 
 urlpatterns = [
-    path("", Upload.as_view())
+    path("", Post.as_view()),
+    path("<int:post_id>", PostModify.as_view())
 ]
 ```
-POSTMAN을 이용해서 Headers에 Authorization값을 넣고 Body에 JSON형식으로 값을 넣어서 디비에 이미지링크과 텍스트가 잘 입력된 모습을 볼 수 있다.
+POSTMAN을 이용해서 Headers에 Authorization값을 넣고 Body에 JSON형식으로 값을 넣어서 디비에 텍스트가 잘 입력된 모습을 볼 수 있다.
 ![업로드](/public/img/upload.png)
