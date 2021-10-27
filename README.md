@@ -1,23 +1,14 @@
 # 루나의 Today I learned 기술 블로그
 
-This is a jekyll template based on [Lanyon](https://github.com/poole/lanyon). See a live demo [here](http://codinfox.github.io).
+### 설명 
+개인 공부를 위해서 2021년 6월부터 시작한 기술 블로그입니다. 컴퓨터공학 생기초와 약간의 자바스크립트 경험이 있는 상태에서 파이썬을 익히기 위해서 코데카데미 파이썬, 백준/프로그래머스 알고리즘을 1달간 공부하고 위코드 백엔드 개발자 과정을 3개월간 들으면서 장고와 파이썬으로 프로젝트를 3개 만든 내용이 담겨져있습니다. 앞으로는 컴퓨터공학 기초개념들과 알고리즘을 꾸준히 공부할 계획입니다. 질문이나 조언이 있으시면 youryoung.ko@gmail.com으로 메일 부탁드립니다.
 
-**If you like this project, PLEASE give it a star.**
-
-Lanyon is an unassuming [Jekyll](http://jekyllrb.com) theme that places content first by tucking away navigation in a hidden drawer. It's based on [Poole](http://getpoole.com), the Jekyll butler.
-
-All the configurations are inside either `_config.yml` or `_config.scss`. The options are fairly straightforward. 
-
-The theme supports: 
-
-1. Theme colors: you can choose your favorite theme color
-2. Changable sidebar locations
-3. Integration of FontAwesome, MathJax, Disqus and Google Analytics
-4. and numerous improvements over original Lanyon
+### 목차
+우측 네비게이션의 카테고리에 들어가보시면 카테고리별로 알고리즘, 파이썬, 장고 등으로 나뉘어져 있고, 블로그에 들어가보시면 모든 게시글이 최신 순으로 나오고 태그에 들어가보시면 나중에 살펴보기, 질문, 위코드, 기초 등으로 나누어져 있습니다. 
 
 
-## License
+### 사용한 템플릿
 
-Open sourced under the [MIT license](LICENSE.md).
-
-<3
+라니온[Lanyon](https://github.com/poole/lanyon)과 지킬[Jekyll](http://jekyllrb.com) 템플릿을 이용했습니다. [여기서](http://codinfox.github.io)템플릿의 데모를 보실 수 있습니다.  
+라니온은 네비게이션을 숨겨진 서랍에 넣어놓음으로서 컨텐츠가 먼저 보여지도록하는 theme입니다. 라니온은 지킬의 집사인 [Poole](http://getpoole.com)을 기반으로 합니다.  
+모든 configuration은 `_config.yml`과 `_config.scss`안에 있습니다. Open sourced under the [MIT license](LICENSE.md).
