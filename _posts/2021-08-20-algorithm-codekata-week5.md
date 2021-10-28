@@ -2,7 +2,7 @@
 layout: post
 category: algorithm(python)
 tag: [입문, 위코드, TIL]
-title: 코드카타 5주차 
+title: 코드카타 5주차 선택정렬, 버블정렬, 재귀, 연결리스트
 ---
 
 # DAY1
