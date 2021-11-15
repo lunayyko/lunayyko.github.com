@@ -139,19 +139,6 @@ class MusicianViewSet(viewsets.GenericViewSet):
         songs = musician.song.all()
         rtn = SongSerializer(songs, many=True).data
         return Response(rtn, status=status.HTTP_200_OK)
-    
-    #특정 뮤지션의 앨범들을 조회
-    @action(detail=True, methods=['GET'])
-    def albums(self, request, pk):
-        musician = Musician.nodes.get_or_none(uuid=pk)
-        if musician is None:
-            return Response({'error': 'DoesNotExist'})
-        query = f'''
-            MATCH (a:Musician {{uuid:'{pk}'}})<-[*]-(s:Song)-[*]->(m:Album) return DISTINCT m
-        '''
-        rtn, meta = neomodel.db.cypher_query(query)
-        albums = [Album.inflate(row[0]) for row in rtn]
-        return Response(AlbumSerializer(albums, many=True).data)
 ```
 
 # 프로젝트 후기
