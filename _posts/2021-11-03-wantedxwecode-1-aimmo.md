@@ -51,11 +51,11 @@ title: 원티드 x 위코드 프리온보딩 과제1 Aimmo
 
 # 사용한 기술 설명
 
-1. Djongo 사용
+**Djongo 사용**
 
 Django에서 기본적으로 제공하는 Database는 Mongodb가 포함되어 있지 않아서 Mongodb기반의 ORM을 작성할 수 있도록 해주는 Djongo를 사용하여 Mongodb와 연결했다.
 
-2. Docker 사용
+**Docker 사용**
 
 팀원들의 빠른 개발환경 셋팅을 위해서 로컬 개발용과 배포용 docker-compose 파일을 만들어서 적용했다.
 
