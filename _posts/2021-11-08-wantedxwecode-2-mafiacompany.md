@@ -2,7 +2,7 @@
 layout: post
 category: wecode
 tag: [wantedxwecode]
-title: 원티드 x 위코드 프리온보딩 과제2 Mafia company
+title: 원티드 x 위코드 프리온보딩 과제2 Mafia company(그래프DB연결검색)
 ---
 
 # 과제 설명 요약

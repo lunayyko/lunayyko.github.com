@@ -2,7 +2,7 @@
 layout: post
 category: wecode
 tag: [wantedxwecode]
-title: 원티드 x 위코드 프리온보딩 과제5 휴먼스케이프
+title: 원티드 x 위코드 프리온보딩 과제5 휴먼스케이프(임상실험정보)
 ---
 
 # 과제 설명 요약

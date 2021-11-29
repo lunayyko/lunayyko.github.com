@@ -2,7 +2,7 @@
 layout: post
 category: wecode
 tag: [wantedxwecode]
-title: 원티드 x 위코드 프리온보딩 과제3 Wantedlab
+title: 원티드 x 위코드 프리온보딩 과제3 Wantedlab(다국어회사이름검색)
 ---
 
 # 과제 설명 요약

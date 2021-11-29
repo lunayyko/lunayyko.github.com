@@ -2,7 +2,7 @@
 layout: post
 category: wecode
 tag: [wantedxwecode]
-title: 원티드 x 위코드 프리온보딩 과제4 8퍼센트
+title: 원티드 x 위코드 프리온보딩 과제4 8퍼센트(입출금거래내역)
 ---
 
 # 과제 설명 요약
