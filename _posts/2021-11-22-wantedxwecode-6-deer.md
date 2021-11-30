@@ -80,6 +80,10 @@ forbidden_area_boundary (반납금지구역을 표시하는 MySQL spatial data�
 forbidden_area_coords (반납금지구역의 경계를 표시하는 위도, 경도로 이루어진 점의 리스트)
 ```
 
+# 디어 서비스 화면
+
+![디어 서비스 화면](/public/img/deer_app.jpeg)
+
 # 사용한 기술 설명
 
 MySQL에서 point, polygon필드를 사용해서 킥보드의 경도 및 위치를 판단하여 전동킥보드의 대여, 반납 및 요금계산(할인 및 벌금 부과)을 하는 프로젝트였는데 새로운 개념이었고 여러가지 문제가 겹쳐서 추가 기능까지는 못하고 기본 기능인 대여, 반납, 기본 요금계산을 구현하게 되었다.
@@ -89,16 +93,19 @@ MySQL에서 point, polygon필드를 사용해서 킥보드의 경도 및 위치�
 - [GDAL API](https://runebook.dev/ko/docs/django/ref/contrib/gis/gdal)
 GDAL 은 Geospatial Data Abstraction Library의 약자 이며 GIS 데이터 기능의 "스위스 군용 칼"입니다. GDAL의 하위 집합은 다양한 표준 형식의 벡터 지리 데이터를 읽고 쓰는 것을 전문으로 하는 OGR Simple Features Library입니다.
 
-GeoDjango는 벡터 공간 데이터의 읽기 및 좌표 변환과 래스터 (이미지) 데이터에 대한 GDAL의 기능에 대한 최소 지원을 포함하여 OGR의 일부 기능을위한 고급 Python 인터페이스를 제공합니다.
+- GeoDjango는 벡터 공간 데이터의 읽기 및 좌표 변환과 래스터 (이미지) 데이터에 대한 GDAL의 기능에 대한 최소 지원을 포함하여 OGR의 일부 기능을위한 고급 Python 인터페이스를 제공합니다.
 
 우리 팀은 도커를 사용해서 개발환경을 설정하고 진행했다. 좌표를 다루는 기능구현에 있어서 팀장님의 블로그에 나와있어서 링크를 첨부한다. [태우님의 디어코퍼레이션 과제 블로그 글](https://velog.io/@burnkim61/%ED%94%84%EB%A6%AC%EC%98%A8%EB%B3%B4%EB%94%A9-%EA%B3%BC%EC%A0%9C-6)
 
 # 모델링
 
-![디비](/public/img/deer_erd.png)
+![디어 erd1](/public/img/deer_erd.png)
 처음에 나는 이렇게 erd를 작성했다. 팀에서 최종적으로 사용한 모델링은 아래와 같다.  
 
+![디어 erd2](/public/img/deer_erd2.png)
+
 킥보드의 사용을 시작하면 BoardingLog에 시작 시간과 함께 기록을 시작하고 in_use 필드를 True로 변경한다.  
+
 in_use필드를 deer 테이블에 넣을 것인지 boardingLog에 넣을 것인지에 대해서 고민했는데 deer와 user테이블 양쪽에서 참조를 통해서 in_use값을 사용하는 경우가 있을 것 같아서 중간에 있는 테이블인 boardingLog에 넣기로 했다. 
 
 # 내가 작성한 코드 / 기억에 남는 코드
