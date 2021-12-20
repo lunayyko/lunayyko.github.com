@@ -10,8 +10,9 @@ title: 파이썬 - 진수 변환 함수
 # 1번
 
 ```python
+
 class Transformer(object):
-    decimal_digits = '0123456789'
+    decimal_digits = "0123456789"
     #10진수로 변환할 경우 숫자들의 리스트 
     def __init__(self, digits):
         self.digits = digits
@@ -46,4 +47,5 @@ class Transformer(object):
             result += str(todigits[mod])
             # 나온 숫자를 반대로 정렬 
         return result[::-1]
+        
 ```
