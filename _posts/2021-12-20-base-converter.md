@@ -58,7 +58,7 @@ from math import log
     #10진수에서 원하는 진수로 바꾸기(바꿀 숫자, 바꿀 숫자의 진수)
 def convertFromBase10(num, base):
     #변경할 숫자의 리스트
-    numToChar = {i : "0123456789ABCDEF"[i] for i in range(16)}
+    #numToChar = {i : "0123456789ABCDEF"[i] for i in range(16)}
     #가장 큰 지수를 power에 저장 
     power = int(log(num, base))
     converted = ""
