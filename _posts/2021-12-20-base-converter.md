@@ -25,28 +25,28 @@ class Transformer(object):
     def to_decimal(self, s):
         return int(self._convert(s, self.digits, self.decimal_digits))
     
-    def _convert(self, number, fromdigits, todigits):
-        # 입력받은 숫자, 바꾸기 전의 진수, 바꾼 뒤의 진수값을 받는다. 예(555,BASE10,BASE2)
-        fromdigits_len, todigits_len = len(fromdigits), len(todigits)
-        # 해당 진수의 숫자리스트의 길이를 저장한다. 예(BASE10은 10진수, '0123456789' 이므로 10개)
-        number = str(number)
-        number_len = len(number)
-        # 입력받은 숫자의 길이도 저장한다
+    # def _convert(self, number, fromdigits, todigits):
+    #     # 입력받은 숫자, 바꾸기 전의 진수, 바꾼 뒤의 진수값을 받는다. 예(555,BASE10,BASE2)
+    #     fromdigits_len, todigits_len = len(fromdigits), len(todigits)
+    #     # 해당 진수의 숫자리스트의 길이를 저장한다. 예(BASE10은 10진수, '0123456789' 이므로 10개)
+    #     number = str(number)
+    #     number_len = len(number)
+    #     # 입력받은 숫자의 길이도 저장한다
 
-        tmp_dec=0
-        # 숫자의 갯수만큼 지수를 곱해서 더하여 십진수로 변환한 값을 저장한다. 
-        # 예: 100(2진수)이면 (2의2승 * 1) + (2의1승 * 0) + (2의0승 * 0)
-        for idx, n in enumerate(number):
-            tmp = fromdigits_len ** (number_len-idx-1) * fromdigits.index(n)
-            tmp_dec += tmp
+    #     tmp_dec=0
+    #     # 숫자의 갯수만큼 지수를 곱해서 더하여 십진수로 변환한 값을 저장한다. 
+    #     # 예: 100(2진수)이면 (2의2승 * 1) + (2의1승 * 0) + (2의0승 * 0)
+    #     for idx, n in enumerate(number):
+    #         tmp = fromdigits_len ** (number_len-idx-1) * fromdigits.index(n)
+    #         tmp_dec += tmp
         
-        #result=''
-        while tmp_dec > 0:
-            # 몫과 나머지를 구하는 파이썬의 내장함수 divmod사용
-            tmp_dec, mod = divmod(tmp_dec, todigits_len)
-            result += str(todigits[mod])
-            # 나온 숫자를 반대로 정렬 
-        #return result[::-1]
+    #     #result=''
+    #     while tmp_dec > 0:
+    #         # 몫과 나머지를 구하는 파이썬의 내장함수 divmod사용
+    #         tmp_dec, mod = divmod(tmp_dec, todigits_len)
+    #         result += str(todigits[mod])
+    #         # 나온 숫자를 반대로 정렬 
+    #     return result[::-1]
 
 ```
 
