@@ -39,11 +39,11 @@ class Transformer(object):
             tmp = fromdigits_len ** (number_len-idx-1) * fromdigits.index(n)
             tmp_dec += tmp
         
-        result=''
+        result=""
         while tmp_dec > 0:
             # 몫과 나머지를 구하는 파이썬의 내장함수 divmod사용
             tmp_dec, mod = divmod(tmp_dec, todigits_len)
             result += str(todigits[mod])
             # 나온 숫자를 반대로 정렬 
-        return result[:-1]
+        return result[::-1]
 ```
