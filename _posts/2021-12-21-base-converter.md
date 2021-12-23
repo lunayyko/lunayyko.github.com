@@ -5,19 +5,19 @@ tag: [기초, TIL]
 title: 파이썬 - 진수 변환 함수
 ---
 
-진수를 변환하는 함수를 만드는게 코딩테스트에서 나와서 진수변환함수들을 살펴보았다.  
-1번은 코딩테스트를 위해서 10진수를 N진수로, N진수를 10진수로 변환하라는 조건을 위해서 만든 클래스고  
-2번은 유투브에서 찾은 10진수에서 원하는 진수로 바꾸는 함수이다.   
-3번은 검색하다가 나온 n진수에서 n진수로 만드는 함수이다.  
-4번은 1번의 코드를 사용한 N진수에서 N진수로 만드는 함수이다. 
+진수를 변환하는 함수를 만드는게 코딩테스트에서 나와서 진수변환함수를 작성하고 인터넷에 있는 풀이들을 살펴보았다.
 
+1번은 코딩테스트를 위해서 10진수를 N진수로, N진수를 10진수로 변환하라는 조건을 위해서 만든 클래스고  
+2번은 유투브에서 찾은 10진수를 N진수로 바꾸는 함수이다.   
+3번은 검색하다가 나온 N진수에서 N진수로 만드는 함수이다.  
+4번은 1번의 클래스 안의 함수를 사용해서 내가 만든 N진수에서 N진수로 만드는 함수이다. 
 
 # 1번
 
 ```python
 class Transformer(object):
     #10진수로 변환할 경우 숫자들의 리스트 
-    #This Transformaer class takes list of numbers that are being used in certain digit(진법).
+    #This Transformaer class takes list of numbers that are being used in certain digit(진법) and hand it over to initializing method.
     decimal_digits = "0123456789"
     #For example, decimal digit takes 0 to 9, Binary digit takes 0 and 1.
     #digits는 n진수의 숫자리스트
@@ -29,8 +29,8 @@ class Transformer(object):
     def from_decimal(self, i):
         return self._convert(i, self.decimal_digits, self.digits)
     
-    #Order of decimal digits and digits matters since we are going to use convert method for both actions.
     #바꾸고자하는 n진수 수가 s에 들어가고 s값과 바꾸고자하는 진수의 숫자리스트, 십진수 숫자리스트를 반환한다.
+    #Order of decimal digits and digits matters since we are going to use convert method for both actions.
     def to_decimal(self, s):
         return int(self._convert(s, self.digits, self.decimal_digits))
     
@@ -64,8 +64,8 @@ class Transformer(object):
         
         result=''
         while tmp_dec > 0:
-            # And from here we change it back to N base by dividing and saving remainders.
             # 몫과 나머지를 구하는 파이썬의 내장함수 divmod사용
+            # And from here we change it back to N base by dividing and saving remainders.
             tmp_dec, mod = divmod(tmp_dec, todigits_len)
             # 10진수로된 tmp_dec를 바꾸자하는 진수의 숫자리스트길이로 나누어서
             result += str(todigits[mod])
