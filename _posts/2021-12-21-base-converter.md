@@ -5,14 +5,14 @@ tag: [기초, TIL]
 title: 파이썬 - 진수 변환 함수
 ---
 
-진수를 변환하는 함수를 만드는게 코딩테스트에서 나와서 진수변환함수를 작성하고 인터넷에 있는 풀이들을 살펴보았다.
+진수를 변환하는게 코딩테스트에서 나와서 진수변환함수를 작성하고 인터넷에 있는 풀이들을 살펴보았다.
 
 1번은 코딩테스트를 위해서 10진수를 N진수로, N진수를 10진수로 변환하라는 조건을 위해서 만든 클래스고  
 2번은 유투브에서 찾은 10진수를 N진수로 바꾸는 함수이다.   
 3번은 검색하다가 나온 N진수에서 N진수로 만드는 함수이다.  
 4번은 1번의 클래스 안의 함수를 사용해서 내가 만든 N진수에서 N진수로 만드는 함수이다. 
 
-# 1번
+## 1번 : 10진수를 N진수로, N진수를 10진수로 변환하는 클래스
 
 ```python
 class Transformer(object):
@@ -82,7 +82,7 @@ print(BASE20.from_decimal('1234'))
 # print(BASE2.to_decimal('1000101011'))
 ```
 
-# 2번
+## 2번 : 10진수를 N진수로 바꾸는 함수
 
 출처 - https://www.youtube.com/watch?v=s3mxIcr7fOQ
 
@@ -109,7 +109,7 @@ print(convertFromBase10(429,7))
 #1152
 ```
 
-# 3번
+## 3번 : N진수에서 N진수로 만드는 함수
 
 출처 - https://code.activestate.com/recipes/111286/
 
@@ -180,7 +180,7 @@ def baseconvert(number,fromdigits,todigits):
     return res
 ```
 
-# 4번
+## 4번 : 1번을 이용한 N진수에서 N진수로 만드는 함수2
 
 ```python
 def nnconverter(number, fromdigits, todigits):
