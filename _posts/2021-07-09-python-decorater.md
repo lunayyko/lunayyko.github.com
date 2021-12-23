@@ -2,12 +2,12 @@
 layout: post
 category: python
 tag: [기초, TIL]
-title: 데코레이터(decorator)
+title: 파이썬 - 데코레이터(decorator), 쿼리디버거
 ---
 
 ## Decorator
 
- decorator를 한마디로 얘기하자면, 대상 함수를 wrapping 하고, 이 wrapping 된 함수의 앞뒤에 추가적으로 꾸며질 구문 들을 정의해서 손쉽게 재사용 가능하게 해주는 것이다.
+Decorator를 한마디로 얘기하자면, 대상 함수를 wrapping 하고, 이 wrapping 된 함수의 앞 뒤에 추가적으로 꾸며질 구문 들을 정의해서 손쉽게 가능하게 해주는 것이다. 재사용, 분리를 위해서 함수를 따로 떼어서 원하는 곳에 붙여넣는 것이라고 생각하면 된다.
 
 출처: https://bluese05.tistory.com/30 [ㅍㅍㅋㄷ]
 
@@ -16,6 +16,51 @@ title: 데코레이터(decorator)
 또한 데코레이터를 이용해, 반복을 줄이고 메소드나 함수의 책임을 확장한다.  
 
 출처: https://hckcksrl.medium.com/ 
+
+예를 들어서 로그인이 되었으면 아래 함수를 실행시키고 싶다고할 때 
+원하는 함수 위에 로그인 데코레이터를 넣어주면 된다. 마찬가지로 권한관리도 할 수 있다.
+[로그인 데코레이터 예시](https://lunayyko.github.io/django/2021/07/29/westagram4/)  
+[어드민 데코레이터(권한관리) 예시](https://lunayyko.github.io/django/2021/09/06/jwt/) 
+
+```python
+#뷰에서 아래와 같이 사용
+
+@login_decorator
+def ViewUserInfoView
+```
+
+혹은 쿼리의 성능을 측정하고 싶을 때 쿼리 디버거 데코레이터를 만들어준 뒤에 함수 위에 넣어서 쿼리가 얼마나 걸리는지 측정할 수 있다.  
+
+```python
+#뷰에서 아래와 같이 사용
+
+@query_debugger  
+def SearchView
+```
+
+```python
+#쿼리 디버거 함수 예시
+import time
+import functools
+from django.db import connection, reset_queries
+
+def query_debugger(func):
+    @functools.wraps(func)
+    def wrapper(*args, **kwargs):
+        reset_queries()
+        number_of_start_queries = len(connection.queries)
+        start  = time.perf_counter()
+        result = func(*args, **kwargs)
+        end    = time.perf_counter()
+        number_of_end_queries = len(connection.queries)
+        print(f"-------------------------------------------------------------------")
+        print(f"Function : {func.__name__}")
+        print(f"Number of Queries : {number_of_end_queries-number_of_start_queries}")
+        print(f"Finished in : {(end - start):.2f}s")
+        print(f"-------------------------------------------------------------------")
+        return result
+    return wrapper
+```
 
 ## 예시1
 
@@ -33,7 +78,7 @@ def greeting():
 print(greeting())
 ```
 ## 예시2
-example.py
+
 ```python
 class Decorator:
 
