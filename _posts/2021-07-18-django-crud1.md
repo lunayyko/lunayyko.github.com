@@ -685,7 +685,8 @@ PyMySQL==1.0.2 #맥 M1의 경우 설치한 파일
 
 ## 디렉토리 구조
 
-(참고) 프로젝트 디렉토리 구조 구조
+```python
+#(참고) 프로젝트 디렉토리 구조 구조
 .
 └── suntae
     ├── manage.py
@@ -696,7 +697,7 @@ PyMySQL==1.0.2 #맥 M1의 경우 설치한 파일
         ├── settings.py
         ├── urls.py
         └── wsgi.py
-
+```
 
 # CRUD 1
 
