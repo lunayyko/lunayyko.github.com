@@ -2,7 +2,7 @@
 layout: post
 category: django
 tag: [입문, 위코드, TIL]
-title: 장고 설정, CRUD1
+title: 장고 설정, CRUD1 (migration 초기화하기)
 ---
 
 개인적으로 복습할 용도로 명령어 위주로 적었어서 혹시 전체적인 흐름에 대해서 더 잘 알고싶다면 아래 두 분의 블로그를 추천한다.  
