@@ -26,3 +26,29 @@ image = soup.select_one('meta[property="og:image"]')
 desc = soup.select_one('meta[property="og:description"]')
 
 ```
+
+### 시행착오의 흔적
+
+```python
+
+charset = soup.select_one('meta[http-equiv="Content-Type"]')
+print('charset', charset)
+
+charset2 = charset.attrs("charset")
+print('charset2', charset2)
+
+# charset.get('content')[charset.get('content').find("charset="):]
+
+charset3 = charset.get('content')[charset.get('content').find("charset="):].replace('charset=', '')
+print('charset3', charset3)
+
+charset4 = soup.headers.get_content_charset()
+print('charset4', charset4)
+
+# res = req.urlopen(url).read().decode(req.urlopen(url).headers.get_content_charset())
+# req.urlopen(url).headers.get_content_charset()
+
+# soup = BeautifulSoup(data.content.decode('utf-8', 'replace'), 'html.parser')
+
+
+```
