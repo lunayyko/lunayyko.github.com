@@ -2,14 +2,13 @@
 layout: post
 category: mysql
 tag: [backend, mysql]
-title: pk가 중복인 경우 없는 필드만 추가로 업데이트 하기(insert into values on duplicate key update 여러행 )
+title: pk가 중복이 아닌 필드만 업데이트 하기(insert into values on duplicate key update 여러행 )
 ---
 
 ## 목적
 
-행을 업데이트하는데 pk가 중복인 경우에는 값이 다른 필드만 업데이트하고 싶었다.
-여러 행을 한 꺼번에 작업해야하는 경우에 한꺼번에 쓸 수 있다. 
-
+pk가 중복이 아닌 경우에만 행을 업데이트하고 싶었다.
+여러 행을 한 꺼번에 작업해야하는 경우에 아래와 같이 insert into 와 duplicate key update를 앞 뒤에 붙여서 한 번에 쓸 수 있다. 
 
 ## mysql 코드 
 
