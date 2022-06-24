@@ -68,3 +68,8 @@ insert into db_community.tb_board_best (yymm, board_seq, SYMBOL, cmp_nm_kor, cmp
 ('202206',23574, '012700.KQ','리드코프','leadcorp','8680',9200,'KRW',3,2,3,4,2,'','B010801','https://cloudfront.alpha-bridge.kr/prod/image/logos/001120.KS.png','54.4401544401544')
 on duplicate key update board_seq = values(board_seq)
 ```
+
+위의 코드는 pk가 중복될 경우에 행의 다른 필드는 업데이트하지 않는다.  
+기존에 있던 데이터들 중 중복된 데이터는 그대로 있고, 새로운 데이터만 입력되게 하려면 아래 블로그에 나와있는 것처럼 on duplicate key update 뒤에 컬럼을 명시해주어야한다.
+
+https://kkangdda.tistory.com/53
