@@ -195,9 +195,6 @@ def reserve_publish(conn, conn_mongo, now):
                 """
                 cursor.execute(sql)
 
-            # 비속어 검사
-            # validate_board.delay(result)
-
             #슬랙 발송시 표시되는 발행된 게시글 갯수
             cnt = cnt + 1
 
