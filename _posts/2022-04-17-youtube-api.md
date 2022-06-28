@@ -12,6 +12,12 @@ title: 메타태그와 api를 사용해서 유투브 동영상 정보 끌어오�
 ### 1. 입력받은 링크에서 키를 추출한다.
 
 ```python
+import re
+import json
+from urllib.request import urlopen
+from urllib.parse import urlparse, parse_qs
+from contextlib import suppress
+from configuration import yt_api_key
 
 def get_yt_id(url, ignore_playlist=False):
     # Examples:
@@ -26,15 +32,53 @@ def get_yt_id(url, ignore_playlist=False):
         # use case: get playlist id not current video in playlist
             with suppress(KeyError):
                 return parse_qs(query.query)['list'][0]
+        if query.path[:7] == '/shorts': return query.path.split('/')[2]
         if query.path == '/watch': return parse_qs(query.query)['v'][0]
         if query.path[:7] == '/watch/': return query.path.split('/')[1]
         if query.path[:7] == '/embed/': return query.path.split('/')[2]
         if query.path[:3] == '/v/': return query.path.split('/')[2]
+
    # returns None for invalid YouTube url
 
+def get_yt_duration(url):
+    video_id = get_yt_id(url)
+    video_url = "https://www.googleapis.com/youtube/v3/videos?id=" + video_id + "&key=" + yt_api_key + "&part=contentDetails&part=snippet"
+    response_video = urlopen(video_url).read()
+    data_video = json.loads(response_video)
+
+    channel = data_video['items'][0]['snippet']['channelTitle']
+    duration = data_video['items'][0]['contentDetails']['duration']
+    reg_dt = data_video['items'][0]['snippet']['publishedAt']
+    thumbnail = data_video['items'][0]['snippet']['thumbnails']['medium']['url']
+
+    match = re.match('PT(\d+H)?(\d+M)?(\d+S)?', duration).groups()
+    hours = _js_parseInt(match[0]) if match[0] else 0
+    minutes = _js_parseInt(match[1]) if match[1] else 0
+    seconds = _js_parseInt(match[2]) if match[2] else 0
+    if hours:
+        if len(str(minutes)) == 1:
+            minutes = '0' + str(minutes)
+        duration = str(hours) + ':' + str(minutes) + ':' + str(seconds)
+    else:
+        if len(str(seconds)) == 1:
+            seconds = '0' + str(seconds)
+        duration = str(minutes) + ':' + str(seconds)
+
+    return {'channel': channel, 'duration': duration, 'reg_dt': reg_dt, 'thumbnail': thumbnail}
+
+# js-like parseInt
+def _js_parseInt(string):
+    return int(''.join([x for x in string if x.isdigit()]))
+
+
+if __name__ == '__main__':
+    #추출하고 싶은 링크를 입력하고 파일을 돌린다.
+    link = 'https://youtu.be/NSAzhdHeHK4'
+    print(get_yt_id(link))
+    print(get_yt_duration(link))
 ```
 
-출처 : https://stackoverflow.com/questions/4356538/how-can-i-extract-video-id-from-youtubes-link-in-python
+키 추출하는 부분 출처 : https://stackoverflow.com/questions/4356538/how-can-i-extract-video-id-from-youtubes-link-in-python
 
 ### 2. 키를 이용해서 api를 치고 영상길이와 채널이름을 추출한다.
 
