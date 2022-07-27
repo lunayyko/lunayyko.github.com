@@ -2,7 +2,7 @@
 layout: post
 category: backend
 tag: [backend, django]
-title: 쿼리디버거(레이지로딩, N+1 등)
+title: 쿼리디버거, Lazy Loading, Eager Loading
 ---
 
 ## 목적
