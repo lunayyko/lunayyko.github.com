@@ -66,3 +66,4 @@ JSON에서 사용된다
 
 [출처1: 코리팁스](https://corytips.tistory.com/161)  
 [출처2: 긱스포긱스](https://www.geeksforgeeks.org/differences-and-applications-of-list-tuple-set-and-dictionary-in-python/)
+[출처3: 스케일러 주제](https://www.scaler.com/topics/python/difference-between-dictionary-list-tuple-and-set-in-python/)
