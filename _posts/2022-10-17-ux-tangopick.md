@@ -1,6 +1,6 @@
 ---
 layout: post
-category: git
+category: UX
 tag: [ux]
 title: 탱고픽 ux 업데이트
 ---
