@@ -21,9 +21,9 @@ title: 포트폴리오 리스트 유닛 디자인 업데이트
 
 ## 스케치
 
-![첫 스케치](/public/img/first_sketch.png){:width="200"}
+![첫 스케치](/public/img/first_sketch.png){:width="400"}
 
-![피그마](/public/img/portflio_figma.png){:width="200"}
+![피그마](/public/img/portfolio_figma.png){:width="400"}
 
-![디자인](/public/img/portfolio_design.png){:width="200"}
+![디자인](/public/img/portfolio_design.png){:width="400"}
 
