@@ -5,10 +5,10 @@ tag: [기초, TIL, react, codecademy]
 title: 코데카데미 리액트 기초과정 요약 - 리액트의 기본구조
 ---
 
-## 코드
+## 리액트 기본 앱 구조
 
 App.js
-```
+```javascript
 import React from 'react';
 
 function MyComponent() {
@@ -19,7 +19,7 @@ export default MyComponent;
 ```
 
 index.js
-```
+```javascript
 import React from 'react';
 
 function MyComponent() {
@@ -30,7 +30,7 @@ export default MyComponent;
 ```
 
 index.html
-```
+```javascript
 import React from 'react';
 
 function MyComponent() {
@@ -40,24 +40,15 @@ function MyComponent() {
 export default MyComponent;
 ```
 
-React applications are made up of components.
+### 리액트 컴포넌트 
 
-Components are responsible for rendering pieces of the user interface.
-
-To create components and render them, react and reactDOM must be imported.
-
-React components can be defined with Javascript functions to make function components.
-
-Function component names must start with a capitalized letter, and Pascal case is the adopted naming convention.
-
-Function components must return some React elements in JSX syntax.
-
-React components can be exported and imported from file to file.
-
-A React component can be used by calling the component name in an HTML-like self-closing tag syntax.
-
-Rendering a React component requires using .createRoot() to specify a root container and calling the .render() method on it.
-
+React는 컴포넌트로 이루어져있다. 컴포넌트에서 UI 조각들을 렌더한다.
+렌더하기 위해서는 react와 reactDOM를 import해야한다. 
+컴포넌트들은 자바스크립트 함수에 의해 정의된다. 함수 컴포넌트 이름은 대문자로 시작해야하고 파스칼케이스(CamelCase)로 쓰여져야한다. 
+함수 컴포넌트는 JSX 문법에 따라 리액트 요소들을 반환해야만한다. 
+리액트 컴포넌트들은 파일에서 파일로 export, import될 수 있다.
+리액트 컴포넌트들은 HTML같이 생긴 '</>' 문법으로도 불러와질 수 있다.
+리액트 컴포넌트를 렌더하려면 root 컨테이너를 명시하기 위해 .createRoot()가 있어야하고 .render()로 불러와야한다. 
 
 ### 리액트는 프레임워크일까 라이브러리일까?
 
