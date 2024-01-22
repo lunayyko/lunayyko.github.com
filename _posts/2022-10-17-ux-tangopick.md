@@ -7,6 +7,8 @@ title: 포트폴리오 리스트 유닛 디자인 업데이트
 
 ## 포트폴리오 전 
 
+<img align='left' width='150' height='100' src='public/img/portfolio_before.jpg'>
+
 ![바꾸기 전](/public/img/portfolio_before.jpg)
 
 ## 포트폴리오 후
