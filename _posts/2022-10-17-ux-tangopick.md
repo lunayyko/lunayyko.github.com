@@ -77,18 +77,19 @@ title: 포트폴리오 리스트 유닛 디자인 업데이트
 처음에는 값이 맞게 나오지 않아서 내부 개발 직원들의 아이디를 조회 대상에서 제외했더니 값이 맞게 나왔다. 
 몽고디비에는 날짜가 초형태로 저장되어있어서 sql에서 바꾸어서 집어넣었다. 
 
+sql에서 date를 timestamp로 변환
 ```sql
 select unix_timestamp('2022-09-26')
 ```
-
+sql
 ```sql
 select count(1) 
 from db_portfolio.tb_idea a left join db_user.tb_user_info b 
-								   on a.user_seq = b.user_seq
+		  on a.user_seq = b.user_seq
 where REG_DT > '2022-10-17' and REG_DT < '2022-10-24' 
   and a.user_seq not in (73,385,8919,5035, 5015, 7516)
 ```
-
+mongoDB
 ```sql
 db.menu_view.find({'menu':'portfolio', 'reg_ts' : {$gte:1666537200, $lte:1667142000},'user_seq':{$nin:[72,73,385,5015,5035,7516,8919]}}).count()
 ```
