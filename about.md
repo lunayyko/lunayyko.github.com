@@ -9,5 +9,5 @@ title: About
 
 저자에 관해서 궁금하신 분들은 아래의 포트폴리오를 참고하시길 바랍니다:
 
-* [포트폴리오](http://lunaplease.com)
+* [포트폴리오](http://yeppiko.dothome.co.kr)
 * [깃헙](https://github.com/lunayyko)
